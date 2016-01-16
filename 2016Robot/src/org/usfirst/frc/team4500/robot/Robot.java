@@ -1,6 +1,8 @@
 
 package org.usfirst.frc.team4500.robot;
 
+import org.usfirst.frc.team4500.robot.subsystems.Drivetrain;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -17,6 +19,7 @@ public class Robot extends IterativeRobot {
 
 	// Instantiate subsystems here, i.e: public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
+	public static Drivetrain drivetrain;
 
     Command autonomousCommand;
 
@@ -26,6 +29,7 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
+		drivetrain = new Drivetrain();
         // instantiate the command used for the autonomous period
         //i.e. autonomousCommand = new ExampleCommand();
     }
