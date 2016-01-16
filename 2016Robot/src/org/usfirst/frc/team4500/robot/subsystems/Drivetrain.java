@@ -51,7 +51,7 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	/**
-	 * Sets the speed for the front side omni wheel
+	 * Sets the speed for the front side omni wheels
 	 * @param speed -1 to 1
 	 */
 	private void setFOmni(double speed) {
@@ -86,7 +86,6 @@ public class Drivetrain extends Subsystem {
      */
     public void omniDrive(double joyX, double joyY, double joyTwist, double gyro) {
     	//TODO Make omni drive function
-    	
     }
 }
 
