@@ -15,7 +15,7 @@ public class Wheel {
 		this.motor_controller = motor_controller;
 	}
 	
-	public double get_speed(Vector velocity, Vector rotation){
+	public double getSpeed(Vector velocity, Vector rotation){
 		/**
 		 * Gets the speed of the wheel based on the linear and rotational movements
 		 */
@@ -24,7 +24,7 @@ public class Wheel {
 		
 	}
 	
-	public void store_speed(double speed){
+	public void setSpeed(double speed){
 		/**
 		 * Set the talon value (Between -1.0 and 1.0) for teh wheel
 		 */

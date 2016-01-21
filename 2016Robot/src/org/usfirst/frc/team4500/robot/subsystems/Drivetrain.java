@@ -5,6 +5,7 @@ import org.usfirst.frc.team4500.robot.RobotMap;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import utilities.Vector;
 import utilities.Wheel;
 
 /**
@@ -109,7 +110,32 @@ public class Drivetrain extends Subsystem {
      * @param gyro gyroscope reading (relative)
      */
     public void omniDrive(double joyX, double joyY, double joyTwist, double gyro) {
-    	//TODO Make omni drive function
+    	Vector linear = new Vector(joyX, joyY, 0); 					//The non rotational component of the motion
+    	Vector rotation = new Vector(0, 0, joyTwist - gyro); 		//The rotational component of the motion
+    	
+    	double speeds[] = new double[4]; 							//Array to store each wheel
+    	double maxSpeed = 0.0; 										//Stores the value of the maximum speed of any of the wheels during the current iteration
+    	
+    	for(int i = 0; i<omniWheels.length; i++){
+    		speeds[i] = omniWheels[i].getSpeed(linear, rotation); 	//Gets the speed of each wheel relative to the robot's current position.
+    																//i.e. the actual speed of the wheel 
+    		if(Math.abs(speeds[i]) > maxSpeed){
+    			maxSpeed = Math.abs(speeds[i]); 					//Sets the value of the max speed
+    		}
+    	}
+    	
+    	if(maxSpeed > 1){											//In case the max speed is too high,
+    																//reduces all speeds using the max speed as a scale factor
+    		for(int i = 0; i<omniWheels.length; i++){
+    			speeds[i] /= maxSpeed;
+    		}
+    	}
+    																//Sets the wheels to the proper speed
+    	for(int i = 0; i<omniWheels.length; i++){
+    		omniWheels[i].setSpeed(speeds[i]);
+    	}
+    	
+    	
     }
 }
 
