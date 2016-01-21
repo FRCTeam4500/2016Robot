@@ -1,8 +1,11 @@
 package org.usfirst.frc.team4500.robot.subsystems;
 
+import org.usfirst.frc.team4500.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import utilities.Wheel;
 
 /**
  *
@@ -19,6 +22,9 @@ public class Drivetrain extends Subsystem {
 	 */
 	private Talon lTank, rTank;
 	
+	private Wheel[] omniWheels;
+	
+	
 	/**
 	 * The RobotDrive object to be used for tank drive
 	 */
@@ -26,6 +32,24 @@ public class Drivetrain extends Subsystem {
 
     public Drivetrain() {
     	tank = new RobotDrive(lTank, rTank);
+    	
+    	lOmni = new Talon(RobotMap.LMOTOR);
+    	rOmni = new Talon(RobotMap.RMOTOR);
+    	fOmni = new Talon(RobotMap.FMOTOR);
+    	bOmni = new Talon(RobotMap.BMOTOR);
+    	
+    	lTank = lOmni;
+    	rTank = rOmni;
+    	
+    	omniWheels = new Wheel[4];
+    	
+    	omniWheels[0] = new Wheel(RobotMap.lOmniPosition, RobotMap.lOmniDirection, RobotMap.lOmniRatio, lOmni);
+    	omniWheels[1] = new Wheel(RobotMap.rOmniPosition, RobotMap.rOmniDirection, RobotMap.rOmniRatio, rOmni);
+    	omniWheels[2] = new Wheel(RobotMap.fOmniPosition, RobotMap.fOmniDirection, RobotMap.fOmniRatio, fOmni);
+    	omniWheels[3] = new Wheel(RobotMap.bOmniPosition, RobotMap.bOmniDirection, RobotMap.bOmniRatio, bOmni);
+    	
+    	
+    	
     	
     }
 	
