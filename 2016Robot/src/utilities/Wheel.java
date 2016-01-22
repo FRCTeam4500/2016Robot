@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.Talon;
 
 public class Wheel {
 	private Vector position;			//Where is the wheel in relation to the center of the robot
-	private Vector direction;			//What direction does the wheel poing
+	private Vector direction;			//What direction does the wheel going
 	private double speed_ratio;			//How fast does the wheel go (gear ratio ...)
 	private Talon motor_controller;
 	
@@ -24,10 +24,10 @@ public class Wheel {
 		
 	}
 	
+	/**
+	 * Set the talon value (Between -1.0 and 1.0) for the wheel
+	 */
 	public void setSpeed(double speed){
-		/**
-		 * Set the talon value (Between -1.0 and 1.0) for teh wheel
-		 */
 		motor_controller.set(speed);
 	}
 	
