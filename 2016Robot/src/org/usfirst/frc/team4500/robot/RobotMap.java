@@ -55,5 +55,27 @@ public class RobotMap {
 								bOmniRatio = 1;
 	
 	
+	//TODO We need to tune all of these PID values once we have the actual robot. It'll be a process.
+	/**
+	 * The P, I, and D values for controlling with the encoder on the tank drive
+	 */
+	public static final double forwardTankP = 0, forwardTankI = 0, forwardTankD = 0;
+	
+	/**
+	 * The P, I, and D values for controlling with the encoder on the omni drive
+	 */
+	public static final double strafeOmniP = 0, strafeOmniI = 0, strafeOmniD = 0;
+	
+	/**
+	 * The P, I, and D values for controlling with the gyro on the tank drive
+	 */
+	public static final double tankGyroP = 0, tankGyroI = 0, tankGyroD = 0;
+	
+	/**
+	 * The P, I and D values for controlling with the gyro on the omni drive
+	 */
+	public static final double omniGyroP = 0, omniGyroI = 0, omniGyroD = 0;
+	
+	
 	
 }

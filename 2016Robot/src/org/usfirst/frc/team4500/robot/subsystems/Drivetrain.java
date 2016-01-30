@@ -2,9 +2,12 @@ package org.usfirst.frc.team4500.robot.subsystems;
 
 import org.usfirst.frc.team4500.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
+import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import utilities.Vector;
 import utilities.Wheel;
@@ -22,6 +25,11 @@ public class Drivetrain extends Subsystem {
 	private Gyro gyro;
 	
 	/**
+	 * The right and front encoder (on the front omni wheel) and the right encoder (on the right tank tread)
+	 */
+	private Encoder rEncoder, fEncoder;
+	
+	/**
 	 * Motor controllers for the left and right tank treads
 	 */
 	private Talon lTank, rTank;
@@ -32,25 +40,29 @@ public class Drivetrain extends Subsystem {
 	 * The RobotDrive object to be used for tank drive
 	 */
 	private RobotDrive tank;
+	
+	/**
+	 * PID controllers to contain different P, I, and D values for the encoder systems
+	 *  of each drivetrain and the gyro systems of each drivetrain
+	 */
+	private PIDController forwardTankPID, strafeOmniPID, gyroTankPID, gyroOmniPID;
 
-    public Drivetrain() { 	
+    public Drivetrain() {
     	lOmni = new Talon(RobotMap.LMOTOR);
     	rOmni = new Talon(RobotMap.RMOTOR);
     	fOmni = new Talon(RobotMap.FMOTOR);
     	bOmni = new Talon(RobotMap.BMOTOR);
-    	
     	lTank = lOmni;
     	rTank = rOmni;
-    	
     	tank = new RobotDrive(lTank, rTank);
-    	
     	omniWheels = new Wheel[4];
-    	
     	omniWheels[0] = new Wheel(RobotMap.lOmniPosition, RobotMap.lOmniDirection, RobotMap.lOmniRatio, lOmni);
     	omniWheels[1] = new Wheel(RobotMap.rOmniPosition, RobotMap.rOmniDirection, RobotMap.rOmniRatio, rOmni);
     	omniWheels[2] = new Wheel(RobotMap.fOmniPosition, RobotMap.fOmniDirection, RobotMap.fOmniRatio, fOmni);
     	omniWheels[3] = new Wheel(RobotMap.bOmniPosition, RobotMap.bOmniDirection, RobotMap.bOmniRatio, bOmni);
-    	
+    	forwardTankPID = new PIDController(RobotMap.forwardTankP, RobotMap.forwardTankI, RobotMap.forwardTankD, null, null);
+    	gyroTankPID = new PIDController(RobotMap.tankGyroP, RobotMap.tankGyroI, RobotMap.tankGyroD, null, null);
+ 
     }
 	
 	public void initDefaultCommand() {
@@ -67,7 +79,7 @@ public class Drivetrain extends Subsystem {
 	}
 	
     /**
-     * Tank drive given a single joystick and optional gyro
+     * Tank drive given a single joystick and possibly gyro for driving straight?
      * @param joyX x-axis of joystick
      * @param joyY y-axis of joystick
      * @param joyTwist twist of joystick
@@ -76,6 +88,16 @@ public class Drivetrain extends Subsystem {
 	public void tankDrive(double joyX, double joyY, double joyTwist, double gyro) {
     	//TODO Make tank drive function
     }
+	
+	/**
+	 * Outputs a corrected twist value to give to a tank driving method 
+	 * for straight driving using the gyro reading
+	 * @param original unmodified joystick twist value
+	 */
+	public double correctTwist(double original) {
+		//TODO Make this add to or subtract from the original value depending on the offset of the gyro
+		return 0;
+	}
     
     /**
      * Six wheel omni drive given joystick input and a gyroscope reading
@@ -125,5 +147,6 @@ public class Drivetrain extends Subsystem {
     public void switchDrivetrain(driveType drivetrain) {
     	//TODO make solenoids, activate them in the proper direction on call
     }
+
 }
 
