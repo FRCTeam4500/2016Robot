@@ -1,32 +1,33 @@
 package org.usfirst.frc.team4500.robot.commands;
 
 import org.usfirst.frc.team4500.robot.Robot;
-import org.usfirst.frc.team4500.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class TankDrive extends Command {
+public class StrafeStraight extends Command {
+	double setpoint;
 
-    public TankDrive() {
+    public StrafeStraight(double setpoint) {
         requires(Robot.drivetrain);
+        this.setpoint = setpoint;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.drivetrain.switchDrivetrain(Drivetrain.driveType.TANK);
+    	Robot.drivetrain.initStrafeStraight(setpoint, Robot.drivetrain.getGyroAngle());
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.tankDrive(Robot.oi.getJoyY(), Robot.oi.getJoyTwist());
+    	Robot.drivetrain.strafeStraight();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return Robot.drivetrain.strafeStraightFinished();
     }
 
     // Called once after isFinished returns true

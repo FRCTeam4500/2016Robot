@@ -137,6 +137,13 @@ public class Drivetrain extends Subsystem {
 		strafeDrive.arcadeDrive(linearOmniHandler.getOutput(), angularOmniHandler.getOutput());
 	}
 	
+	/*
+	 * Returns true when the robot has reached its destination after omni driving straight
+	 */
+	public boolean strafeStraightFinished() {
+		return linearOmniPID.onTarget();
+	}
+	
 	/**
 	 * Sets the proper setpoints for the PID loops before calling tankDriveStraight()
 	 * @param distanceSetpoint setpoint for the encoder
@@ -150,10 +157,17 @@ public class Drivetrain extends Subsystem {
 	/**
 	 * Makes the robot drive straight using PID control.
 	 *  Call initializeTankDriveStraight() first, and then iterate this function until
-	 *  the distance setpoint has been reached.
+	 *  tandDriveStraightFinished() returns true
 	 */
 	public void tankDriveStraight() {
 		tankDrivetrain.arcadeDrive(linearTankHandler.getOutput(), angularTankHandler.getOutput());
+	}
+	
+	/*
+	 * Returns true when the robot has reached its destination after tank driving straight
+	 */
+	public boolean tankDriveStraightFinished() {
+		return linearTankPID.onTarget();
 	}
     
     /**
