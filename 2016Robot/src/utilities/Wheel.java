@@ -8,6 +8,10 @@ public class Wheel {
 	private double speed_ratio;			//How fast does the wheel go (gear ratio ...)
 	private Talon motor_controller;
 	
+	/*
+	 * Class to store values relating to each omni wheel's postion,
+	 *  and methods for controlling their speeds for the purpose of gyroscopic driving
+	 */
 	public Wheel(Vector position, Vector direction, double speed_ratio, Talon motor_controller) {
 		this.position = position;
 		this.direction = direction;
@@ -15,10 +19,10 @@ public class Wheel {
 		this.motor_controller = motor_controller;
 	}
 	
+	/**
+	 * Gets the speed of the wheel based on the linear and rotational movements
+	 */
 	public double getSpeed(Vector velocity, Vector rotation){
-		/**
-		 * Gets the speed of the wheel based on the linear and rotational movements
-		 */
 		Vector wheel_velocity = velocity.add(rotation.cross(position));
 		return direction.dot(wheel_velocity) * speed_ratio;
 		

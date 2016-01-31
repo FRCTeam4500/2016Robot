@@ -21,7 +21,7 @@ public class TankDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.tankDrive(Robot.oi.getJoyX(), Robot.oi.getJoyY(), Robot.oi.getJoyTwist(), Robot.drivetrain.getGyroAngle());
+    	Robot.drivetrain.tankDrive(Robot.oi.getJoyX(), Robot.oi.getJoyY(), Robot.oi.getJoyTwist());
     }
 
     // Make this return true when this Command no longer needs to run execute()

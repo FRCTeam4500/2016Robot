@@ -1,6 +1,8 @@
 package org.usfirst.frc.team4500.robot.subsystems;
 
+import org.usfirst.frc.team4500.robot.Robot;
 import org.usfirst.frc.team4500.robot.RobotMap;
+import org.usfirst.frc.team4500.robot.commands.TankDrive;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
@@ -9,6 +11,7 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import utilities.PIDHandler;
 import utilities.Vector;
 import utilities.Wheel;
 
@@ -22,6 +25,9 @@ public class Drivetrain extends Subsystem {
 	 */
 	private Talon lOmni, rOmni, fOmni, bOmni;
 	
+	/**
+	 * The robot's gyroscope
+	 */
 	private Gyro gyro;
 	
 	/**
@@ -34,18 +40,36 @@ public class Drivetrain extends Subsystem {
 	 */
 	private Talon lTank, rTank;
 	
-	private Wheel[] omniWheels;
-
-	/**
-	 * The RobotDrive object to be used for tank drive
+	/*
+	 * Array containing each omni wheel
 	 */
-	private RobotDrive tank;
+	private Wheel[] omniWheels;
 	
 	/**
-	 * PID controllers to contain different P, I, and D values for the encoder systems
-	 *  of each drivetrain and the gyro systems of each drivetrain
+	 * PID controllers to contain different P, I, and D values for the encoder and gyro systems
+	 *  of each drivetrain.
 	 */
-	private PIDController forwardTankPID, strafeOmniPID, gyroTankPID, gyroOmniPID;
+	private PIDController linearTankPID, linearOmniPID, angularTankPID, angularOmniPID;
+	
+	/**
+	 * PIDHandler instances for the tank drive so that we can get the raw PID output
+	 */
+	private PIDHandler linearTankHandler, angularTankHandler;
+	
+	/*
+	 * PIDHandler instances for omni drive strafing so that we can get the raw PID outpout
+	 */
+	private PIDHandler linearOmniHandler, angularOmniHandler;
+	
+	/*
+	 * RobotDrive object for the tank treads
+	 */
+	private RobotDrive tankDrivetrain;
+	
+	/*
+	 * RobotDrive object containing the front and back omni wheels for the purpose of straight strafing
+	 */
+	private RobotDrive strafeDrive;
 
     public Drivetrain() {
     	lOmni = new Talon(RobotMap.LMOTOR);
@@ -54,20 +78,26 @@ public class Drivetrain extends Subsystem {
     	bOmni = new Talon(RobotMap.BMOTOR);
     	lTank = lOmni;
     	rTank = rOmni;
-    	tank = new RobotDrive(lTank, rTank);
+    	tankDrivetrain = new RobotDrive(lTank, rTank);
+    	strafeDrive = new RobotDrive(fOmni, bOmni);
     	omniWheels = new Wheel[4];
     	omniWheels[0] = new Wheel(RobotMap.lOmniPosition, RobotMap.lOmniDirection, RobotMap.lOmniRatio, lOmni);
     	omniWheels[1] = new Wheel(RobotMap.rOmniPosition, RobotMap.rOmniDirection, RobotMap.rOmniRatio, rOmni);
     	omniWheels[2] = new Wheel(RobotMap.fOmniPosition, RobotMap.fOmniDirection, RobotMap.fOmniRatio, fOmni);
     	omniWheels[3] = new Wheel(RobotMap.bOmniPosition, RobotMap.bOmniDirection, RobotMap.bOmniRatio, bOmni);
-    	forwardTankPID = new PIDController(RobotMap.forwardTankP, RobotMap.forwardTankI, RobotMap.forwardTankD, null, null);
-    	gyroTankPID = new PIDController(RobotMap.tankGyroP, RobotMap.tankGyroI, RobotMap.tankGyroD, null, null);
- 
+    	linearTankHandler = new PIDHandler();
+    	angularTankHandler = new PIDHandler();
+    	linearTankPID = new PIDController(RobotMap.forwardTankP, RobotMap.forwardTankI, RobotMap.forwardTankD, rEncoder, linearTankHandler);
+    	angularTankPID = new PIDController(RobotMap.tankGyroP, RobotMap.tankGyroI, RobotMap.tankGyroD, gyro, angularTankHandler);
+    	linearOmniPID = new PIDController(RobotMap.strafeOmniP, RobotMap.strafeOmniI, RobotMap.strafeOmniD, fEncoder, linearOmniHandler);
+    	angularOmniPID = new PIDController(RobotMap.omniGyroP, RobotMap.omniGyroI, RobotMap.omniGyroD, gyro, angularOmniHandler);
     }
 	
-	public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+	/**
+	 * Makes the robot tank drive when no other command is assigned
+	 */
+    public void initDefaultCommand() {
+        setDefaultCommand(new TankDrive());
     }
 	
 	/**
@@ -79,24 +109,51 @@ public class Drivetrain extends Subsystem {
 	}
 	
     /**
-     * Tank drive given a single joystick and possibly gyro for driving straight?
+     * Tank drive given a single joystick
      * @param joyX x-axis of joystick
      * @param joyY y-axis of joystick
      * @param joyTwist twist of joystick
      * @param gyro optional gyro reading - set to 0 for no gyro
      */
-	public void tankDrive(double joyX, double joyY, double joyTwist, double gyro) {
-    	//TODO Make tank drive function
+	public void tankDrive(double joyY, double joyTwist) {
+    	tankDrivetrain.arcadeDrive(joyY, joyTwist, true);
     }
 	
+	
 	/**
-	 * Outputs a corrected twist value to give to a tank driving method 
-	 * for straight driving using the gyro reading
-	 * @param original unmodified joystick twist value
+	 * Sets the proper setpoints for the PID loops before calling strafeStraight()
+	 * @param distanceSetpoint the setpoint for the encoder
+	 * @param angleToMaintain the setpoint for the gyro
 	 */
-	public double correctTwist(double original) {
-		//TODO Make this add to or subtract from the original value depending on the offset of the gyro
-		return 0;
+	public void initStrafeStraight(double distanceSetpoint, double angleToMaintain) {
+		linearOmniPID.setSetpoint(distanceSetpoint);
+		angularOmniPID.setSetpoint(angleToMaintain);
+	}
+	
+	/**
+	 * Makes the robot strafe straight using PID control
+	 */
+	public void strafeStraight() {
+		strafeDrive.arcadeDrive(linearOmniHandler.getOutput(), angularOmniHandler.getOutput());
+	}
+	
+	/**
+	 * Sets the proper setpoints for the PID loops before calling tankDriveStraight()
+	 * @param distanceSetpoint setpoint for the encoder
+	 * @param angleToMaintain setpoint for the gyro
+	 */
+	public void initTankDriveStraight(double distanceSetpoint, double angleToMaintain) {
+		linearTankPID.setSetpoint(distanceSetpoint); //Give the distance setpoint to the linear tank controller
+		angularTankPID.setSetpoint(angleToMaintain); //Set the angular tank controller to maintain the angle
+	}
+	
+	/**
+	 * Makes the robot drive straight using PID control.
+	 *  Call initializeTankDriveStraight() first, and then iterate this function until
+	 *  the distance setpoint has been reached.
+	 */
+	public void tankDriveStraight() {
+		tankDrivetrain.arcadeDrive(linearTankHandler.getOutput(), angularTankHandler.getOutput());
 	}
     
     /**
