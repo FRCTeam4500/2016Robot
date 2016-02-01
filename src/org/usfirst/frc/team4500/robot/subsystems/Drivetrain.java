@@ -4,6 +4,8 @@ import org.usfirst.frc.team4500.robot.Robot;
 import org.usfirst.frc.team4500.robot.RobotMap;
 import org.usfirst.frc.team4500.robot.commands.TankDrive;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.PIDController;
@@ -70,6 +72,11 @@ public class Drivetrain extends Subsystem {
 	 * RobotDrive object containing the front and back omni wheels for the purpose of straight strafing
 	 */
 	private RobotDrive strafeDrive;
+	
+	/**
+	 * Solenoids for switching wheels
+	 */
+	private DoubleSolenoid wheelSwitch;
 
     public Drivetrain() {
     	lOmni = new Talon(RobotMap.LMOTOR);
@@ -93,6 +100,7 @@ public class Drivetrain extends Subsystem {
     	angularTankPID = new PIDController(RobotMap.tankGyroP, RobotMap.tankGyroI, RobotMap.tankGyroD, gyro, angularTankHandler);
     	linearOmniPID = new PIDController(RobotMap.strafeOmniP, RobotMap.strafeOmniI, RobotMap.strafeOmniD, fEncoder, linearOmniHandler);
     	angularOmniPID = new PIDController(RobotMap.omniGyroP, RobotMap.omniGyroI, RobotMap.omniGyroD, gyro, angularOmniHandler);
+    	wheelSwitch = new DoubleSolenoid(RobotMap.DRIVESWITCHER1, RobotMap.DRIVESWICHER2);
     }
 	
 	/**
@@ -219,6 +227,15 @@ public class Drivetrain extends Subsystem {
      */
     public void switchDrivetrain(driveType drivetrain) {
     	//TODO make solenoids, activate them in the proper direction on call
+    	if(drivetrain == driveType.OMNI)
+    	{
+    		wheelSwitch.set(Value.kForward);
+    	}
+    	
+    	if(drivetrain == driveType.TANK)
+    	{
+    		wheelSwitch.set(Value.kReverse);
+    	}
     }
 
 }

@@ -76,6 +76,10 @@ public class RobotMap {
 	 */
 	public static final double omniGyroP = 0, omniGyroI = 0, omniGyroD = 0;
 	
+	/**
+	 * Ports for solenoids
+	 */
+	public static final int DRIVESWITCHER1 = 0, DRIVESWICHER2 = 1; 
 	
 	
 }
