@@ -87,6 +87,8 @@ public class Drivetrain extends Subsystem {
     	omniWheels[3] = new Wheel(RobotMap.bOmniPosition, RobotMap.bOmniDirection, RobotMap.bOmniRatio, bOmni);
     	linearTankHandler = new PIDHandler();
     	angularTankHandler = new PIDHandler();
+    	linearOmniHandler = new PIDHandler();
+    	angularOmniHandler = new PIDHandler();
     	linearTankPID = new PIDController(RobotMap.forwardTankP, RobotMap.forwardTankI, RobotMap.forwardTankD, rEncoder, linearTankHandler);
     	angularTankPID = new PIDController(RobotMap.tankGyroP, RobotMap.tankGyroI, RobotMap.tankGyroD, gyro, angularTankHandler);
     	linearOmniPID = new PIDController(RobotMap.strafeOmniP, RobotMap.strafeOmniI, RobotMap.strafeOmniD, fEncoder, linearOmniHandler);
