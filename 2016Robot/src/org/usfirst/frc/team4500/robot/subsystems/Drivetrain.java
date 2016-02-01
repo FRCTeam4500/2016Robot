@@ -40,7 +40,7 @@ public class Drivetrain extends Subsystem {
 	 */
 	private Talon lTank, rTank;
 	
-	/*
+	/**
 	 * Array containing each omni wheel
 	 */
 	private Wheel[] omniWheels;
@@ -56,17 +56,17 @@ public class Drivetrain extends Subsystem {
 	 */
 	private PIDHandler linearTankHandler, angularTankHandler;
 	
-	/*
+	/**
 	 * PIDHandler instances for omni drive strafing so that we can get the raw PID outpout
 	 */
 	private PIDHandler linearOmniHandler, angularOmniHandler;
 	
-	/*
+	/**
 	 * RobotDrive object for the tank treads
 	 */
 	private RobotDrive tankDrivetrain;
 	
-	/*
+	/**
 	 * RobotDrive object containing the front and back omni wheels for the purpose of straight strafing
 	 */
 	private RobotDrive strafeDrive;
@@ -137,7 +137,7 @@ public class Drivetrain extends Subsystem {
 		strafeDrive.arcadeDrive(linearOmniHandler.getOutput(), angularOmniHandler.getOutput());
 	}
 	
-	/*
+	/**
 	 * Returns true when the robot has reached its destination after omni driving straight
 	 */
 	public boolean strafeStraightFinished() {
@@ -163,7 +163,7 @@ public class Drivetrain extends Subsystem {
 		tankDrivetrain.arcadeDrive(linearTankHandler.getOutput(), angularTankHandler.getOutput());
 	}
 	
-	/*
+	/**
 	 * Returns true when the robot has reached its destination after tank driving straight
 	 */
 	public boolean tankDriveStraightFinished() {

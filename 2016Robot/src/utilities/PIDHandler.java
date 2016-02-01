@@ -20,6 +20,11 @@ public class PIDHandler implements PIDOutput {
 		this.output = output;
 	}
 	
+	/**
+	 * Gets the output of the PID controller
+	 * No assignment necessary!
+	 * @return the output of the PID controller, which should be (-1 to 1)
+	 */
 	public double getOutput() {
 		return output;
 	}
