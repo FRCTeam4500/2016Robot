@@ -18,17 +18,17 @@ public class RobotMap {
 	/**
 	 * 	Turret motor ports - dummy values!
 	 */
-	public static final int HORIZMOTOR = 4, VERTMOTOR = 5;
+	public static final int HORIZMOTOR = 4, VERTMOTOR = 5, FIREMOTOR = 6, CLIMBMOTOR = 7;
 	
 	/**
 	 * Analog sensor ports - dummy values!
 	 */
-	public static final int GYRO = 0; 
+	public static final int GYRO = 0, CLIMBPOTENT = 1; 
 	
 	/**
 	 * Digital sensor ports - dummy values!
 	 */
-	public static final int HORIZENCODER = 0, VERTENCODER = 1;
+	public static final int HORIZENCODER = 0, VERTENCODER = 1, DRIVEENCODER = 2, STRAFENCODER = 3, LSWITCH = 4, RSWITCH = 5;
 	
 	/**
 	 * The position of each wheel with relation to the center of the robot (in inches but that doesn't matter)
