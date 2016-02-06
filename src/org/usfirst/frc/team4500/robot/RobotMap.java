@@ -55,6 +55,31 @@ public class RobotMap {
 								bOmniRatio = 1;
 	
 	
+	//TODO Find actual value
+	/**
+	 * The height from the ground to the camera in meters - DUMMY VALUE!
+	 */
+	public static final double HEIGHT_TO_CAMERA = 1;
+
+	
+	/**
+	 * The height of the goal from the ground in meters
+	 */
+	public static final double HEIGHT_OF_GOAL = 2.1336;
+	
+	//TODO Find actual value
+	/**
+	 * The velocity of the ball as it leaves the cannon - DUMMY VALUE
+	 */
+	public static final double VELOCITY = 1;
+	
+	//TODO May need to adjust for practicality
+	/**
+	 * The gravitational constant in m/s^2
+	 */
+	public static final double GRAVITY = 9.81;
+	
+	
 	//TODO We need to tune all of these PID values once we have the actual robot. It'll be a process.
 	/**
 	 * The P, I, and D values for controlling with the encoder on the tank drive
@@ -75,6 +100,16 @@ public class RobotMap {
 	 * The P, I and D values for controlling with the gyro on the omni drive
 	 */
 	public static final double omniGyroP = 0, omniGyroI = 0, omniGyroD = 0;
+	
+	/**
+	 * The P, I and D values for controlling the horizontal motion of the cannon
+	 */
+	public static final double horizCannonP = 0, horizCannonI = 0, horizCannonD = 0;
+	
+	/**
+	 * The P, I and D values for controlling the vertical motion of the cannon
+	 */
+	public static final double vertCannonP = 0, vertCannonI = 0, vertCannonD = 0;
 	
 	
 	

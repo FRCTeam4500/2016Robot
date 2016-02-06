@@ -93,6 +93,7 @@ public class Drivetrain extends Subsystem {
     	angularTankPID = new PIDController(RobotMap.tankGyroP, RobotMap.tankGyroI, RobotMap.tankGyroD, gyro, angularTankHandler);
     	linearOmniPID = new PIDController(RobotMap.strafeOmniP, RobotMap.strafeOmniI, RobotMap.strafeOmniD, fEncoder, linearOmniHandler);
     	angularOmniPID = new PIDController(RobotMap.omniGyroP, RobotMap.omniGyroI, RobotMap.omniGyroD, gyro, angularOmniHandler);
+    	//TODO Enable PID controllers - not sure if here or in the initPID... functions
     }
 	
 	/**
