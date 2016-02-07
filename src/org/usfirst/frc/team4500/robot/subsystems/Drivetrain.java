@@ -112,11 +112,9 @@ public class Drivetrain extends Subsystem {
 	}
 	
     /**
-     * Tank drive given a single joystick
-     * @param joyX x-axis of joystick
+     * Tank drive given a single joystick, arcade style
      * @param joyY y-axis of joystick
      * @param joyTwist twist of joystick
-     * @param gyro optional gyro reading - set to 0 for no gyro
      */
 	public void tankDrive(double joyY, double joyTwist) {
     	tankDrivetrain.arcadeDrive(joyY, joyTwist, true);

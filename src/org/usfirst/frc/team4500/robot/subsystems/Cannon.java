@@ -57,10 +57,17 @@ public class Cannon extends Subsystem {
      * @param velocity The velocity of the ball as it leaves the cannon in m/s
      * @param gravity The gravitational constant to use in m/s/s
      * @param height The height from the camera to the top of the goal in m, i.e. height of goal minus height of camera
+     * @param heightAdjustment The amount to adjust upward from the center of the TAPE to the center of the GOAL, since
+     * 			the tape only covers the base of the goal. This has the added benefit of allowing a distance-scaled 
+     * 			adjustment for if the robot tends to shoot too low or too high
      */
-    public void setVerticalAngle(double degrees, double velocity, double gravity, double height) {
+    public void setVerticalAngle(double degrees, double velocity, double gravity, double height, double heightAdjustment) {
     	double angle = degrees*Math.PI/180; //Convert the degree measurement into radians
     	double xDistance = height/Math.tan(angle); //Use trig to find the distance from the robot to the goal horizontally
+    	//Now that the height to the center of the TAPE has been used for calculating the x distance, the height to use
+    	//for the adjustment is added to the original height to get the height to the center of the actual GOAL, which is
+    	//higher than the center of the tape.
+    	height += heightAdjustment; 
     	//Use a projectile equation, solved for angle, to find the angle to set the cannon to
     	verticalPID.setSetpoint(
     		(Math.pow(velocity, 2) 
