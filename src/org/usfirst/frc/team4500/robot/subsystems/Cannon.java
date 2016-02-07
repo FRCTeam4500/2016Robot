@@ -49,10 +49,8 @@ public class Cannon extends Subsystem {
     }
 
     /**
-     * Aims the cannon vertically given an angle off the horizontal to the goal from the camera
-     * Uses a projectile equation to find the angle to set to, and sets the setpoint of the PID
-     * controller to the angle
-     * Use this function, and then use aimVertically to move the cannon to the calculated setpoint
+     * Calculates where to aim the cannon vertically given an angle off the horizontal to the goal from the camera
+     * Uses a projectile equation to find the angle to set to.
      * @param degrees The angle from the camera to the goal in degrees
      * @param velocity The velocity of the ball as it leaves the cannon in m/s
      * @param gravity The gravitational constant to use in m/s/s
@@ -61,23 +59,38 @@ public class Cannon extends Subsystem {
      * 			the tape only covers the base of the goal. This has the added benefit of allowing a distance-scaled 
      * 			adjustment for if the robot tends to shoot too low or too high
      */
-    public void setVerticalAngle(double degrees, double velocity, double gravity, double height, double heightAdjustment) {
+    private double calculateVerticalAngle(double degrees, double velocity, double gravity, double height, double heightAdjustment) {
     	double angle = degrees*Math.PI/180; //Convert the degree measurement into radians
     	double xDistance = height/Math.tan(angle); //Use trig to find the distance from the robot to the goal horizontally
-    	//Now that the height to the center of the TAPE has been used for calculating the x distance, the height to use
-    	//for the adjustment is added to the original height to get the height to the center of the actual GOAL, which is
-    	//higher than the center of the tape.
+    	/*
+    	 * Now that the height to the center of the TAPE has been used for calculating the x distance, the height to use
+    	 * for the adjustment is added to the original height to get the height to the center of the actual GOAL, which is
+    	 * higher than the center of the tape.
+    	 */
     	height += heightAdjustment; 
     	//Use a projectile equation, solved for angle, to find the angle to set the cannon to
-    	verticalPID.setSetpoint(
-    		(Math.pow(velocity, 2) 
+    	return (Math.pow(velocity, 2) 
     				- Math.sqrt(Math.pow(velocity, 4) - gravity*(gravity*Math.pow(xDistance, 2) + 2*height*Math.pow(velocity, 2))))
-    				/(gravity*xDistance));
+    				/(gravity*xDistance);
     }
     
     /**
-     * Sets the vertical motor to the output of the PID controller
-     * Iterate this function until verticalAimFinished() returns true
+     * Uses the constants in RobotMap to set the setpoint of the PID controller to the necessary angle to fire.
+     * Must be given an angle from vision processing. 
+     * TODO May need to make this set an offset from a calculated "0" point.
+     * Use this function, and the iterate aimVertically() to move the cannon to the calculated setpoint
+     * @param degrees The angle in degrees to use from vision
+     */
+    public void setVerticalAngle(double degrees) {
+    	verticalPID.setSetpoint(calculateVerticalAngle(
+    			degrees, RobotMap.VELOCITY, RobotMap.GRAVITY, (RobotMap.HEIGHT_OF_GOAL-RobotMap.HEIGHT_TO_CAMERA), RobotMap.HEIGHT_OFFSET));
+    }
+    
+    
+    
+    /**
+     * Sets the vertical motor to the output of the PID controller.
+     * Iterate this function until verticalAimFinished() returns true.
      */
     public void aimVertically() {
     	vertMotor.set(vertHandler.getOutput());

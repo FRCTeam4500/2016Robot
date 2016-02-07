@@ -67,6 +67,11 @@ public class RobotMap {
 	 */
 	public static final double HEIGHT_OF_GOAL = 2.1336;
 	
+	/**
+	 * The height from the center of the TAPE to the center of the GOAL in m - DUMMY VALUE!
+	 */
+	public static final double HEIGHT_OFFSET = 0.25;
+	
 	//TODO Find actual value
 	/**
 	 * The velocity of the ball as it leaves the cannon - DUMMY VALUE
