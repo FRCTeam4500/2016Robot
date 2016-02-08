@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.tables.ITableListener;
 
 public class TableCommunicator implements ITableListener {
 	
-	double number = 0;
+	Double number = new Double(0);
 	
 	public TableCommunicator() {
 		initialize();
@@ -23,13 +23,13 @@ public class TableCommunicator implements ITableListener {
 
 	@Override
 	public void valueChanged(ITable source, String key, Object value, boolean isNew) {
-		if(isNew && key == RobotMap.TABLE_KEY) {
+		if(isNew && key.equals(RobotMap.TABLE_KEY)) {
 			number = (Double) value;
 		}
 	}
 	
 	public double getLatestNumber() {
-		return number;
+		return number.doubleValue();
 	}
 
 }
