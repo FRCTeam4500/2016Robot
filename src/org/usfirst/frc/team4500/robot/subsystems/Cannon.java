@@ -2,6 +2,7 @@ package org.usfirst.frc.team4500.robot.subsystems;
 
 import org.usfirst.frc.team4500.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Talon;
@@ -29,6 +30,12 @@ public class Cannon extends Subsystem {
 	 * The PIDHandler objects for the vertical and horizontal components of the cannon
 	 */
 	PIDHandler vertHandler, horizHandler;
+	/**
+	 * The limit switches on the left and right of the lazy Susan which allow us to limit
+	 * the horizontal movement of the cannon so we don't destroy the board.
+	 */
+	DigitalInput rLimit, lLimit;
+	
 	
 	public Cannon() {
 		horizMotor = new Talon(RobotMap.HORIZMOTOR);
@@ -37,6 +44,8 @@ public class Cannon extends Subsystem {
 		horizHandler = new PIDHandler();
 		horizontalPID = new PIDController(RobotMap.horizCannonP, RobotMap.horizCannonI, RobotMap.horizCannonD, horizEncoder, horizHandler);
 		verticalPID = new PIDController(RobotMap.vertCannonP, RobotMap.vertCannonI, RobotMap.vertCannonD, vertEncoder, vertHandler);
+		rLimit = new DigitalInput(RobotMap.RSWITCH);
+		lLimit = new DigitalInput(RobotMap.LSWITCH);
 	}
 
     public void initDefaultCommand() {
@@ -44,12 +53,42 @@ public class Cannon extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     
+    /**
+     * Sets both claw motors to 0 power.
+     */
+    public void doNothing() {
+    	horizMotor.set(0);
+    	vertMotor.set(0);
+    }
+    
+    /**
+     * Sets the horizontal motor to the specified speed.
+     * @param speed From -1 to 1.
+     */
+    public void moveHorizontally(double speed) {
+    	horizMotor.set(speed);
+    }
+   
+    
+    /**
+     * TODO This function will aim the horizontal component of the cannon. Still not sure what method will be used, either
+     * PID with camera as sensor or PID using a degree measurement gotten by the camera, mostly depending on how much
+     * latency the vision processing has.
+     */
     public void aimHorizontal() {
-    	
+    	//TODO Make the robot aim horizontally
+    }
+    
+    /**
+     * Sets the vertical motor controller to the specified speed.
+     * @param speed From -1 to 1.
+     */
+    public void moveVertically(double speed) {
+    	vertMotor.set(speed);
     }
 
     /**
-     * Calculates where to aim the cannon vertically given an angle off the horizontal to the goal from the camera
+     * Calculates where to aim the cannon vertically given an angle off the horizontal to the goal from the camera.
      * Uses a projectile equation to find the angle to set to.
      * @param degrees The angle from the camera to the goal in degrees
      * @param velocity The velocity of the ball as it leaves the cannon in m/s
@@ -62,13 +101,11 @@ public class Cannon extends Subsystem {
     private double calculateVerticalAngle(double degrees, double velocity, double gravity, double height, double heightAdjustment) {
     	double angle = degrees*Math.PI/180; //Convert the degree measurement into radians
     	double xDistance = height/Math.tan(angle); //Use trig to find the distance from the robot to the goal horizontally
-    	/*
-    	 * Now that the height to the center of the TAPE has been used for calculating the x distance, the height to use
-    	 * for the adjustment is added to the original height to get the height to the center of the actual GOAL, which is
-    	 * higher than the center of the tape.
-    	 */
+    	 /*Now that the height to the center of the TAPE has been used for calculating the x distance, the height to use
+    	 for the adjustment is added to the original height to get the height to the center of the actual GOAL, which is
+    	 higher than the center of the tape.*/
     	height += heightAdjustment; 
-    	//Use a projectile equation, solved for angle, to find the angle to set the cannon to
+    	//Use a projectile equation, solved for angle, to find the angle to which the cannon must be set in order to hit the goal.
     	return (Math.pow(velocity, 2) 
     				- Math.sqrt(Math.pow(velocity, 4) - gravity*(gravity*Math.pow(xDistance, 2) + 2*height*Math.pow(velocity, 2))))
     				/(gravity*xDistance);
@@ -86,8 +123,6 @@ public class Cannon extends Subsystem {
     			degrees, RobotMap.VELOCITY, RobotMap.GRAVITY, (RobotMap.HEIGHT_OF_GOAL-RobotMap.HEIGHT_TO_CAMERA), RobotMap.HEIGHT_OFFSET));
     }
     
-    
-    
     /**
      * Sets the vertical motor to the output of the PID controller.
      * Iterate this function until verticalAimFinished() returns true.
@@ -103,5 +138,22 @@ public class Cannon extends Subsystem {
     public boolean verticalAimFinished() {
     	return verticalPID.onTarget();
     }
+    
+    /**
+     * Returns FALSE when the left limit switch is pressed.
+     * @return lLimit.get()
+     */
+    public boolean getLeftLimit() {
+    	return lLimit.get();
+    }
+    
+    /**
+     * Returns FALSE when the right limit switch is pressed.
+     * @return rLimit.get()
+     */
+    public boolean getRightLimit() {
+    	return lLimit.get();
+    }
+   
 }
 

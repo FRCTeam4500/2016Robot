@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team4500.robot;
 
+import org.usfirst.frc.team4500.robot.subsystems.Cannon;
 import org.usfirst.frc.team4500.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -20,6 +21,7 @@ public class Robot extends IterativeRobot {
 	// Instantiate subsystems here, i.e: public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 	public static Drivetrain drivetrain;
+	public static Cannon cannon;
 
     Command autonomousCommand;
 
@@ -28,8 +30,10 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+    	//TODO We'll comment these out and only initialize them one by one as we test the robot.
 		oi = new OI();
 		drivetrain = new Drivetrain();
+		cannon = new Cannon();
         // instantiate the command used for the autonomous period
         //i.e. autonomousCommand = new ExampleCommand();
     }
