@@ -115,6 +115,24 @@ public class RobotMap {
 	 * The P, I and D values for controlling the vertical motion of the cannon
 	 */
 	public static final double vertCannonP = 0, vertCannonI = 0, vertCannonD = 0;
+
+	/**
+	 * The IP address to use to communicate with the network table for vision.
+	 * XXX Dummy
+	 */
+	public static final String TABLE_IP = "10.1.90.2";
+
+	/**
+	 * The name of the network table.
+	 * XXX Dummy
+	 */
+	public static final String TABLE_NAME = "vision";
+
+	/**
+	 * The name of the angle value in the table
+	 * XXX Dummy
+	 */
+	public static final String TABLE_KEY = "angle";
 	
 	
 	
