@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team4500.robot;
 
+import org.usfirst.frc.team4500.robot.commands.connectToCoprocessor;
 import org.usfirst.frc.team4500.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -30,6 +31,9 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
 		drivetrain = new Drivetrain();
+		(new connectToCoprocessor()).start(); //TODO: Make sure that this command runs in parallel
+		
+		
         // instantiate the command used for the autonomous period
         //i.e. autonomousCommand = new ExampleCommand();
     }

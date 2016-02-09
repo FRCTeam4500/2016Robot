@@ -76,6 +76,14 @@ public class RobotMap {
 	 */
 	public static final double omniGyroP = 0, omniGyroI = 0, omniGyroD = 0;
 	
+	/**
+	 * The address (IP probably) and socket on which to connect the port
+	 */
+	//TODO: Find values for these
+	
+	public static final String COPROCESSOR_ADDRESS = "";
+	public static final int COPROCESSOR_PORT = 1234;
+	
 	
 	
 }
