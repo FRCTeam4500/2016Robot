@@ -25,7 +25,7 @@ public class OI {
 	 */
 	public OI() {
 		
-		stick = new Joystick(1);
+		stick = new Joystick(0);
 		initializeSocket();
 		
 		
@@ -61,8 +61,7 @@ public class OI {
 	 * @return x value from joystick (-1 to 1)
 	 */
 	public double getJoyX() {
-		//TODO Deadzones
-		return stick.getX();
+		return (stick.getX() < RobotMap.DEADZONE) ? 0 : stick.getX();
 	}
 	
 	/**
@@ -70,8 +69,7 @@ public class OI {
 	 * @return y value from joystick (-1 to 1)
 	 */
 	public double getJoyY() {
-		//TODO Deadzones
-		return stick.getY();
+		return (stick.getY() < RobotMap.DEADZONE) ? 0 : stick.getY();
 	}
 	
 	/**
@@ -79,8 +77,7 @@ public class OI {
 	 * @return twist value from joystick (-1 to 1)
 	 */
 	public double getJoyTwist() {
-		//TODO Deadzones
-		return stick.getTwist();
+		return (stick.getTwist() < RobotMap.DEADZONE) ? 0 : stick.getTwist();
 	}
 	
 	public double getGoalAngle(){

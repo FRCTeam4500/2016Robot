@@ -39,6 +39,7 @@ public class Drivetrain extends Subsystem {
 	 * The right and front encoder (on the front omni wheel) and the right encoder (on the right tank tread)
 	 */
 	private Encoder rEncoder, fEncoder;
+	//TODO Initialize these if we get them
 	
 	/**
 	 * Motor controllers for the left and right tank treads

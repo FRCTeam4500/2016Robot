@@ -18,7 +18,7 @@ public class RobotMap {
 	/**
 	 * 	Turret motor ports - dummy values!
 	 */
-	public static final int HORIZMOTOR = 4, VERTMOTOR = 5, FIREMOTOR = 6, CLIMBMOTOR = 7;
+	public static final int HORIZMOTOR = 5, VERTMOTOR = 7, FIREMOTOR = 6, CLIMBMOTOR = 8, LOADMOTOR = 4;
 	
 	/**
 	 * Analog sensor ports - dummy values!
@@ -28,7 +28,18 @@ public class RobotMap {
 	/**
 	 * Digital sensor ports - dummy values!
 	 */
-	public static final int HORIZENCODER = 0, VERTENCODER = 1, DRIVEENCODER = 2, STRAFENCODER = 3, LSWITCH = 4, RSWITCH = 5;
+	public static final int HORIZENCODER1 = 0, HORIZENCODER2 = 1, VERTENCODER1 = 2, VERTENCODER2 = 3;
+	//DRIVEENCODER = 2, STRAFENCODER = 3, 
+	
+	/**
+	 * Limit switches on horizontal component of cannon
+	 */
+	public static final int LSWITCH = 4, RSWITCH = 5;
+	
+	/**
+	 * The deadzone on the joystick
+	 */
+	public static final double DEADZONE = .05;
 	
 	/**
 	 * The position of each wheel with relation to the center of the robot (in inches but that doesn't matter)
@@ -158,7 +169,12 @@ public class RobotMap {
 	 */
 	public static final int CLIMBERMOTOR = 0;
 
+	/**
+	 * The max voltage output of the potentiometer for scaling down to a value between -1 and 1
+	 * XXX Dummy
+	 */
 	public static final double MAX_POT_VOLTS = 5;
+	
 	/**
 	 * The address (IP probably) and socket on which to connect the port
 	 */
