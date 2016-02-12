@@ -60,6 +60,18 @@ public class RobotMap {
 	 * The height from the ground to the camera in meters - DUMMY VALUE!
 	 */
 	public static final double HEIGHT_TO_CAMERA = 1;
+	
+	/**
+	 * The maximum speed we can move the cannon while calibrating it, safely.
+	 * XXX Dummy
+	 */
+	public static final double CALLIBRATE_SPEED = 0.2;
+	
+	/**
+	 * The gear ratio of the lazy suzan : the gear on the motor turning it
+	 * XXX DummY
+	 */
+	public static final double cannonRatio = 13.5/2.6;
 
 	
 	/**

@@ -154,6 +154,17 @@ public class Cannon extends Subsystem {
     public boolean getRightLimit() {
     	return lLimit.get();
     }
+    
+    /**
+     * Resets the horizontal encoder to 0
+     */
+    public void resetHorizontalEncoder() {
+    	horizEncoder.reset();
+    }
+    
+    public void safelySetVertSetpoint(double setpoint) {
+    	verticalPID.setSetpoint(setpoint);
+    }
    
 }
 
