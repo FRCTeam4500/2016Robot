@@ -2,6 +2,7 @@
 package org.usfirst.frc.team4500.robot;
 
 import org.usfirst.frc.team4500.robot.subsystems.Cannon;
+import org.usfirst.frc.team4500.robot.subsystems.Climber;
 import org.usfirst.frc.team4500.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -22,6 +23,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static Drivetrain drivetrain;
 	public static Cannon cannon;
+	public static Climber climber;
 
     Command autonomousCommand;
 
