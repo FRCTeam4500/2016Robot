@@ -5,35 +5,34 @@ import org.usfirst.frc.team4500.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * This class is intentionally NOT 
+ *
  */
-class AimVertically extends Command {
+class AimHorizontally extends Command {
 
-    double degrees = 0;
+    double offset;
 	
 	/**
-	 * DON'T USE THIS ALONE. DOES NOT REQUIRE THE SUBSYSTEM. USE AIMCANNON
-	 * Aims the vertical component of the cannon to the specified angle in degrees.
-	 * @param degrees The angle to set the vertical component of cannon to in degrees.
+	 * DO NOT USE THIS COMMAND ALONE. DOES NOT REQUIRE SUBSYSTEM. USE AIMCANNON.
+	 * Aims the horizontal component of the cannon.
+	 * @param offset
 	 */
-    public AimVertically(double degrees) {
-        //requires(Robot.cannon); //We don't want this if we want both axes to aim simultaneously
-        this.degrees = degrees;
+    public AimHorizontally(double offset) {
+        this.offset = offset;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.cannon.setVerticalAngle(degrees);
+    	Robot.cannon.setHorizontalAngle(offset);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.cannon.aimVertically();
+    	Robot.cannon.aimHorizontally();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.cannon.verticalAimFinished();
+        return Robot.cannon.horizontalAimFinished();
     }
 
     // Called once after isFinished returns true

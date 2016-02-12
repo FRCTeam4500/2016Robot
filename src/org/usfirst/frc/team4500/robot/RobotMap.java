@@ -182,6 +182,16 @@ public class RobotMap {
 	
 	public static final String COPROCESSOR_ADDRESS = "";
 	public static final int COPROCESSOR_PORT = 1234;
+
+	/**
+	 * The angle after which the plexiglass will pop out
+	 */
+	public static final double VERTICAL_LIMIT = 80;
+
+	/**
+	 * The angle after which the wires will pop out
+	 */
+	public static final double HORIZONTAL_LIMIT = 40;
 	
 	
 	

@@ -74,15 +74,30 @@ public class Cannon extends Subsystem {
     	horizMotor.set(speed);
     }
    
+    /**
+     * Adds an offset to the current angle of the encoder.
+     * @param offset the offset in degrees
+     */
+    public void setHorizontalAngle(double offset) {
+    	safelySetHorizSetpoint(horizEncoder.getDistance() + offset);
+    }
     
     /**
-     * TODO This function will aim the horizontal component of the cannon. Still not sure what method will be used, either
-     * PID with camera as sensor or PID using a degree measurement gotten by the camera, mostly depending on how much
-     * latency the vision processing has.
+     * Aims the horizontal component of the cannon using PID control.
+     * Iterate this function after calling setHorizontalAngle()
      */
-    public void aimHorizontal() {
-    	//TODO Make the robot aim horizontally
+    public void aimHorizontally() {
+    	horizMotor.set(horizHandler.getOutput());
     }
+    
+    /**
+     * Returns true when the vertical aim is finished
+     * @return the onTarget() function of the horizontal PID loop
+     */
+    public boolean horizontalAimFinished() {
+    	return horizontalPID.onTarget();
+    }
+    
     
     /**
      * Sets the vertical motor controller to the specified speed.
@@ -124,7 +139,7 @@ public class Cannon extends Subsystem {
      * @param degrees The angle in degrees to use from vision
      */
     public void setVerticalAngle(double degrees) {
-    	verticalPID.setSetpoint(calculateVerticalAngle(
+    	safelySetVertSetpoint(calculateVerticalAngle(
     			degrees, RobotMap.VELOCITY, RobotMap.GRAVITY, (RobotMap.HEIGHT_OF_GOAL-RobotMap.HEIGHT_TO_CAMERA), RobotMap.HEIGHT_OFFSET));
     }
     
@@ -168,7 +183,15 @@ public class Cannon extends Subsystem {
     }
     
     public void safelySetVertSetpoint(double setpoint) {
-    	verticalPID.setSetpoint(setpoint);
+    	if (setpoint < RobotMap.VERTICAL_LIMIT) {
+    		verticalPID.setSetpoint(setpoint);
+    	}
+    }
+    
+    public void safelySetHorizSetpoint(double setpoint) {
+    	if (setpoint < RobotMap.HORIZONTAL_LIMIT) {
+    		horizontalPID.setSetpoint(setpoint);
+    	}
     }
    
 }

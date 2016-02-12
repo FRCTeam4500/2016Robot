@@ -5,25 +5,24 @@ import org.usfirst.frc.team4500.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * This class is intentionally NOT 
+ *
  */
-class AimVertically extends Command {
+public class ManualMoveToVertSetpoint extends Command {
 
-    double degrees = 0;
+    double setpoint;
 	
 	/**
-	 * DON'T USE THIS ALONE. DOES NOT REQUIRE THE SUBSYSTEM. USE AIMCANNON
-	 * Aims the vertical component of the cannon to the specified angle in degrees.
-	 * @param degrees The angle to set the vertical component of cannon to in degrees.
+	 * Moves the vertical component of the cannon to the desired PID setpoint
+	 * @param setpoint in degrees
 	 */
-    public AimVertically(double degrees) {
-        //requires(Robot.cannon); //We don't want this if we want both axes to aim simultaneously
-        this.degrees = degrees;
+    public ManualMoveToVertSetpoint(double setpoint) {
+        requires(Robot.cannon);
+        this.setpoint = setpoint;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.cannon.setVerticalAngle(degrees);
+    	Robot.cannon.safelySetVertSetpoint(setpoint);
     }
 
     // Called repeatedly when this Command is scheduled to run
