@@ -3,6 +3,7 @@ package org.usfirst.frc.team4500.robot.subsystems;
 import org.usfirst.frc.team4500.robot.Robot;
 import org.usfirst.frc.team4500.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 
@@ -13,6 +14,7 @@ public class Climber extends PIDSubsystem {
 
 	private static final double kp = 0, ki = 0, kd = 0;
 	private Talon climberTalon;
+	private AnalogInput potentiometer;
     // Initialize your subsystem here
     public Climber() {
         // Use these to get going:
@@ -30,7 +32,7 @@ public class Climber extends PIDSubsystem {
         // Return your input value for the PID loop
         // e.g. a sensor, like a potentiometer:
         // yourPot.getAverageVoltage() / kYourMaxVoltage;
-    	return 0.0;
+    	return potentiometer.getAverageVoltage()/RobotMap.MAX_POT_VOLTS;
     }
     
     protected void usePIDOutput(double output) {

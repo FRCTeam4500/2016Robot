@@ -157,6 +157,8 @@ public class RobotMap {
 	 * Motor for the climber
 	 */
 	public static final int CLIMBERMOTOR = 0;
+
+	public static final double MAX_POT_VOLTS = 5;
 	
 	
 }

@@ -222,10 +222,13 @@ public class Drivetrain extends Subsystem {
     
     /**
      * Switches the drivetrain by using the pneumatics
-     * CURRENTLY A STUB!
      */
     public void switchDrivetrain(driveType drivetrain) {
-    	//TODO make solenoids, activate them in the proper direction on call
+    	if (drivetrain == driveType.OMNI) {
+    		wheelSwitch.set(Value.kForward);
+    	} else {
+    		wheelSwitch.set(Value.kReverse);
+    	}
     }
 
 }
