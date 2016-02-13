@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import utilities.VisionServer;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -22,6 +23,7 @@ public class Robot extends IterativeRobot {
 
 	// Instantiate subsystems here, i.e: public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
+	public static VisionServer visionServer;
 	public static Drivetrain drivetrain;
 	public static Cannon cannon;
 	public static Climber climber;
@@ -35,6 +37,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
     	//TODO We'll comment these out and only initialize them one by one as we test the robot.
 		oi = new OI();
+		visionServer = new VisionServer();
 		drivetrain = new Drivetrain();
 		cannon = new Cannon();
 		(new connectToCoprocessor()).start(); //TODO: Make sure that this command runs in parallel

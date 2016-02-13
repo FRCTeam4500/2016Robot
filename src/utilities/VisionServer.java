@@ -50,9 +50,32 @@ public class VisionServer {
 	 * Gets the angle above the horizontal that the goal is.
 	 * The format of the reading is 8 bytes then \n
 	 */
-	public double getGoalAngle(){
+	public double getYAngle(){
 		try {
 			coprocessorSock.getOutputStream().write(0); //Tell the coprocessor that we want an angle
+			String angleInString = socketReader.readLine();
+			
+			byte[] angleInBytes = angleInString.substring(0, angleInString.length() - 1).getBytes(); //skip the newline character
+			
+			return ByteBuffer.wrap(angleInBytes).getDouble();
+			
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return -1;
+		
+	}
+	
+	/**
+	 * Gets the angle horizontal horizontally relative to the camera to the goal.
+	 * The format of the reading is 8 bytes then \n
+	 */
+	public double getXAngle(){
+		try {
+			coprocessorSock.getOutputStream().write(1); //Tell the coprocessor that we want an angle
 			String angleInString = socketReader.readLine();
 			
 			byte[] angleInBytes = angleInString.substring(0, angleInString.length() - 1).getBytes(); //skip the newline character
