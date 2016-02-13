@@ -7,7 +7,7 @@ import org.usfirst.frc.team4500.robot.commands.TankDrive;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Gyro;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -33,7 +33,7 @@ public class Drivetrain extends Subsystem {
 	/**
 	 * The robot's gyroscope
 	 */
-	private Gyro gyro;
+	private ADXRS450_Gyro gyro;
 	
 	/**
 	 * The right and front encoder (on the front omni wheel) and the right encoder (on the right tank tread)
