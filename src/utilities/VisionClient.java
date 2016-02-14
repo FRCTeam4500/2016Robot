@@ -2,20 +2,23 @@ package utilities;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
 
 import org.usfirst.frc.team4500.robot.RobotMap;
+import org.usfirst.frc.team4500.robot.commands.connectToCoprocessor;
 
-public class VisionServer {
+public class VisionClient {
 	
 	
 	Socket coprocessorSock;
-	BufferedReader socketReader;
+	InputStream socketReader;
+	boolean isInitialized;
 	
-	public VisionServer() {
+	public VisionClient() {
 		initializeSocket();
 	}
 	
@@ -25,9 +28,11 @@ public class VisionServer {
 	 * The coprocesser socket may be a null socket - be warned.
 	 */
 	public boolean initializeSocket(){
+		isInitialized = false;
 		try {
 			coprocessorSock = new Socket(RobotMap.COPROCESSOR_ADDRESS, RobotMap.COPROCESSOR_PORT);
-			socketReader = new BufferedReader(new InputStreamReader(coprocessorSock.getInputStream()));
+			socketReader = coprocessorSock.getInputStream();
+			isInitialized = true;
 			
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
@@ -48,16 +53,48 @@ public class VisionServer {
 	
 	/**
 	 * Gets the angle above the horizontal that the goal is.
-	 * The format of the reading is 8 bytes then \n
+	 * The format of the reading is 8 bytes for the double
 	 */
+	
+	private double readDouble(){
+		try{
+			byte[] data = new byte[8];
+			int bytesRead = 0;
+			
+			while(bytesRead < 8){
+				int amountRead = socketReader.read(data, bytesRead, 8 - bytesRead);
+				
+				
+				
+				if(amountRead < 0){ //if the connection closes on us
+					this.socketReader = null;
+					this.coprocessorSock = null;
+					this.isInitialized = false;
+					new connectToCoprocessor().start();
+					
+				}else{
+					bytesRead += amountRead;
+				}
+			}
+			//reverse the array
+			for(int i = 0; i < 4; i++){
+				byte tmp = data[i];
+				data[i] = data[7-i];
+				data[7-i] = tmp;
+			}
+			return ByteBuffer.wrap(data).getDouble(); 
+			
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return -1;
+	}
+	
 	public double getYAngle(){
 		try {
 			coprocessorSock.getOutputStream().write(0); //Tell the coprocessor that we want an angle
-			String angleInString = socketReader.readLine();
-			
-			byte[] angleInBytes = angleInString.substring(0, angleInString.length() - 1).getBytes(); //skip the newline character
-			
-			return ByteBuffer.wrap(angleInBytes).getDouble();
+			return readDouble();
 			
 			
 		} catch (IOException e) {
@@ -75,12 +112,9 @@ public class VisionServer {
 	 */
 	public double getXAngle(){
 		try {
-			coprocessorSock.getOutputStream().write(1); //Tell the coprocessor that we want an angle
-			String angleInString = socketReader.readLine();
-			
-			byte[] angleInBytes = angleInString.substring(0, angleInString.length() - 1).getBytes(); //skip the newline character
-			
-			return ByteBuffer.wrap(angleInBytes).getDouble();
+			coprocessorSock.getOutputStream().write(1); //thisi writes a byte, not a whole integer
+														//Tell the coprocessor that we want an angle
+			return readDouble();
 			
 			
 		} catch (IOException e) {
