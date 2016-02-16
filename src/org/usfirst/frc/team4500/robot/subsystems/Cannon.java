@@ -81,7 +81,7 @@ public class Cannon extends Subsystem {
      * Adds an offset to the current angle of the encoder.
      * @param offset the offset in degrees
      */
-    public void setHorizontalAngle(double offsetPulses) {
+    public void setHorizontalOffset(double offsetPulses) {
     	safelySetHorizSetpoint(horizEncoder.getDistance() + offsetPulses);
     }
     
@@ -183,9 +183,9 @@ public class Cannon extends Subsystem {
     	}
     }
     
-    public void safelySetHorizSetpoint(double setpoint) {
-    	if (setpoint < RobotMap.HORIZONTAL_LIMIT) {
-    		horizontalPID.setSetpoint(setpoint);
+    public void safelySetHorizSetpoint(double setpointPulses) {
+    	if (setpointPulses < toHorizontalPulses(RobotMap.HORIZONTAL_LIMIT)) {
+    		horizontalPID.setSetpoint(setpointPulses);
     	}
     }
    
