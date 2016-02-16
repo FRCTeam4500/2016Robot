@@ -1,18 +1,19 @@
 package utilities;
 
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 
 public class Wheel {
 	private Vector position;			//Where is the wheel in relation to the center of the robot
 	private Vector direction;			//What direction does the wheel going
 	private double speed_ratio;			//How fast does the wheel go (gear ratio ...)
-	private Talon motor_controller;
+	private SpeedController motor_controller;
 	
 	/*
 	 * Class to store values relating to each omni wheel's postion,
 	 *  and methods for controlling their speeds for the purpose of gyroscopic driving
 	 */
-	public Wheel(Vector position, Vector direction, double speed_ratio, Talon motor_controller) {
+	public Wheel(Vector position, Vector direction, double speed_ratio, SpeedController motor_controller) {
 		this.position = position;
 		this.direction = direction;
 		this.speed_ratio = speed_ratio;

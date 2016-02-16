@@ -4,11 +4,15 @@ import org.usfirst.frc.team4500.robot.Robot;
 import org.usfirst.frc.team4500.robot.RobotMap;
 import org.usfirst.frc.team4500.robot.commands.TankDrive;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Gyro;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import utilities.PIDHandler;
@@ -23,22 +27,24 @@ public class Drivetrain extends Subsystem {
 	 * Motor controllers for the left, right, front, and back omni wheels.
 	 *  Use the setter functions to set speeds in case we need multiple controllers for the same side.
 	 */
-	private Talon lOmni, rOmni, fOmni, bOmni;
+	private Victor lOmni, rOmni;
+	private Jaguar fOmni, bOmni;
 	
 	/**
 	 * The robot's gyroscope
 	 */
-	private Gyro gyro;
+	private ADXRS450_Gyro gyro;
 	
 	/**
 	 * The right and front encoder (on the front omni wheel) and the right encoder (on the right tank tread)
 	 */
 	private Encoder rEncoder, fEncoder;
+	//TODO Initialize these if we get them
 	
 	/**
 	 * Motor controllers for the left and right tank treads
 	 */
-	private Talon lTank, rTank;
+	private Victor lTank, rTank;
 	
 	/**
 	 * Array containing each omni wheel
@@ -70,12 +76,17 @@ public class Drivetrain extends Subsystem {
 	 * RobotDrive object containing the front and back omni wheels for the purpose of straight strafing
 	 */
 	private RobotDrive strafeDrive;
+	
+	/**
+	 * Solenoids for switching wheels
+	 */
+	private DoubleSolenoid wheelSwitch;
 
     public Drivetrain() {
-    	lOmni = new Talon(RobotMap.LMOTOR);
-    	rOmni = new Talon(RobotMap.RMOTOR);
-    	fOmni = new Talon(RobotMap.FMOTOR);
-    	bOmni = new Talon(RobotMap.BMOTOR);
+    	lOmni = new Victor(RobotMap.LMOTOR);
+    	rOmni = new Victor(RobotMap.RMOTOR);
+    	fOmni = new Jaguar(RobotMap.FMOTOR);
+    	bOmni = new Jaguar(RobotMap.BMOTOR);
     	lTank = lOmni;
     	rTank = rOmni;
     	tankDrivetrain = new RobotDrive(lTank, rTank);
@@ -93,6 +104,8 @@ public class Drivetrain extends Subsystem {
     	angularTankPID = new PIDController(RobotMap.tankGyroP, RobotMap.tankGyroI, RobotMap.tankGyroD, gyro, angularTankHandler);
     	linearOmniPID = new PIDController(RobotMap.strafeOmniP, RobotMap.strafeOmniI, RobotMap.strafeOmniD, fEncoder, linearOmniHandler);
     	angularOmniPID = new PIDController(RobotMap.omniGyroP, RobotMap.omniGyroI, RobotMap.omniGyroD, gyro, angularOmniHandler);
+    	//TODO Enable PID controllers - not sure if here or in the initPID... functions
+    	wheelSwitch = new DoubleSolenoid(RobotMap.DRIVESWITCHER1, RobotMap.DRIVESWICHER2);
     }
 	
 	/**
@@ -111,11 +124,9 @@ public class Drivetrain extends Subsystem {
 	}
 	
     /**
-     * Tank drive given a single joystick
-     * @param joyX x-axis of joystick
+     * Tank drive given a single joystick, arcade style
      * @param joyY y-axis of joystick
      * @param joyTwist twist of joystick
-     * @param gyro optional gyro reading - set to 0 for no gyro
      */
 	public void tankDrive(double joyY, double joyTwist) {
     	tankDrivetrain.arcadeDrive(joyY, joyTwist, true);
@@ -215,10 +226,13 @@ public class Drivetrain extends Subsystem {
     
     /**
      * Switches the drivetrain by using the pneumatics
-     * CURRENTLY A STUB!
      */
     public void switchDrivetrain(driveType drivetrain) {
-    	//TODO make solenoids, activate them in the proper direction on call
+    	if (drivetrain == driveType.OMNI) {
+    		wheelSwitch.set(Value.kForward);
+    	} else {
+    		wheelSwitch.set(Value.kReverse);
+    	}
     }
 
 }

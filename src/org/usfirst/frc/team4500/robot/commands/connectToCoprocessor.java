@@ -1,33 +1,35 @@
 package org.usfirst.frc.team4500.robot.commands;
 
+
+
 import org.usfirst.frc.team4500.robot.Robot;
-import org.usfirst.frc.team4500.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Call as a parallel command to initialize the coprocessor communication.
  */
-public class OmniDrive extends Command {
+public class connectToCoprocessor extends Command {
 
-    public OmniDrive() {
-    	requires(Robot.drivetrain);
+    public connectToCoprocessor() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.drivetrain.switchDrivetrain(Drivetrain.driveType.OMNI);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//Gives the omni drive functions the square of the joystick axes, making for smoother control.
-    	Robot.drivetrain.omniDrive(Math.pow(Robot.oi.getJoyX(), 2), Math.pow(Robot.oi.getJoyY(), 2), Math.pow(Robot.oi.getJoyTwist(), 2), Robot.drivetrain.getGyroAngle());
+    	if(!Robot.visionClient.socketInitialized()){
+    		Robot.visionClient.initializeSocket();
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return Robot.visionClient.socketInitialized();
     }
 
     // Called once after isFinished returns true

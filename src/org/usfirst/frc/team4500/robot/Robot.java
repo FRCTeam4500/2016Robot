@@ -1,12 +1,16 @@
 
 package org.usfirst.frc.team4500.robot;
 
+import org.usfirst.frc.team4500.robot.subsystems.Cannon;
+import org.usfirst.frc.team4500.robot.subsystems.Climber;
+import org.usfirst.frc.team4500.robot.commands.connectToCoprocessor;
 import org.usfirst.frc.team4500.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import utilities.VisionClient;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -19,7 +23,10 @@ public class Robot extends IterativeRobot {
 
 	// Instantiate subsystems here, i.e: public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
+	public static VisionClient visionClient;
 	public static Drivetrain drivetrain;
+	public static Cannon cannon;
+	public static Climber climber;
 
     Command autonomousCommand;
 
@@ -28,8 +35,14 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+    	//TODO We'll comment these out and only initialize them one by one as we test the robot.
 		oi = new OI();
+		visionClient = new VisionClient();
 		drivetrain = new Drivetrain();
+		cannon = new Cannon();
+		(new connectToCoprocessor()).start(); //TODO: Make sure that this command runs in parallel
+		
+		
         // instantiate the command used for the autonomous period
         //i.e. autonomousCommand = new ExampleCommand();
     }

@@ -18,7 +18,7 @@ public class RobotMap {
 	/**
 	 * 	Turret motor ports - dummy values!
 	 */
-	public static final int HORIZMOTOR = 4, VERTMOTOR = 5, FIREMOTOR = 6, CLIMBMOTOR = 7;
+	public static final int HORIZMOTOR = 5, VERTMOTOR = 7, FIREMOTOR = 6, CLIMBMOTOR = 8, LOADMOTOR = 4;
 	
 	/**
 	 * Analog sensor ports - dummy values!
@@ -28,7 +28,18 @@ public class RobotMap {
 	/**
 	 * Digital sensor ports - dummy values!
 	 */
-	public static final int HORIZENCODER = 0, VERTENCODER = 1, DRIVEENCODER = 2, STRAFENCODER = 3, LSWITCH = 4, RSWITCH = 5;
+	public static final int HORIZENCODER1 = 0, HORIZENCODER2 = 1, VERTENCODER1 = 2, VERTENCODER2 = 3;
+	//DRIVEENCODER = 2, STRAFENCODER = 3, 
+	
+	/**
+	 * Limit switches on horizontal component of cannon
+	 */
+	public static final int LSWITCH = 4, RSWITCH = 5;
+	
+	/**
+	 * The deadzone on the joystick
+	 */
+	public static final double DEADZONE = .05;
 	
 	/**
 	 * The position of each wheel with relation to the center of the robot (in inches but that doesn't matter)
@@ -55,6 +66,48 @@ public class RobotMap {
 								bOmniRatio = 1;
 	
 	
+	//TODO Find actual value
+	/**
+	 * The height from the ground to the camera in meters - DUMMY VALUE!
+	 */
+	public static final double HEIGHT_TO_CAMERA = 1;
+	
+	/**
+	 * The maximum speed we can move the cannon while calibrating it, safely.
+	 * XXX Dummy
+	 */
+	public static final double CALLIBRATE_SPEED = 0.2;
+	
+	/**
+	 * The gear ratio of the lazy suzan : the gear on the motor turning it
+	 * XXX DummY
+	 */
+	public static final double cannonRatio = 13.5/2.6;
+
+	
+	/**
+	 * The height of the goal from the ground in meters
+	 */
+	public static final double HEIGHT_OF_GOAL = 2.1336;
+	
+	/**
+	 * The height from the center of the TAPE to the center of the GOAL in m - DUMMY VALUE!
+	 */
+	public static final double HEIGHT_OFFSET = 0.25;
+	
+	//TODO Find actual value
+	/**
+	 * The velocity of the ball as it leaves the cannon - DUMMY VALUE
+	 */
+	public static final double VELOCITY = 1;
+	
+	//TODO May need to adjust for practicality
+	/**
+	 * The gravitational constant in m/s^2
+	 */
+	public static final double GRAVITY = 9.81;
+	
+	
 	//TODO We need to tune all of these PID values once we have the actual robot. It'll be a process.
 	/**
 	 * The P, I, and D values for controlling with the encoder on the tank drive
@@ -75,6 +128,70 @@ public class RobotMap {
 	 * The P, I and D values for controlling with the gyro on the omni drive
 	 */
 	public static final double omniGyroP = 0, omniGyroI = 0, omniGyroD = 0;
+	
+	/**
+	 * The P, I and D values for controlling the horizontal motion of the cannon
+	 */
+	public static final double horizCannonP = 0, horizCannonI = 0, horizCannonD = 0;
+	
+	/**
+	 * The P, I and D values for controlling the vertical motion of the cannon
+	 */
+	public static final double vertCannonP = 0, vertCannonI = 0, vertCannonD = 0;
+
+	/**
+	 * The IP address to use to communicate with the network table for vision.
+	 * XXX Dummy
+	 */
+	public static final String TABLE_IP = "10.1.90.2";
+
+	/**
+	 * The name of the network table.
+	 * XXX Dummy
+	 */
+	public static final String TABLE_NAME = "vision";
+
+	/**
+	 * The name of the angle value in the table
+	 * XXX Dummy
+	 */
+	public static final String TABLE_KEY = "angle";
+	
+	/**
+	 * Ports for solenoids
+	 */
+	public static final int DRIVESWITCHER1 = 0, DRIVESWICHER2 = 1; 
+	
+	public static final double CLIMBERTOP = 0, CLIMBERBOTTOM = 0;
+	
+	/**
+	 * Motor for the climber
+	 */
+	public static final int CLIMBERMOTOR = 0;
+
+	/**
+	 * The max voltage output of the potentiometer for scaling down to a value between -1 and 1
+	 * XXX Dummy
+	 */
+	public static final double MAX_POT_VOLTS = 5;
+	
+	/**
+	 * The address (IP probably) and socket on which to connect the port
+	 */
+	//TODO: Find values for these
+	
+	public static final String COPROCESSOR_ADDRESS = "";
+	public static final int COPROCESSOR_PORT = 1234;
+
+	/**
+	 * The angle after which the plexiglass will pop out
+	 */
+	public static final double VERTICAL_LIMIT = 80;
+
+	/**
+	 * The angle after which the wires will pop out
+	 */
+	public static final double HORIZONTAL_LIMIT = 40;
 	
 	
 	
