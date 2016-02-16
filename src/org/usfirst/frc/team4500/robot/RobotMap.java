@@ -196,6 +196,13 @@ public class RobotMap {
 	 * The angle after which the wires will pop out
 	 */
 	public static final double HORIZONTAL_LIMIT = 40;
+
+	public static final int pneumaticsModule = 0;
+
+	//Dummys
+	public static int tankDrive = 0;
+
+	public static int omniDrive = 1;
 	
 	
 	

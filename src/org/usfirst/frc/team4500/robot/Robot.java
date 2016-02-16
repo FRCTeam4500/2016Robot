@@ -1,10 +1,11 @@
 
 package org.usfirst.frc.team4500.robot;
 
+import org.usfirst.frc.team4500.robot.commands.ConnectToCoprocessor;
 import org.usfirst.frc.team4500.robot.subsystems.Cannon;
 import org.usfirst.frc.team4500.robot.subsystems.Climber;
-import org.usfirst.frc.team4500.robot.commands.ConnectToCoprocessor;
 import org.usfirst.frc.team4500.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team4500.robot.subsystems.PnumaticsMain;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -27,6 +28,7 @@ public class Robot extends IterativeRobot {
 	public static Drivetrain drivetrain;
 	public static Cannon cannon;
 	public static Climber climber;
+	public static PnumaticsMain pnumatics;
 
     Command autonomousCommand;
 
@@ -39,6 +41,7 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		//visionClient = new VisionClient();
 		drivetrain = new Drivetrain();
+		pnumatics = new PnumaticsMain();
 		//cannon = new Cannon();
 		//climber = new Climber();
 		
