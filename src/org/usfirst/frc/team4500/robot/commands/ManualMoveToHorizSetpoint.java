@@ -18,7 +18,7 @@ public class ManualMoveToHorizSetpoint extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.cannon.safelySetHorizSetpoint(setpoint);
+    	Robot.cannon.safelySetHorizSetpoint(Robot.cannon.toHorizontalPulses(setpoint));
     }
 
     // Called repeatedly when this Command is scheduled to run

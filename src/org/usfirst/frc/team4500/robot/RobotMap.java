@@ -32,9 +32,9 @@ public class RobotMap {
 	//DRIVEENCODER = 2, STRAFENCODER = 3, 
 	
 	/**
-	 * Limit switches on horizontal component of cannon
+	 * Limit switch on horizontal component of cannon
 	 */
-	public static final int LSWITCH = 4, RSWITCH = 5;
+	public static final int SWITCH = 4;
 	
 	/**
 	 * The deadzone on the joystick
@@ -79,10 +79,14 @@ public class RobotMap {
 	public static final double CALLIBRATE_SPEED = 0.2;
 	
 	/**
-	 * The gear ratio of the lazy suzan : the gear on the motor turning it
-	 * XXX DummY
+	 * The gear ratio of the lazy suzan : the gear on the motor turning the lazy suzan
 	 */
-	public static final double cannonRatio = 13.5/2.6;
+	public static final double CANNON_RATIO = 13.5/2.6;
+	
+	/**
+	 * The number of encoder pulses per degree of axle rotation on a PG motor
+	 */
+	public static final double PULSES_PER_DEGREE = 497/360;
 
 	
 	/**

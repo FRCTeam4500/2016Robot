@@ -3,7 +3,7 @@ package org.usfirst.frc.team4500.robot;
 
 import org.usfirst.frc.team4500.robot.subsystems.Cannon;
 import org.usfirst.frc.team4500.robot.subsystems.Climber;
-import org.usfirst.frc.team4500.robot.commands.connectToCoprocessor;
+import org.usfirst.frc.team4500.robot.commands.ConnectToCoprocessor;
 import org.usfirst.frc.team4500.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -37,10 +37,13 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
     	//TODO We'll comment these out and only initialize them one by one as we test the robot.
 		oi = new OI();
-		visionClient = new VisionClient();
+		//visionClient = new VisionClient();
 		drivetrain = new Drivetrain();
-		cannon = new Cannon();
-		(new connectToCoprocessor()).start(); //TODO: Make sure that this command runs in parallel
+		//cannon = new Cannon();
+		//climber = new Climber();
+		
+		
+		(new ConnectToCoprocessor()).start(); //TODO: Make sure that this command runs in parallel
 		
 		
         // instantiate the command used for the autonomous period

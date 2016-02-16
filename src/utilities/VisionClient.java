@@ -9,7 +9,7 @@ import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
 
 import org.usfirst.frc.team4500.robot.RobotMap;
-import org.usfirst.frc.team4500.robot.commands.connectToCoprocessor;
+import org.usfirst.frc.team4500.robot.commands.ConnectToCoprocessor;
 
 public class VisionClient {
 	
@@ -70,7 +70,7 @@ public class VisionClient {
 					this.socketReader = null;
 					this.coprocessorSock = null;
 					this.isInitialized = false;
-					new connectToCoprocessor().start();
+					new ConnectToCoprocessor().start();
 					
 				}else{
 					bytesRead += amountRead;

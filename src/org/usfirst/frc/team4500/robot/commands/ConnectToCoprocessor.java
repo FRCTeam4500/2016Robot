@@ -9,9 +9,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  * Call as a parallel command to initialize the coprocessor communication.
  */
-public class connectToCoprocessor extends Command {
+public class ConnectToCoprocessor extends Command {
 
-    public connectToCoprocessor() {
+    public ConnectToCoprocessor() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }

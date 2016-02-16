@@ -1,14 +1,10 @@
 package org.usfirst.frc.team4500.robot;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.Socket;
-import java.net.UnknownHostException;
-import java.nio.ByteBuffer;
+import org.usfirst.frc.team4500.robot.commands.ManualMoveToHorizSetpoint;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -17,12 +13,17 @@ import edu.wpi.first.wpilibj.buttons.Button;
 public class OI {
 	Joystick stick;
 	
+	//Buttons are instantiated like this:
+	//Button b1 = new JoystickButton(stick, 0);
+	
 	/**
 	 * Initializes the joystick and the coprocessor socket;
 	 * The coprocesser socket may be a null socket - be warned.
 	 */
 	public OI() {
 		stick = new Joystick(0);
+		//Buttons can be made to activate commands like this:
+		//b1.whenPressed(new ManualMoveToHorizSetpoint(30));
 	}
 	
 	

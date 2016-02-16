@@ -35,7 +35,7 @@ public class Cannon extends Subsystem {
 	 * The limit switches on the left and right of the lazy Susan which allow us to limit
 	 * the horizontal movement of the cannon so we don't destroy the board.
 	 */
-	DigitalInput rLimit, lLimit;
+	DigitalInput limit;
 	
 	
 	public Cannon() {
@@ -47,8 +47,7 @@ public class Cannon extends Subsystem {
 		verticalPID = new PIDController(RobotMap.vertCannonP, RobotMap.vertCannonI, RobotMap.vertCannonD, vertEncoder, vertHandler);
 		horizontalPID.enable();
 		verticalPID.enable();
-		rLimit = new DigitalInput(RobotMap.RSWITCH);
-		lLimit = new DigitalInput(RobotMap.LSWITCH);
+		limit = new DigitalInput(RobotMap.SWITCH);
 		horizEncoder = new Encoder(RobotMap.HORIZENCODER1, RobotMap.HORIZENCODER2);
 		vertEncoder = new Encoder(RobotMap.VERTENCODER1, RobotMap.VERTENCODER2);
 	}
@@ -66,6 +65,10 @@ public class Cannon extends Subsystem {
     	vertMotor.set(0);
     }
     
+    public double toHorizontalPulses(double degrees) {
+    	return degrees*RobotMap.PULSES_PER_DEGREE*RobotMap.CANNON_RATIO;
+    }
+    
     /**
      * Sets the horizontal motor to the specified speed.
      * @param speed From -1 to 1.
@@ -78,8 +81,8 @@ public class Cannon extends Subsystem {
      * Adds an offset to the current angle of the encoder.
      * @param offset the offset in degrees
      */
-    public void setHorizontalAngle(double offset) {
-    	safelySetHorizSetpoint(horizEncoder.getDistance() + offset);
+    public void setHorizontalAngle(double offsetPulses) {
+    	safelySetHorizSetpoint(horizEncoder.getDistance() + offsetPulses);
     }
     
     /**
@@ -160,19 +163,11 @@ public class Cannon extends Subsystem {
     }
     
     /**
-     * Returns FALSE when the left limit switch is pressed.
-     * @return lLimit.get()
-     */
-    public boolean getLeftLimit() {
-    	return lLimit.get();
-    }
-    
-    /**
      * Returns FALSE when the right limit switch is pressed.
      * @return rLimit.get()
      */
-    public boolean getRightLimit() {
-    	return lLimit.get();
+    public boolean getLimit() {
+    	return limit.get();
     }
     
     /**
