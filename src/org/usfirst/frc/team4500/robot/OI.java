@@ -5,6 +5,7 @@ import org.usfirst.frc.team4500.robot.commands.ManualMoveToHorizSetpoint;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -14,7 +15,7 @@ public class OI {
 	Joystick stick;
 	
 	//Buttons are instantiated like this:
-	//Button b1 = new JoystickButton(stick, 0);
+	Button b1 = new JoystickButton(stick, 6);
 	
 	/**
 	 * Initializes the joystick and the coprocessor socket;
@@ -23,7 +24,9 @@ public class OI {
 	public OI() {
 		stick = new Joystick(0);
 		//Buttons can be made to activate commands like this:
-		//b1.whenPressed(new ManualMoveToHorizSetpoint(30));
+		
+		
+		b1.whenPressed(new ManualMoveToHorizSetpoint(SmartDashboard.getNumber("Horizontal Setpoint")));
 	}
 	
 	
