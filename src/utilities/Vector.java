@@ -3,7 +3,7 @@ package utilities;
 
 
 public class Vector {
-public final Vector zero = new Vector(0,0,0);
+public static final Vector zero = new Vector(0,0,0);
 	
 	private final double x,y,z;
 	
