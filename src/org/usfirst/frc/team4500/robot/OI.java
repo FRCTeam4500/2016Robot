@@ -32,7 +32,7 @@ public class OI {
 	 * @return x value from joystick (-1 to 1)
 	 */
 	public double getJoyX() {
-		return (stick.getX() < RobotMap.DEADZONE) ? 0 : stick.getX();
+		return (Math.abs(stick.getX()) < RobotMap.DEADZONE) ? 0 : stick.getX();
 	}
 	
 	/**
@@ -40,7 +40,7 @@ public class OI {
 	 * @return y value from joystick (-1 to 1)
 	 */
 	public double getJoyY() {
-		return (stick.getY() < RobotMap.DEADZONE) ? 0 : stick.getY();
+		return (Math.abs(stick.getY()) < RobotMap.DEADZONE) ? 0 : stick.getY();
 	}
 	
 	/**
@@ -48,7 +48,7 @@ public class OI {
 	 * @return twist value from joystick (-1 to 1)
 	 */
 	public double getJoyTwist() {
-		return (stick.getTwist() < RobotMap.DEADZONE) ? 0 : stick.getTwist();
+		return (Math.abs(stick.getTwist()) < RobotMap.DEADZONE) ? 0 : stick.getTwist();
 	}
 	
 	
