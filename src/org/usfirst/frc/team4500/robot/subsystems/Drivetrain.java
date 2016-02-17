@@ -108,6 +108,13 @@ public class Drivetrain extends Subsystem {
     	//TODO Enable PID controllers - not sure if here or in the initPID... functions
     	wheelSwitch = new DoubleSolenoid(RobotMap.DRIVESWITCHER1, RobotMap.DRIVESWICHER2);
     }
+    
+    private void initPID() {
+    	angularTankPID.setAbsoluteTolerance(RobotMap.ANGULAR_TOLERANCE);
+    	angularOmniPID.setAbsoluteTolerance(RobotMap.ANGULAR_TOLERANCE);
+    	angularOmniPID.setContinuous(false);
+    	angularTankPID.setContinuous(false);
+    }
 	
 	/**
 	 * Makes the robot tank drive when no other command is assigned

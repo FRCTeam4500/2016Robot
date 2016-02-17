@@ -199,6 +199,12 @@ public class RobotMap {
 
 	public static final int pneumaticsModule = 0;
 
+	public static final double HORIZ_TOLERANCE = 2;
+
+	public static final double VERT_TOLERANCE = 2;
+
+	public static final double ANGULAR_TOLERANCE = 2;
+
 	//Dummys
 	public static int tankDrive = 0;
 

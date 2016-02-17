@@ -47,9 +47,17 @@ public class Cannon extends Subsystem {
 		vertEncoder = new Encoder(RobotMap.VERTENCODER1, RobotMap.VERTENCODER2);
 		horizontalPID = new PIDController(RobotMap.horizCannonP, RobotMap.horizCannonI, RobotMap.horizCannonD, horizEncoder, horizHandler);
 		verticalPID = new PIDController(RobotMap.vertCannonP, RobotMap.vertCannonI, RobotMap.vertCannonD, vertEncoder, vertHandler);
+		limit = new DigitalInput(RobotMap.SWITCH);
+		initPID();
+	}
+	
+	private void initPID() {
+		horizontalPID.setAbsoluteTolerance(RobotMap.HORIZ_TOLERANCE);
+		verticalPID.setAbsoluteTolerance(RobotMap.VERT_TOLERANCE);
+		horizontalPID.setContinuous(false);
+		verticalPID.setContinuous(false);
 		horizontalPID.enable();
 		verticalPID.enable();
-		limit = new DigitalInput(RobotMap.SWITCH);
 	}
 
     public void initDefaultCommand() {
