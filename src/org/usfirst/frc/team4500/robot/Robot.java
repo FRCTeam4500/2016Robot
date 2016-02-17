@@ -38,15 +38,17 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
     	//TODO We'll comment these out and only initialize them one by one as we test the robot.
-		oi = new OI();
+    	
 		//visionClient = new VisionClient();
 		drivetrain = new Drivetrain();
 		pneumatics = new PneumaticsMain();
-		//cannon = new Cannon();
+		cannon = new Cannon();
 		//climber = new Climber();
 		
+		oi = new OI();
 		
-		(new ConnectToCoprocessor()).start(); //TODO: Make sure that this command runs in parallel
+		
+		//(new ConnectToCoprocessor()).start(); //TODO: Make sure that this command runs in parallel
 		
 		
         // instantiate the command used for the autonomous period

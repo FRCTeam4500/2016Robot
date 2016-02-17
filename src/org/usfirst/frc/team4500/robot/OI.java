@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4500.robot;
 
 import org.usfirst.frc.team4500.robot.commands.ManualMoveToHorizSetpoint;
+import org.usfirst.frc.team4500.robot.commands.TankDrive;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -15,18 +16,18 @@ public class OI {
 	Joystick stick;
 	
 	//Buttons are instantiated like this:
-	Button b1 = new JoystickButton(stick, 6);
+	Button b1;
 	
 	/**
 	 * Initializes the joystick and the coprocessor socket;
 	 * The coprocesser socket may be a null socket - be warned.
 	 */
 	public OI() {
-		stick = new Joystick(0);
+		stick = new Joystick(0); 
 		//Buttons can be made to activate commands like this:
 		
-		
-		b1.whenPressed(new ManualMoveToHorizSetpoint(SmartDashboard.getNumber("Horizontal Setpoint")));
+		b1 = new JoystickButton(stick, 6);
+		b1.whenPressed(new ManualMoveToHorizSetpoint(30));
 	}
 	
 	
