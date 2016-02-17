@@ -86,7 +86,7 @@ public class RobotMap {
 	/**
 	 * The number of encoder pulses per degree of axle rotation on a PG motor
 	 */
-	public static final double PULSES_PER_DEGREE = 497/360;
+	public static final double PULSES_PER_DEGREE = 498.148/360;
 
 	
 	/**
