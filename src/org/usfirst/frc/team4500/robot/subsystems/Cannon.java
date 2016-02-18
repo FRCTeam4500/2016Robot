@@ -56,6 +56,8 @@ public class Cannon extends Subsystem {
 		verticalPID.setAbsoluteTolerance(RobotMap.VERT_TOLERANCE);
 		horizontalPID.setContinuous(false);
 		verticalPID.setContinuous(false);
+		horizEncoder.setDistancePerPulse((1/RobotMap.PULSES_PER_DEGREE)*RobotMap.CANNON_RATIO);
+		vertEncoder.setDistancePerPulse(1/RobotMap.PULSES_PER_DEGREE);
 		horizontalPID.enable();
 		verticalPID.enable();
 	}
@@ -73,9 +75,6 @@ public class Cannon extends Subsystem {
     	vertMotor.set(0);
     }
     
-    public double toHorizontalPulses(double degrees) {
-    	return degrees*RobotMap.PULSES_PER_DEGREE*RobotMap.CANNON_RATIO;
-    }
     
     /**
      * Sets the horizontal motor to the specified speed.
@@ -191,9 +190,9 @@ public class Cannon extends Subsystem {
     	}
     }
     
-    public void safelySetHorizSetpoint(double setpointPulses) {
-    	if (setpointPulses < toHorizontalPulses(RobotMap.HORIZONTAL_LIMIT)) {
-    		horizontalPID.setSetpoint(setpointPulses);
+    public void safelySetHorizSetpoint(double setpoint) {
+    	if (setpoint < RobotMap.HORIZONTAL_LIMIT) {
+    		horizontalPID.setSetpoint(setpoint);
     	}
     }
    
