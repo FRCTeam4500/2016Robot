@@ -18,7 +18,7 @@ public class Cannon extends Subsystem {
     /**
      * The motor controllers for the horizontal and vertical aiming mechanisms
      */
-	Victor horizMotor, vertMotor, fireMotor;
+	Victor horizMotor, vertMotor;
 	/**
 	 * The encoders on the horizontal and vertical aiming mechanisms
 	 */
@@ -41,7 +41,6 @@ public class Cannon extends Subsystem {
 	public Cannon() {
 		horizMotor = new Victor(RobotMap.HORIZMOTOR);
 		vertMotor = new Victor(RobotMap.VERTMOTOR);
-		fireMotor = new Victor(RobotMap.FIREMOTOR);
 		vertHandler = new PIDHandler();
 		horizHandler = new PIDHandler();
 		horizEncoder = new Encoder(RobotMap.HORIZENCODER1, RobotMap.HORIZENCODER2);
@@ -74,10 +73,6 @@ public class Cannon extends Subsystem {
     public void doNothing() {
     	horizMotor.set(0);
     	vertMotor.set(0);
-    }
-    
-    public void spinUp() {
-    	fireMotor.set(1);
     }
     
     
