@@ -205,6 +205,8 @@ public class RobotMap {
 
 	public static final double ANGULAR_TOLERANCE = 2;
 
+	public static final double LOAD_SPEED = .5;
+
 	//Dummys
 	public static int tankDrive = 0;
 

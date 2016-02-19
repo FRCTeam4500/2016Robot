@@ -5,6 +5,7 @@ import org.usfirst.frc.team4500.robot.commands.ConnectToCoprocessor;
 import org.usfirst.frc.team4500.robot.subsystems.Cannon;
 import org.usfirst.frc.team4500.robot.subsystems.Climber;
 import org.usfirst.frc.team4500.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team4500.robot.subsystems.Loader;
 import org.usfirst.frc.team4500.robot.subsystems.PneumaticsMain;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -29,6 +30,7 @@ public class Robot extends IterativeRobot {
 	public static Cannon cannon;
 	public static Climber climber;
 	public static PneumaticsMain pneumatics;
+	public static Loader loader;
 
     Command autonomousCommand;
 
@@ -43,6 +45,7 @@ public class Robot extends IterativeRobot {
 		drivetrain = new Drivetrain();
 		pneumatics = new PneumaticsMain();
 		cannon = new Cannon();
+		loader = new Loader();
 		//climber = new Climber();
 		
 		oi = new OI();
