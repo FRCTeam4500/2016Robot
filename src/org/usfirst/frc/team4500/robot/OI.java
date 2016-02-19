@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4500.robot;
 
+import org.usfirst.frc.team4500.robot.commands.CalibrateCannon;
 import org.usfirst.frc.team4500.robot.commands.ManualMoveToHorizSetpoint;
 import org.usfirst.frc.team4500.robot.commands.MoveHorizontally;
 import org.usfirst.frc.team4500.robot.commands.MoveVertically;
@@ -19,7 +20,7 @@ public class OI {
 	Joystick stick;
 	
 	//Buttons are instantiated like this:
-	Button setpointB, moveLeft, moveRight, moveUp, moveDown, spinUp;
+	Button setpointB, moveLeft, moveRight, moveUp, moveDown, spinUp, callibrate;
 	
 	/**
 	 * Initializes the joystick and the coprocessor socket;
@@ -29,19 +30,27 @@ public class OI {
 		stick = new Joystick(0); 
 		//Buttons can be made to activate commands like this:
 		
-		//setpointB = new JoystickButton(stick, 6);
-		//setpointB.whenPressed(new ManualMoveToHorizSetpoint(30));
+		setpointB = new JoystickButton(stick, 11);
+		setpointB.whenPressed(new ManualMoveToHorizSetpoint(30));
+		
 		moveLeft = new JoystickButton(stick, 3);
 		moveRight = new JoystickButton(stick, 4);
 		moveUp = new JoystickButton(stick, 6);
 		moveDown = new JoystickButton(stick, 5);
-		moveLeft.whileHeld(new MoveHorizontally(-1));
-		moveRight.whileActive(new MoveHorizontally(1));
-		moveUp.whileHeld(new MoveVertically(1));
-		moveDown.whileHeld(new MoveVertically(-1));
+		callibrate = new JoystickButton(stick, 12);
+		moveLeft.whileHeld(new MoveHorizontally(-.5));
+		moveRight.whileActive(new MoveHorizontally(.5));
+		moveUp.whileHeld(new MoveVertically(.5));
+		moveDown.whileHeld(new MoveVertically(-.5));
+		moveDown.whenReleased(new MoveVertically(0));
+		moveUp.whenReleased(new MoveVertically(0));
+		moveRight.whenReleased(new MoveHorizontally(0));
+		moveLeft.whenReleased(new MoveHorizontally(0));
 		
 		spinUp = new JoystickButton(stick, 2);
-		spinUp.whenPressed(new SpinUp(3000));
+		spinUp.whenPressed(new SpinUp(1));
+		
+		callibrate.whenPressed(new CalibrateCannon());
 	}
 	
 	
