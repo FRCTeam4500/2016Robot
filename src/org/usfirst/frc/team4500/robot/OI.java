@@ -1,6 +1,9 @@
 package org.usfirst.frc.team4500.robot;
 
 import org.usfirst.frc.team4500.robot.commands.ManualMoveToHorizSetpoint;
+import org.usfirst.frc.team4500.robot.commands.MoveHorizontally;
+import org.usfirst.frc.team4500.robot.commands.MoveVertically;
+import org.usfirst.frc.team4500.robot.commands.SpinUp;
 import org.usfirst.frc.team4500.robot.commands.TankDrive;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -16,7 +19,7 @@ public class OI {
 	Joystick stick;
 	
 	//Buttons are instantiated like this:
-	Button b1;
+	Button setpointB, moveLeft, moveRight, moveUp, moveDown, spinUp;
 	
 	/**
 	 * Initializes the joystick and the coprocessor socket;
@@ -26,8 +29,19 @@ public class OI {
 		stick = new Joystick(0); 
 		//Buttons can be made to activate commands like this:
 		
-		b1 = new JoystickButton(stick, 6);
-		b1.whenPressed(new ManualMoveToHorizSetpoint(30));
+		//setpointB = new JoystickButton(stick, 6);
+		//setpointB.whenPressed(new ManualMoveToHorizSetpoint(30));
+		moveLeft = new JoystickButton(stick, 3);
+		moveRight = new JoystickButton(stick, 4);
+		moveUp = new JoystickButton(stick, 6);
+		moveDown = new JoystickButton(stick, 5);
+		moveLeft.whileHeld(new MoveHorizontally(-1));
+		moveRight.whileActive(new MoveHorizontally(1));
+		moveUp.whileHeld(new MoveVertically(1));
+		moveDown.whileHeld(new MoveVertically(-1));
+		
+		spinUp = new JoystickButton(stick, 2);
+		spinUp.whenPressed(new SpinUp(3000));
 	}
 	
 	
