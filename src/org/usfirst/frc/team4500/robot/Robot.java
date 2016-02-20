@@ -99,7 +99,7 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
     	if(Robot.cannon.horizEncoder != null){
     		SmartDashboard.putNumber("HoizEncoder", Robot.cannon.horizEncoder.get());
-    		SmartDashboard.putNumber("Vert Encoder", Robot.cannon.vertEncoder.get());
+    		SmartDashboard.putNumber("Vert Encoder", Robot.cannon.vertEncoder.getDistance());
     		SmartDashboard.putNumber("Counter", n);
     		n++;
     		SmartDashboard.putString("Working", "yes");
