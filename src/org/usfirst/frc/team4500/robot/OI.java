@@ -41,7 +41,7 @@ public class OI {
 		moveRight = new JoystickButton(stick, 4);
 		moveUp = new JoystickButton(stick, 6);
 		moveDown = new JoystickButton(stick, 5);
-		callibrate = new JoystickButton(stick, 12);
+		//callibrate = new JoystickButton(stick, 12);
 		resetEncoders = new JoystickButton(stick, 7);
 		moveLeft.whileHeld(new MoveHorizontally(-.5));
 		moveRight.whileActive(new MoveHorizontally(.5));
@@ -56,13 +56,13 @@ public class OI {
 		spinUp = new JoystickButton(stick, 2);
 		spinUp.whenPressed(new SpinUp(1));
 		
-		callibrate.whenPressed(new CalibrateCannon());
+		//callibrate.whenPressed(new CalibrateCannon());
 		
 		load = new JoystickButton(stick, 8);
 		load.whileHeld(new Load());
 		
-		cameraAim = new JoystickButton(stick, 9);
-		cameraAim.whenPressed(new AimVertically(Robot.visionClient.getYAngle()));
+		//cameraAim = new JoystickButton(stick, 9);
+		//cameraAim.whenPressed(new AimVertically(Robot.visionClient.getYAngle()));
 		
 		
 	}
