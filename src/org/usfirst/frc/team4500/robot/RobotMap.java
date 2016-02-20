@@ -11,22 +11,22 @@ import utilities.Vector;
  */
 public class RobotMap {
     /**
-     * Drive motor ports - dummy values!
+     * Drive motor ports
      */
 	public static final int LMOTOR = 0, RMOTOR = 1, FMOTOR = 2, BMOTOR = 3;
 	
 	/**
-	 * 	Turret motor ports - dummy values!
+	 * 	Turret motor ports
 	 */
 	public static final int HORIZMOTOR = 5, VERTMOTOR = 7, FIREMOTOR = 6, CLIMBMOTOR = 8, LOADMOTOR = 4;
 	
 	/**
-	 * Analog sensor ports - dummy values!
+	 * Analog sensor ports
 	 */
 	public static final int GYRO = 0, CLIMBPOTENT = 1; 
 	
 	/**
-	 * Digital sensor ports - dummy values!
+	 * Digital sensor ports
 	 */
 	public static final int HORIZENCODER1 = 0, HORIZENCODER2 = 1, VERTENCODER1 = 2, VERTENCODER2 = 3;
 	//DRIVEENCODER = 2, STRAFENCODER = 3, 
@@ -88,6 +88,9 @@ public class RobotMap {
 	 */
 	public static final double PULSES_PER_DEGREE = 498.148/360;
 	
+	/**
+	 * The ratio of the small sprocket attached to the motor : the large sprocket which moves the vertical component of the cannon
+	 */
 	public static final double VERTICAL_RATIO = .6/1.9;
 
 	

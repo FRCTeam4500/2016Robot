@@ -65,7 +65,7 @@ public class Cannon extends Subsystem {
 		horizontalPID.setContinuous(false);
 		verticalPID.setContinuous(false);
 		horizEncoder.setDistancePerPulse((1/RobotMap.PULSES_PER_DEGREE)*RobotMap.CANNON_RATIO);
-		vertEncoder.setDistancePerPulse((1/RobotMap.PULSES_PER_DEGREE) * RobotMap.VERTICAL_RATIO);
+		vertEncoder.setDistancePerPulse(1/(RobotMap.PULSES_PER_DEGREE * RobotMap.VERTICAL_RATIO));
 		horizontalPID.enable();
 		verticalPID.enable();
 	}
