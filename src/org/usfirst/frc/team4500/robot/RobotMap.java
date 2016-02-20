@@ -87,6 +87,8 @@ public class RobotMap {
 	 * The number of encoder pulses per degree of axle rotation on a PG motor
 	 */
 	public static final double PULSES_PER_DEGREE = 498.148/360;
+	
+	public static final double VERTICAL_RATIO = .6/1.9;
 
 	
 	/**
@@ -136,12 +138,12 @@ public class RobotMap {
 	/**
 	 * The P, I and D values for controlling the horizontal motion of the cannon
 	 */
-	public static final double horizCannonP = 0.01, horizCannonI = 0, horizCannonD = 0;
+	public static final double horizCannonP = -0.01, horizCannonI = 0, horizCannonD = 0;
 	
 	/**
 	 * The P, I and D values for controlling the vertical motion of the cannon
 	 */
-	public static final double vertCannonP = 0, vertCannonI = 0, vertCannonD = 0;
+	public static final double vertCannonP = .01, vertCannonI = .001, vertCannonD = 0;
 
 	/**
 	 * The IP address to use to communicate with the network table for vision.

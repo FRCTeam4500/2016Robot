@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import utilities.VisionClient;
 
 /**
@@ -31,6 +32,7 @@ public class Robot extends IterativeRobot {
 	public static Climber climber;
 	public static PneumaticsMain pneumatics;
 	public static Loader loader;
+	int n;
 
     Command autonomousCommand;
 
@@ -39,6 +41,7 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+    	n = 0;
     	//TODO We'll comment these out and only initialize them one by one as we test the robot.
     	
 		//visionClient = new VisionClient();
@@ -94,6 +97,15 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
+    	if(Robot.cannon.horizEncoder != null){
+    		SmartDashboard.putNumber("HoizEncoder", Robot.cannon.horizEncoder.get());
+    		SmartDashboard.putNumber("Vert Encoder", Robot.cannon.vertEncoder.get());
+    		SmartDashboard.putNumber("Counter", n);
+    		n++;
+    		SmartDashboard.putString("Working", "yes");
+    	}else{
+    		SmartDashboard.putString("Working", "No");
+    	}
         Scheduler.getInstance().run();
     }
     

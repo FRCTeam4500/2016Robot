@@ -22,7 +22,7 @@ public class Cannon extends Subsystem {
 	/**
 	 * The encoders on the horizontal and vertical aiming mechanisms
 	 */
-	Encoder horizEncoder, vertEncoder;
+	public Encoder horizEncoder, vertEncoder;
 	/**
 	 * PID controllers for the vertical and horizontal components of the cannon
 	 */
@@ -45,7 +45,14 @@ public class Cannon extends Subsystem {
 		vertHandler = new PIDHandler();
 		horizHandler = new PIDHandler();
 		horizEncoder = new Encoder(RobotMap.HORIZENCODER1, RobotMap.HORIZENCODER2);
+		horizEncoder.setMaxPeriod(.1);
+		horizEncoder.setDistancePerPulse(1);
+		horizEncoder.setMinRate(10);
+		horizEncoder.setSamplesToAverage(7);
+		
 		vertEncoder = new Encoder(RobotMap.VERTENCODER1, RobotMap.VERTENCODER2);
+		vertEncoder.setSamplesToAverage(7);
+		
 		horizontalPID = new PIDController(RobotMap.horizCannonP, RobotMap.horizCannonI, RobotMap.horizCannonD, horizEncoder, horizHandler);
 		verticalPID = new PIDController(RobotMap.vertCannonP, RobotMap.vertCannonI, RobotMap.vertCannonD, vertEncoder, vertHandler);
 		limit = new DigitalInput(RobotMap.SWITCH);
@@ -58,7 +65,7 @@ public class Cannon extends Subsystem {
 		horizontalPID.setContinuous(false);
 		verticalPID.setContinuous(false);
 		horizEncoder.setDistancePerPulse((1/RobotMap.PULSES_PER_DEGREE)*RobotMap.CANNON_RATIO);
-		vertEncoder.setDistancePerPulse(1/RobotMap.PULSES_PER_DEGREE);
+		vertEncoder.setDistancePerPulse((1/RobotMap.PULSES_PER_DEGREE) * RobotMap.VERTICAL_RATIO);
 		horizontalPID.enable();
 		verticalPID.enable();
 	}
@@ -187,6 +194,10 @@ public class Cannon extends Subsystem {
      */
     public void resetHorizontalEncoder() {
     	horizEncoder.reset();
+    }
+    
+    public void resetVerticalEncoder(){
+    	vertEncoder.reset();
     }
     
     public void safelySetVertSetpoint(double setpoint) {

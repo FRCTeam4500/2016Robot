@@ -1,9 +1,12 @@
 package org.usfirst.frc.team4500.robot;
 
 import org.usfirst.frc.team4500.robot.commands.CalibrateCannon;
+import org.usfirst.frc.team4500.robot.commands.Load;
 import org.usfirst.frc.team4500.robot.commands.ManualMoveToHorizSetpoint;
+import org.usfirst.frc.team4500.robot.commands.ManualMoveToVertSetpoint;
 import org.usfirst.frc.team4500.robot.commands.MoveHorizontally;
 import org.usfirst.frc.team4500.robot.commands.MoveVertically;
+import org.usfirst.frc.team4500.robot.commands.ResetEncoders;
 import org.usfirst.frc.team4500.robot.commands.SpinUp;
 import org.usfirst.frc.team4500.robot.commands.TankDrive;
 
@@ -20,7 +23,7 @@ public class OI {
 	Joystick stick;
 	
 	//Buttons are instantiated like this:
-	Button setpointB, moveLeft, moveRight, moveUp, moveDown, spinUp, callibrate;
+	Button setpointB, moveLeft, moveRight, moveUp, moveDown, spinUp, callibrate, load, resetEncoders;
 	
 	/**
 	 * Initializes the joystick and the coprocessor socket;
@@ -31,13 +34,14 @@ public class OI {
 		//Buttons can be made to activate commands like this:
 		
 		setpointB = new JoystickButton(stick, 11);
-		setpointB.whenPressed(new ManualMoveToHorizSetpoint(30));
+		setpointB.whenPressed(new ManualMoveToVertSetpoint(-30));
 		
 		moveLeft = new JoystickButton(stick, 3);
 		moveRight = new JoystickButton(stick, 4);
 		moveUp = new JoystickButton(stick, 6);
 		moveDown = new JoystickButton(stick, 5);
 		callibrate = new JoystickButton(stick, 12);
+		resetEncoders = new JoystickButton(stick, 7);
 		moveLeft.whileHeld(new MoveHorizontally(-.5));
 		moveRight.whileActive(new MoveHorizontally(.5));
 		moveUp.whileHeld(new MoveVertically(.5));
@@ -46,11 +50,15 @@ public class OI {
 		moveUp.whenReleased(new MoveVertically(0));
 		moveRight.whenReleased(new MoveHorizontally(0));
 		moveLeft.whenReleased(new MoveHorizontally(0));
+		resetEncoders.whenPressed(new ResetEncoders());
 		
 		spinUp = new JoystickButton(stick, 2);
 		spinUp.whenPressed(new SpinUp(1));
 		
 		callibrate.whenPressed(new CalibrateCannon());
+		
+		load = new JoystickButton(stick, 8);
+		load.whileHeld(new Load());
 	}
 	
 	
