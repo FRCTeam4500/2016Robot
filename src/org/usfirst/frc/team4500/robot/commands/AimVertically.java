@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  * This class is intentionally NOT 
  */
-class AimVertically extends Command {
+public class AimVertically extends Command {
 
     double degrees = 0;
 	

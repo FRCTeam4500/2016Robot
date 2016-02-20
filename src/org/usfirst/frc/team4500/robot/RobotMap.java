@@ -104,11 +104,10 @@ public class RobotMap {
 	 */
 	public static final double HEIGHT_OFFSET = 0.25;
 	
-	//TODO Find actual value
 	/**
-	 * The velocity of the ball as it leaves the cannon - DUMMY VALUE
+	 * The velocity of the ball as it leaves the cannon in m/s
 	 */
-	public static final double VELOCITY = 1;
+	public static final double VELOCITY = 7;
 	
 	//TODO May need to adjust for practicality
 	/**

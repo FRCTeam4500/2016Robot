@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4500.robot;
 
+import org.usfirst.frc.team4500.robot.commands.AimVertically;
 import org.usfirst.frc.team4500.robot.commands.CalibrateCannon;
 import org.usfirst.frc.team4500.robot.commands.Load;
 import org.usfirst.frc.team4500.robot.commands.ManualMoveToHorizSetpoint;
@@ -23,7 +24,7 @@ public class OI {
 	Joystick stick;
 	
 	//Buttons are instantiated like this:
-	Button setpointB, moveLeft, moveRight, moveUp, moveDown, spinUp, callibrate, load, resetEncoders;
+	Button setpointB, moveLeft, moveRight, moveUp, moveDown, spinUp, callibrate, load, resetEncoders, cameraAim;
 	
 	/**
 	 * Initializes the joystick and the coprocessor socket;
@@ -59,6 +60,11 @@ public class OI {
 		
 		load = new JoystickButton(stick, 8);
 		load.whileHeld(new Load());
+		
+		cameraAim = new JoystickButton(stick, 9);
+		cameraAim.whenPressed(new AimVertically(Robot.visionClient.getYAngle()));
+		
+		
 	}
 	
 	
