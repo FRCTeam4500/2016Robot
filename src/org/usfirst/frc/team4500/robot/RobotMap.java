@@ -211,6 +211,11 @@ public class RobotMap {
 
 	public static final double LOAD_SPEED = .5;
 
+	/**
+	 * 180 minus the actual aimed angle where the encoder reads 0 degrees
+	 */
+	public static final double EFFECTIVE_HORIZONTAL = 150;
+
 	//Dummys
 	public static int tankDrive = 0;
 

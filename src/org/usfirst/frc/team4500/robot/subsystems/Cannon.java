@@ -163,7 +163,7 @@ public class Cannon extends Subsystem {
      * @param degrees The angle in degrees to use from vision
      */
     public void setVerticalAngle(double degrees) {
-    	safelySetVertSetpoint(calculateVerticalAngle(
+    	safelySetVertSetpoint(RobotMap.EFFECTIVE_HORIZONTAL-calculateVerticalAngle(
     			degrees, RobotMap.VELOCITY, RobotMap.GRAVITY, (RobotMap.HEIGHT_OF_GOAL-RobotMap.HEIGHT_TO_CAMERA), RobotMap.HEIGHT_OFFSET));
     }
     
