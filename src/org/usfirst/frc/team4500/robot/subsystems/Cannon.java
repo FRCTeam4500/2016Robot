@@ -54,7 +54,7 @@ public class Cannon extends Subsystem {
 		vertEncoder.setSamplesToAverage(7);
 		
 		horizEncoder.setDistancePerPulse(1/(RobotMap.PULSES_PER_DEGREE*RobotMap.CANNON_RATIO));
-		vertEncoder.setDistancePerPulse(1/(RobotMap.PULSES_PER_DEGREE * RobotMap.VERTICAL_RATIO));
+		vertEncoder.setDistancePerPulse(.4);//1/(RobotMap.PULSES_PER_DEGREE * RobotMap.VERTICAL_RATIO));
 		
 		horizontalPID = new PIDController(RobotMap.horizCannonP, RobotMap.horizCannonI, RobotMap.horizCannonD, horizEncoder, horizHandler);
 		verticalPID = new PIDController(RobotMap.vertCannonP, RobotMap.vertCannonI, RobotMap.vertCannonD, vertEncoder, vertHandler);

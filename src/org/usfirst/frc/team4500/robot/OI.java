@@ -39,14 +39,15 @@ public class OI {
 		
 		moveLeft = new JoystickButton(stick, 3);
 		moveRight = new JoystickButton(stick, 4);
-		moveUp = new JoystickButton(stick, 6);
-		moveDown = new JoystickButton(stick, 5);
+		moveUp = new JoystickButton(stick, 5);
+		moveDown = new JoystickButton(stick, 6);
+		
 		//callibrate = new JoystickButton(stick, 12);
 		resetEncoders = new JoystickButton(stick, 7);
 		moveLeft.whileHeld(new MoveHorizontally(-.5));
 		moveRight.whileActive(new MoveHorizontally(.5));
-		moveUp.whileHeld(new MoveVertically(.5));
-		moveDown.whileHeld(new MoveVertically(-.5));
+		moveUp.whileHeld(new MoveVertically(-.4));
+		moveDown.whileHeld(new MoveVertically(.3));
 		moveDown.whenReleased(new MoveVertically(0));
 		moveUp.whenReleased(new MoveVertically(0));
 		moveRight.whenReleased(new MoveHorizontally(0));
