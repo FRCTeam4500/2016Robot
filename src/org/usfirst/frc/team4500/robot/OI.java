@@ -35,7 +35,7 @@ public class OI {
 		//Buttons can be made to activate commands like this:
 		
 		setpointB = new JoystickButton(stick, 11);
-		setpointB.whenPressed(new ManualMoveToVertSetpoint(-30));
+		setpointB.whenPressed(new ManualMoveToVertSetpoint(30));
 		
 		moveLeft = new JoystickButton(stick, 3);
 		moveRight = new JoystickButton(stick, 4);

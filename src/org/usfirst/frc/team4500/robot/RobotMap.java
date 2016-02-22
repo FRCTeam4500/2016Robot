@@ -145,7 +145,7 @@ public class RobotMap {
 	/**
 	 * The P, I and D values for controlling the vertical motion of the cannon
 	 */
-	public static final double vertCannonP = .01, vertCannonI = .001, vertCannonD = 0;
+	public static final double vertCannonP = -.03, vertCannonI = 0, vertCannonD = 0;
 
 	/**
 	 * The IP address to use to communicate with the network table for vision.
