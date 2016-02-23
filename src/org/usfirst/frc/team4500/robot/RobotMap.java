@@ -151,7 +151,7 @@ public class RobotMap {
 	 * The IP address to use to communicate with the network table for vision.
 	 * XXX Dummy
 	 */
-	public static final String TABLE_IP = "10.1.90.2";
+	public static final String TABLE_IP = "10.45.0.20";
 
 	/**
 	 * The name of the network table.
@@ -163,7 +163,7 @@ public class RobotMap {
 	 * The name of the angle value in the table
 	 * XXX Dummy
 	 */
-	public static final String TABLE_KEY = "angle";
+	public static final String TABLE_X_KEY = "centerX", TABLE_Y_KEY = "centerY";
 	
 	/**
 	 * Ports for solenoids

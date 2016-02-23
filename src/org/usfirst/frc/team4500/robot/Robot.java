@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import utilities.TableCommunicator;
 import utilities.VisionClient;
 
 /**
@@ -32,6 +33,7 @@ public class Robot extends IterativeRobot {
 	public static Climber climber;
 	public static PneumaticsMain pneumatics;
 	public static Loader loader;
+	public static TableCommunicator tableCommunicator;
 	int n;
 
     Command autonomousCommand;
@@ -49,6 +51,7 @@ public class Robot extends IterativeRobot {
 		pneumatics = new PneumaticsMain();
 		cannon = new Cannon();
 		loader = new Loader();
+		tableCommunicator = new TableCommunicator();
 		//climber = new Climber();
 		
 		oi = new OI();
@@ -106,6 +109,8 @@ public class Robot extends IterativeRobot {
     	}else{
     		SmartDashboard.putString("Working", "No");
     	}
+    	SmartDashboard.putNumber("Vision X", tableCommunicator.getLatestX());
+    	SmartDashboard.putNumber("Vision Y", tableCommunicator.getLatestY());
         Scheduler.getInstance().run();
     }
     
