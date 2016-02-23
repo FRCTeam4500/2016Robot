@@ -10,17 +10,20 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class SpinUp extends Command {
 
-    double ms;
+    double sec;
     Timer time;
 	
-	public SpinUp(double ms) {
+	/**
+	 * Spins up the flywheel for the given number of seconds
+	 * @param sec time to spin in seconds
+	 */
+    public SpinUp(double sec) {
 		time = new Timer();
-		this.ms = ms;
+		this.sec = sec;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	time.reset();
     	time.start();
     }
 
@@ -31,7 +34,7 @@ public class SpinUp extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return time.get() > ms;
+        return (time.get() > sec);
     }
 
     // Called once after isFinished returns true

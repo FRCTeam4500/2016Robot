@@ -216,6 +216,10 @@ public class RobotMap {
 	 */
 	public static final double EFFECTIVE_HORIZONTAL = 150;
 
+	public static final int LOAD_SOLENOID_1 = 0;
+
+	public static final int LOAD_SOLENOID_2 = 1;
+
 	//Dummys
 	public static int tankDrive = 0;
 
