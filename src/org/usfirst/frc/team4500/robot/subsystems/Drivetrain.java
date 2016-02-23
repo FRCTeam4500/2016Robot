@@ -233,9 +233,9 @@ public class Drivetrain extends Subsystem {
      */
     public void switchDrivetrain(driveType drivetrain) {
     	if (drivetrain == driveType.OMNI) {
-    		wheelSwitch.set(Value.kForward);
-    	} else {
     		wheelSwitch.set(Value.kReverse);
+    	} else {
+    		wheelSwitch.set(Value.kForward);
     	}
     }
 

@@ -168,7 +168,7 @@ public class RobotMap {
 	/**
 	 * Ports for solenoids
 	 */
-	public static final int DRIVESWITCHER1 = 0, DRIVESWICHER2 = 1; 
+	public static final int DRIVESWITCHER1 = 2, DRIVESWICHER2 = 3; 
 	
 	public static final double CLIMBERTOP = 0, CLIMBERBOTTOM = 0;
 	

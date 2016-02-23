@@ -7,9 +7,12 @@ import org.usfirst.frc.team4500.robot.commands.ManualMoveToHorizSetpoint;
 import org.usfirst.frc.team4500.robot.commands.ManualMoveToVertSetpoint;
 import org.usfirst.frc.team4500.robot.commands.MoveHorizontally;
 import org.usfirst.frc.team4500.robot.commands.MoveVertically;
+import org.usfirst.frc.team4500.robot.commands.OmniDrive;
 import org.usfirst.frc.team4500.robot.commands.ResetEncoders;
 import org.usfirst.frc.team4500.robot.commands.SpinUp;
+import org.usfirst.frc.team4500.robot.commands.SwitchTrain;
 import org.usfirst.frc.team4500.robot.commands.TankDrive;
+import org.usfirst.frc.team4500.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -24,7 +27,9 @@ public class OI {
 	Joystick stick;
 	
 	//Buttons are instantiated like this:
-	Button setpointB, moveLeft, moveRight, moveUp, moveDown, spinUp, callibrate, load, resetEncoders, cameraAim;
+	Button setpointB, moveLeft, moveRight, 
+	moveUp, moveDown, spinUp, callibrate, 
+	load, resetEncoders, cameraAim, omni, tank;
 	
 	/**
 	 * Initializes the joystick and the coprocessor socket;
@@ -34,7 +39,7 @@ public class OI {
 		stick = new Joystick(0); 
 		//Buttons can be made to activate commands like this:
 		
-		setpointB = new JoystickButton(stick, 11);
+		/*setpointB = new JoystickButton(stick, 11);
 		setpointB.whenPressed(new ManualMoveToVertSetpoint(30));
 		
 		moveLeft = new JoystickButton(stick, 3);
@@ -64,7 +69,11 @@ public class OI {
 		
 		//cameraAim = new JoystickButton(stick, 9);
 		//cameraAim.whenPressed(new AimVertically(Robot.visionClient.getYAngle()));
-		
+		*/
+		omni = new JoystickButton(stick, 11);
+		omni.whenPressed(new OmniDrive());
+		tank = new JoystickButton(stick, 12);
+		tank.whenPressed(new TankDrive());
 		
 	}
 	
