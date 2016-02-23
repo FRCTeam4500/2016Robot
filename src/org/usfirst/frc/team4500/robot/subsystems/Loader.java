@@ -2,7 +2,7 @@ package org.usfirst.frc.team4500.robot.subsystems;
 
 import org.usfirst.frc.team4500.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -10,10 +10,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Loader extends Subsystem {
     
-    Victor loader;
+    Talon loader;
     
     public Loader() {
-    	loader = new Victor(RobotMap.LOADMOTOR);
+    	loader = new Talon(RobotMap.LOADMOTOR);
     }
 
     public void initDefaultCommand() {

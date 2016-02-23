@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import utilities.PIDHandler;
 
@@ -18,7 +17,7 @@ public class Cannon extends Subsystem {
     /**
      * The motor controllers for the horizontal and vertical aiming mechanisms
      */
-	Victor horizMotor, vertMotor, fireMotor;
+	Talon horizMotor, vertMotor, fireMotor;
 	/**
 	 * The encoders on the horizontal and vertical aiming mechanisms
 	 */
@@ -39,9 +38,9 @@ public class Cannon extends Subsystem {
 	
 	
 	public Cannon() {
-		horizMotor = new Victor(RobotMap.HORIZMOTOR);
-		vertMotor = new Victor(RobotMap.VERTMOTOR);
-		fireMotor = new Victor(RobotMap.FIREMOTOR);
+		horizMotor = new Talon(RobotMap.HORIZMOTOR);
+		vertMotor = new Talon(RobotMap.VERTMOTOR);
+		fireMotor = new Talon(RobotMap.FIREMOTOR);
 		vertHandler = new PIDHandler();
 		horizHandler = new PIDHandler();
 		horizEncoder = new Encoder(RobotMap.HORIZENCODER1, RobotMap.HORIZENCODER2);
