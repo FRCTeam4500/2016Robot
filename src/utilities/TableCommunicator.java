@@ -7,18 +7,21 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.tables.ITable;
 import edu.wpi.first.wpilibj.tables.ITableListener;
 
-public class TableCommunicator implements ITableListener {
+public class TableCommunicator {//implements ITableListener {
 	
 	Double xVal = new Double(0);
 	Double yVal = new Double(0);
 	
+	NetworkTable table;
+	
 	public TableCommunicator() {
-		initialize();
+		//initialize();
+		table = NetworkTable.getTable(RobotMap.TABLE_NAME);
 	}
 	
-	private void initialize() {
-		NetworkTable.setClientMode();
-		NetworkTable.setIPAddress(RobotMap.TABLE_IP);
+	/*private void initialize() {
+		//NetworkTable.setClientMode();
+		//NetworkTable.setIPAddress(RobotMap.TABLE_IP);
 		NetworkTable table = NetworkTable.getTable(RobotMap.TABLE_NAME);
 		table.addTableListener(this);
 	}
@@ -30,14 +33,14 @@ public class TableCommunicator implements ITableListener {
 		} else if (isNew && key.equals(RobotMap.TABLE_Y_KEY)) {
 			yVal = (Double) value;
 		}
-	}
+	}*/
 	
 	public double getLatestX() {
-		return xVal.doubleValue();
+		return table.getNumber(RobotMap.TABLE_X_KEY, 0);
 	}
 	
 	public double getLatestY() {
-		return yVal.doubleValue();
+		return table.getNumber(RobotMap.TABLE_Y_KEY, 0);
 	}
 
 }

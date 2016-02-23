@@ -157,7 +157,7 @@ public class RobotMap {
 	 * The name of the network table.
 	 * XXX Dummy
 	 */
-	public static final String TABLE_NAME = "vision";
+	public static final String TABLE_NAME = "GRIP/vision";
 
 	/**
 	 * The name of the angle value in the table
