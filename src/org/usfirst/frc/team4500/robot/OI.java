@@ -39,8 +39,8 @@ public class OI {
 		stick = new Joystick(0); 
 		//Buttons can be made to activate commands like this:
 		
-		/*setpointB = new JoystickButton(stick, 11);
-		setpointB.whenPressed(new ManualMoveToVertSetpoint(30));
+		//setpointB = new JoystickButton(stick, 11);
+		//setpointB.whenPressed(new ManualMoveToVertSetpoint(30));
 		
 		moveLeft = new JoystickButton(stick, 3);
 		moveRight = new JoystickButton(stick, 4);
@@ -69,7 +69,7 @@ public class OI {
 		
 		//cameraAim = new JoystickButton(stick, 9);
 		//cameraAim.whenPressed(new AimVertically(Robot.visionClient.getYAngle()));
-		*/
+		
 		omni = new JoystickButton(stick, 11);
 		omni.whenPressed(new OmniDrive());
 		tank = new JoystickButton(stick, 12);
