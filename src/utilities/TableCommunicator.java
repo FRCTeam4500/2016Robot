@@ -42,5 +42,16 @@ public class TableCommunicator {//implements ITableListener {
 	public double getLatestY() {
 		return table.getNumber(RobotMap.TABLE_Y_KEY, 0);
 	}
+	
+	public double getXAgnle() {
+		double xPos = table.getNumber(RobotMap.TABLE_X_KEY, 0);
+		double xAngle = Math.atan(xPos / (640 * Math.tan(RobotMap.xFOV)));
+		return xAngle;
+	}
 
+	public double getYAgnle() {
+		double yPos = table.getNumber(RobotMap.TABLE_Y_KEY, 0);
+		double yAngle = Math.atan(yPos / (480 * Math.tan(RobotMap.yFOV)));
+		return yAngle;
+	}
 }
