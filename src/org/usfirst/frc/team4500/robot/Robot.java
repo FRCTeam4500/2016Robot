@@ -44,7 +44,7 @@ public class Robot extends IterativeRobot {
     	n = 0;
     	//TODO We'll comment these out and only initialize them one by one as we test the robot.
     	
-		//visionClient = new VisionClient();
+		visionClient = new VisionClient();
 		drivetrain = new Drivetrain();
 		pneumatics = new PneumaticsMain();
 		cannon = new Cannon();
@@ -53,8 +53,8 @@ public class Robot extends IterativeRobot {
 		
 		oi = new OI();
 		
-		
-		//(new ConnectToCoprocessor()).start(); //TODO: Make sure that this command runs in parallel
+		//visionClient = new VisionClient();
+		(new ConnectToCoprocessor()).start(); //TODO: Make sure that this command runs in parallel
 		
 		
         // instantiate the command used for the autonomous period
@@ -97,7 +97,7 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-    	if(Robot.cannon.horizEncoder != null){
+    	/*if(Robot.cannon.horizEncoder != null){
     		SmartDashboard.putNumber("HoizEncoder", Robot.cannon.horizEncoder.get());
     		SmartDashboard.putNumber("Vert Encoder", Robot.cannon.vertEncoder.getDistance());
     		SmartDashboard.putNumber("Counter", n);
@@ -105,6 +105,10 @@ public class Robot extends IterativeRobot {
     		SmartDashboard.putString("Working", "yes");
     	}else{
     		SmartDashboard.putString("Working", "No");
+    	}*/
+    	if(visionClient.socketInitialized()){
+    		visionClient.getXAngle();
+    		visionClient.getYAngle();
     	}
         Scheduler.getInstance().run();
     }

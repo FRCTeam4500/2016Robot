@@ -24,7 +24,8 @@ public class OI {
 	Joystick stick;
 	
 	//Buttons are instantiated like this:
-	Button setpointB, moveLeft, moveRight, moveUp, moveDown, spinUp, callibrate, load, resetEncoders, cameraAim;
+	Button setpointB, moveLeft, moveRight, moveUp, moveDown, 
+	spinUp, callibrate, load, resetEncoders, cameraAim;
 	
 	/**
 	 * Initializes the joystick and the coprocessor socket;
@@ -34,7 +35,7 @@ public class OI {
 		stick = new Joystick(0); 
 		//Buttons can be made to activate commands like this:
 		
-		setpointB = new JoystickButton(stick, 11);
+		/*setpointB = new JoystickButton(stick, 11);
 		setpointB.whenPressed(new ManualMoveToVertSetpoint(30));
 		
 		moveLeft = new JoystickButton(stick, 3);
@@ -60,11 +61,13 @@ public class OI {
 		//callibrate.whenPressed(new CalibrateCannon());
 		
 		load = new JoystickButton(stick, 8);
-		load.whileHeld(new Load());
+		load.whileHeld(new Load());*/
 		
 		//cameraAim = new JoystickButton(stick, 9);
 		//cameraAim.whenPressed(new AimVertically(Robot.visionClient.getYAngle()));
 		
+		//cameraAim = new JoystickButton(stick, 1);
+		//cameraAim.whenPressed(new AimVertically(Robot.visionClient.getYAngle()*180/3.14 + 45));
 		
 	}
 	

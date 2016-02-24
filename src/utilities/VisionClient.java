@@ -11,6 +11,8 @@ import java.nio.ByteBuffer;
 import org.usfirst.frc.team4500.robot.RobotMap;
 import org.usfirst.frc.team4500.robot.commands.ConnectToCoprocessor;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class VisionClient {
 	
 	
@@ -19,7 +21,11 @@ public class VisionClient {
 	boolean isInitialized;
 	
 	public VisionClient() {
-		initializeSocket();
+		while(!this.socketInitialized()){
+			initializeSocket();
+			SmartDashboard.putString("InitS", "NO");
+		}
+		SmartDashboard.putString("InitS", "yes");
 	}
 	
 	
@@ -94,8 +100,9 @@ public class VisionClient {
 	public double getYAngle(){
 		try {
 			coprocessorSock.getOutputStream().write(0); //Tell the coprocessor that we want an angle
-			return readDouble();
-			
+			double d = readDouble();
+			SmartDashboard.putNumber("xAngle", d);
+			return d;
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -114,7 +121,9 @@ public class VisionClient {
 		try {
 			coprocessorSock.getOutputStream().write(1); //thisi writes a byte, not a whole integer
 														//Tell the coprocessor that we want an angle
-			return readDouble();
+			double d = readDouble();
+			SmartDashboard.putNumber("xAngle", d);
+			return d;
 			
 			
 		} catch (IOException e) {
@@ -128,7 +137,7 @@ public class VisionClient {
 
 	public boolean socketInitialized() {
 		// TODO Auto-generated method stub
-		return !coprocessorSock.equals(null);
+		return ! (coprocessorSock == null);
 	}
 
 }
