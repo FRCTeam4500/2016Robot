@@ -97,7 +97,7 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-    	/*if(Robot.cannon.horizEncoder != null){
+    	if(Robot.cannon.horizEncoder != null){
     		SmartDashboard.putNumber("HoizEncoder", Robot.cannon.horizEncoder.get());
     		SmartDashboard.putNumber("Vert Encoder", Robot.cannon.vertEncoder.getDistance());
     		SmartDashboard.putNumber("Counter", n);
@@ -105,10 +105,14 @@ public class Robot extends IterativeRobot {
     		SmartDashboard.putString("Working", "yes");
     	}else{
     		SmartDashboard.putString("Working", "No");
-    	}*/
+    	}
     	if(visionClient.socketInitialized()){
     		visionClient.getXAngle();
     		visionClient.getYAngle();
+    		SmartDashboard.putString("InitS", "Yes");
+    	}else{
+    		visionClient.initializeSocket();
+    		SmartDashboard.putString("InitS", "No");
     	}
         Scheduler.getInstance().run();
     }

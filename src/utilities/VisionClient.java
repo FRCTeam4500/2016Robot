@@ -21,11 +21,11 @@ public class VisionClient {
 	boolean isInitialized;
 	
 	public VisionClient() {
-		while(!this.socketInitialized()){
+		/*while(!this.socketInitialized()){
 			initializeSocket();
 			SmartDashboard.putString("InitS", "NO");
-		}
-		SmartDashboard.putString("InitS", "yes");
+		}*/
+		//SmartDashboard.putString("InitS", "yes");
 	}
 	
 	
@@ -45,11 +45,13 @@ public class VisionClient {
 			e.printStackTrace();
 			coprocessorSock = null;
 			socketReader = null;
+			SmartDashboard.putString("Error", "UnknownHost");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			coprocessorSock = null;
 			socketReader = null;
+			SmartDashboard.putString("Error", "IOException");
 			return false;
 		}
 		
@@ -101,12 +103,15 @@ public class VisionClient {
 		try {
 			coprocessorSock.getOutputStream().write(0); //Tell the coprocessor that we want an angle
 			double d = readDouble();
-			SmartDashboard.putNumber("xAngle", d);
+			SmartDashboard.putNumber("yAngle", d);
 			return d;
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (NullPointerException e){
+			e.printStackTrace();
+			initializeSocket();
 		}
 		
 		return -1;

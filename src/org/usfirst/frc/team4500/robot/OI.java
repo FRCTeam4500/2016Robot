@@ -35,7 +35,7 @@ public class OI {
 		stick = new Joystick(0); 
 		//Buttons can be made to activate commands like this:
 		
-		/*setpointB = new JoystickButton(stick, 11);
+		setpointB = new JoystickButton(stick, 11);
 		setpointB.whenPressed(new ManualMoveToVertSetpoint(30));
 		
 		moveLeft = new JoystickButton(stick, 3);
@@ -44,7 +44,7 @@ public class OI {
 		moveDown = new JoystickButton(stick, 6);
 		
 		//callibrate = new JoystickButton(stick, 12);
-		resetEncoders = new JoystickButton(stick, 7);
+
 		moveLeft.whileHeld(new MoveHorizontally(-.5));
 		moveRight.whileActive(new MoveHorizontally(.5));
 		moveUp.whileHeld(new MoveVertically(-.4));
@@ -53,7 +53,7 @@ public class OI {
 		moveUp.whenReleased(new MoveVertically(0));
 		moveRight.whenReleased(new MoveHorizontally(0));
 		moveLeft.whenReleased(new MoveHorizontally(0));
-		resetEncoders.whenPressed(new ResetEncoders());
+
 		
 		spinUp = new JoystickButton(stick, 2);
 		spinUp.whenPressed(new SpinUp(1));
@@ -61,13 +61,16 @@ public class OI {
 		//callibrate.whenPressed(new CalibrateCannon());
 		
 		load = new JoystickButton(stick, 8);
-		load.whileHeld(new Load());*/
+		load.whileHeld(new Load());
 		
-		//cameraAim = new JoystickButton(stick, 9);
+		resetEncoders = new JoystickButton(stick, 7);
+		resetEncoders.whenPressed(new ResetEncoders());
+		
+		cameraAim = new JoystickButton(stick, 9);
 		//cameraAim.whenPressed(new AimVertically(Robot.visionClient.getYAngle()));
 		
 		//cameraAim = new JoystickButton(stick, 1);
-		//cameraAim.whenPressed(new AimVertically(Robot.visionClient.getYAngle()*180/3.14 + 45));
+		cameraAim.whenPressed(new AimVertically(45));//Robot.visionClient.getYAngle()*180/3.14 + 45));
 		
 	}
 	

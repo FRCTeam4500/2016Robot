@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import utilities.PIDHandler;
 
 /**
@@ -205,7 +206,12 @@ public class Cannon extends Subsystem {
     public void safelySetVertSetpoint(double setpoint) {
     	if (setpoint < RobotMap.VERTICAL_LIMIT) {
     		verticalPID.setSetpoint(setpoint);
+    		SmartDashboard.putString("InLimit", "yes");
+    	}else{
+    		SmartDashboard.putString("InLimit", "no");
     	}
+    	
+    	SmartDashboard.putNumber("CalculatedAngle", setpoint);
     }
     
     public void safelySetHorizSetpoint(double setpoint) {

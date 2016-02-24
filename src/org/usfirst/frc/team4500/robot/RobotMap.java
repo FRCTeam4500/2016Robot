@@ -151,7 +151,7 @@ public class RobotMap {
 	 * The IP address to use to communicate with the network table for vision.
 	 * XXX Dummy
 	 */
-	public static final String TABLE_IP = "10.45.0.187";
+	public static final String TABLE_IP = "10.45.0.187"; //TODO: Wrong ip
 
 	/**
 	 * The name of the network table.
@@ -188,7 +188,7 @@ public class RobotMap {
 	 */
 	//TODO: Find values for these
 	
-	public static final String COPROCESSOR_ADDRESS = "";
+	public static final String COPROCESSOR_ADDRESS = "10.45.0.187";
 	public static final int COPROCESSOR_PORT = 1234;
 
 	/**
