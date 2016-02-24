@@ -225,6 +225,10 @@ public class RobotMap {
 
 	public static int omniDrive = 1;
 	
+	//TODO dummy for field of view
+	public static double xFOV;
+	public static double yFOV;
+	
 	
 	
 }
