@@ -7,9 +7,11 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import utilities.PIDHandler;
 import utilities.Vector;
@@ -23,8 +25,8 @@ public class Drivetrain extends Subsystem {
 	 * Motor controllers for the left, right, front, and back omni wheels.
 	 *  Use the setter functions to set speeds in case we need multiple controllers for the same side.
 	 */
-	private Talon lOmni, rOmni;
-	private Talon fOmni, bOmni;
+	private Victor lOmni, rOmni;
+	private Jaguar fOmni, bOmni;
 	
 	/**
 	 * The robot's gyroscope
@@ -40,7 +42,7 @@ public class Drivetrain extends Subsystem {
 	/**
 	 * Motor controllers for the left and right tank treads
 	 */
-	private Talon lTank, rTank;
+	private Victor lTank, rTank;
 	
 	/**
 	 * Array containing each omni wheel
@@ -79,10 +81,10 @@ public class Drivetrain extends Subsystem {
 	private DoubleSolenoid wheelSwitch;
 
     public Drivetrain() {
-    	lOmni = new Talon(RobotMap.LMOTOR);
-    	rOmni = new Talon(RobotMap.RMOTOR);
-    	fOmni = new Talon(RobotMap.FMOTOR);
-    	bOmni = new Talon(RobotMap.BMOTOR);
+    	lOmni = new Victor(RobotMap.LMOTOR);
+    	rOmni = new Victor(RobotMap.RMOTOR);
+    	fOmni = new Jaguar(RobotMap.FMOTOR);
+    	bOmni = new Jaguar(RobotMap.BMOTOR);
     	lTank = lOmni;
     	rTank = rOmni;
     	gyro = new ADXRS450_Gyro();

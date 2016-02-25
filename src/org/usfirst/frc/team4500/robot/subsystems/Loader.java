@@ -5,6 +5,7 @@ import org.usfirst.frc.team4500.robot.RobotMap;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -12,11 +13,11 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Loader extends Subsystem {
     
-    private Talon loader;
+    private Victor loader;
     private DoubleSolenoid grabSol;
     
     public Loader() {
-    	loader = new Talon(RobotMap.LOADMOTOR);
+    	loader = new Victor(RobotMap.LOADMOTOR);
     	grabSol = new DoubleSolenoid(RobotMap.LOAD_SOLENOID_1, RobotMap.LOAD_SOLENOID_2);
     }
 

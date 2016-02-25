@@ -4,6 +4,7 @@ import org.usfirst.frc.team4500.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 
 /**
@@ -12,13 +13,13 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
 public class Climber extends PIDSubsystem {
 
 	private static final double kp = 0, ki = 0, kd = 0;
-	private Talon climberTalon;
+	private Victor climberTalon;
 	private AnalogInput potentiometer;
     // Initialize your subsystem here
     public Climber() {
         // Use these to get going:
     	super("Climber", kp, ki, kd);  
-    	climberTalon = new Talon(RobotMap.CLIMBERMOTOR);
+    	climberTalon = new Victor(RobotMap.CLIMBERMOTOR);
         enable();
     }
     
