@@ -168,7 +168,7 @@ public class RobotMap {
 	/**
 	 * Ports for solenoids
 	 */
-	public static final int DRIVESWITCHER1 = 0, DRIVESWICHER2 = 1; 
+	public static final int DRIVESWITCHER1 = 2, DRIVESWICHER2 = 3; 
 	
 	public static final double CLIMBERTOP = 0, CLIMBERBOTTOM = 0;
 	
@@ -215,6 +215,10 @@ public class RobotMap {
 	 * 180 minus the actual aimed angle where the encoder reads 0 degrees
 	 */
 	public static final double EFFECTIVE_HORIZONTAL = 150;
+
+	public static final int LOAD_SOLENOID_1 = 0;
+
+	public static final int LOAD_SOLENOID_2 = 1;
 
 	//Dummys
 	public static int tankDrive = 0;
