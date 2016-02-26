@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4500.robot.subsystems;
 
 import org.usfirst.frc.team4500.robot.RobotMap;
+import org.usfirst.frc.team4500.robot.commands.DoNothing;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
@@ -75,7 +76,7 @@ public class Cannon extends Subsystem {
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+        setDefaultCommand(new DoNothing());
     }
     
     /**
@@ -84,6 +85,7 @@ public class Cannon extends Subsystem {
     public void doNothing() {
     	horizMotor.set(0);
     	vertMotor.set(0);
+    	fireMotor.set(0);
     }
     
     public void spinUp() {
