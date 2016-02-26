@@ -7,11 +7,10 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class DoNothing extends Command {
+public class LoadUp extends Command {
 
-    public DoNothing() {
-        // Use requires() here to declare subsystem dependencies
-        requires(Robot.cannon);
+    public LoadUp() {
+        requires(Robot.loader);
     }
 
     // Called just before this Command runs the first time
@@ -20,12 +19,12 @@ public class DoNothing extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.cannon.doNothing();
+    	Robot.loader.loadUp();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
