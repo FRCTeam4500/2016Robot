@@ -54,7 +54,7 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		
 		//visionClient = new VisionClient();
-		(new ConnectToCoprocessor()).start(); //TODO: Make sure that this command runs in parallel
+		//(new ConnectToCoprocessor()).start(); //TODO: Make sure that this command runs in parallel
 		
 		
         // instantiate the command used for the autonomous period
