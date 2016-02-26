@@ -121,6 +121,10 @@ public class OI {
 		return (Math.abs(stick.getTwist()) < RobotMap.DEADZONE) ? 0 : stick.getTwist();
 	}
 	
+	public int getPOV() {
+		return stick.getPOV();
+	}
+
 	
 }
 
