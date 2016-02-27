@@ -22,14 +22,15 @@ public class ConnectToCoprocessor extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(!Robot.visionClient.socketInitialized()){
-    		Robot.visionClient.initializeSocket();
-    	}
+    	//if(!Robot.visionClient.socketInitialized()){
+    	//	Robot.visionClient.initializeSocket();
+    	//}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.visionClient.socketInitialized();
+        //return Robot.visionClient.socketInitialized();
+    	return true;
     }
 
     // Called once after isFinished returns true

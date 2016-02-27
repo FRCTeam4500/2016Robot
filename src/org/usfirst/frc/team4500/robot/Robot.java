@@ -33,6 +33,7 @@ public class Robot extends IterativeRobot {
 	public static PneumaticsMain pneumatics;
 	public static Loader loader;
 	int n;
+	int counter = 0;
 
     Command autonomousCommand;
 
@@ -83,6 +84,8 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+        
+        
     }
 
     /**
@@ -115,6 +118,8 @@ public class Robot extends IterativeRobot {
     		SmartDashboard.putString("InitS", "No");
     	}
         Scheduler.getInstance().run();
+        counter++;
+        SmartDashboard.putNumber("Iterations", counter);
     }
     
     /**
