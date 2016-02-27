@@ -1,17 +1,15 @@
 package org.usfirst.frc.team4500.robot.commands;
 
-
-
 import org.usfirst.frc.team4500.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Call as a parallel command to initialize the coprocessor communication.
+ *
  */
-public class ConnectToCoprocessor extends Command {
+public class ReadVisionData extends Command {
 
-    public ConnectToCoprocessor() {
+    public ReadVisionData() {
         requires(Robot.visionClient);
     }
 
@@ -21,19 +19,16 @@ public class ConnectToCoprocessor extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(!Robot.visionClient.socketInitialized()){
-    		Robot.visionClient.initializeSocket();
-    	}
+    	Robot.visionClient.readData();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.visionClient.socketInitialized();
+        return Robot.visionClient.needsConnect();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	new ReadVisionData().start();;
     }
 
     // Called when another command which requires one or more of the same
