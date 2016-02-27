@@ -122,7 +122,7 @@ public class OI {
 	}
 	
 	public int getPOV() {
-		return stick.getPOV();
+		return stick.getPOV(0);
 	}
 
 	
