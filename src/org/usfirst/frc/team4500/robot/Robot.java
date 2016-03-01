@@ -33,7 +33,6 @@ public class Robot extends IterativeRobot {
 	public static PneumaticsMain pneumatics;
 	public static Loader loader;
 	int n;
-	int counter = 0;
 
     Command autonomousCommand;
 
@@ -45,7 +44,7 @@ public class Robot extends IterativeRobot {
     	n = 0;
     	//TODO We'll comment these out and only initialize them one by one as we test the robot.
     	
-		visionClient = new VisionClient();
+		//visionClient = new VisionClient();
 		drivetrain = new Drivetrain();
 		pneumatics = new PneumaticsMain();
 		cannon = new Cannon();
@@ -84,8 +83,6 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
-        
-        
     }
 
     /**
@@ -109,17 +106,15 @@ public class Robot extends IterativeRobot {
     	}else{
     		SmartDashboard.putString("Working", "No");
     	}
-    	if(visionClient.socketInitialized()){
+    	/*if(visionClient.socketInitialized()){
     		visionClient.getXAngle();
     		visionClient.getYAngle();
     		SmartDashboard.putString("InitS", "Yes");
     	}else{
     		visionClient.initializeSocket();
     		SmartDashboard.putString("InitS", "No");
-    	}
+    	}*/
         Scheduler.getInstance().run();
-        counter++;
-        SmartDashboard.putNumber("Iterations", counter);
     }
     
     /**

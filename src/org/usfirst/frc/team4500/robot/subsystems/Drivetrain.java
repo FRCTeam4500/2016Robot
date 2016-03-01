@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.RobotDrive.MotorType;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -105,6 +106,8 @@ public class Drivetrain extends Subsystem {
     	angularOmniPID = new PIDController(RobotMap.omniGyroP, RobotMap.omniGyroI, RobotMap.omniGyroD, gyro, angularOmniHandler);
     	//TODO Enable PID controllers - not sure if here or in the initPID... functions
     	wheelSwitch = new DoubleSolenoid(RobotMap.DRIVESWITCHER1, RobotMap.DRIVESWICHER2);
+    	//tankDrivetrain.setInvertedMotor(MotorType.kFrontRight, true);
+    	//tankDrivetrain.setInvertedMotor(MotorType.kRearRight, true);
     }
     
     private void initPID() {
@@ -126,7 +129,7 @@ public class Drivetrain extends Subsystem {
 	 * @return The angle given by the gyro in degrees
 	 */
 	public double getGyroAngle() {
-		return gyro.getAngle();
+		return 0;//gyro.getAngle();
 	}
 	
     /**
@@ -235,9 +238,9 @@ public class Drivetrain extends Subsystem {
      */
     public void switchDrivetrain(driveType drivetrain) {
     	if (drivetrain == driveType.OMNI) {
-    		wheelSwitch.set(Value.kReverse);
-    	} else {
     		wheelSwitch.set(Value.kForward);
+    	} else {
+    		wheelSwitch.set(Value.kReverse);
     	}
     }
 

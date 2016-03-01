@@ -1,11 +1,7 @@
 package org.usfirst.frc.team4500.robot;
 
 import org.usfirst.frc.team4500.robot.commands.AimVertically;
-import org.usfirst.frc.team4500.robot.commands.CalibrateCannon;
-import org.usfirst.frc.team4500.robot.commands.CannonDoNothing;
 import org.usfirst.frc.team4500.robot.commands.Load;
-import org.usfirst.frc.team4500.robot.commands.ManualMoveToHorizSetpoint;
-import org.usfirst.frc.team4500.robot.commands.ManualMoveToVertSetpoint;
 import org.usfirst.frc.team4500.robot.commands.MoveHorizontally;
 import org.usfirst.frc.team4500.robot.commands.MoveVertically;
 import org.usfirst.frc.team4500.robot.commands.OmniDrive;
@@ -13,11 +9,9 @@ import org.usfirst.frc.team4500.robot.commands.ResetEncoders;
 import org.usfirst.frc.team4500.robot.commands.SpinUp;
 import org.usfirst.frc.team4500.robot.commands.TankDrive;
 
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -29,11 +23,7 @@ public class OI {
 	//Buttons are instantiated like this:
 	Button setpointB, moveLeft, moveRight, 
 	moveUp, moveDown, spinUp, callibrate, 
-	load, resetEncoders, cameraAim, omni, tank,
-	loadUp, loadDown;
-	
-	
-	
+	load, resetEncoders, cameraAim, omni, tank;
 	
 	/**
 	 * Initializes the joystick and the coprocessor socket;
@@ -46,10 +36,14 @@ public class OI {
 		//setpointB = new JoystickButton(stick, 11);
 		//setpointB.whenPressed(new ManualMoveToVertSetpoint(30));
 		
-		moveLeft = new JoystickButton(stick, 19);
-		moveRight = new JoystickButton(stick, 14);
-		moveUp = new JoystickButton(stick, 12);
-		moveDown = new JoystickButton(stick, 16);
+		moveLeft = new JoystickButton(stick, 3);
+		moveRight = new JoystickButton(stick, 4);
+		moveUp = new JoystickButton(stick, 5);
+		moveDown = new JoystickButton(stick, 6);
+		
+		omni = new JoystickButton(stick,11);
+		tank = new JoystickButton(stick,12);
+		
 		
 		//callibrate = new JoystickButton(stick, 12);
 
@@ -61,38 +55,30 @@ public class OI {
 		moveUp.whenReleased(new MoveVertically(0));
 		moveRight.whenReleased(new MoveHorizontally(0));
 		moveLeft.whenReleased(new MoveHorizontally(0));
+		
+		omni.whenPressed(new OmniDrive());
+		tank.whenPressed(new TankDrive());
 
 		
-		spinUp = new JoystickButton(stick, 1);
+		spinUp = new JoystickButton(stick, 2);
 		spinUp.whenPressed(new SpinUp(1));
-		spinUp.whenReleased(new CannonDoNothing());
+		spinUp.whenReleased(new SpinUp(0));
 		
 		//callibrate.whenPressed(new CalibrateCannon());
 		
-		load = new JoystickButton(stick, 2);
+		load = new JoystickButton(stick, 8);
 		load.whileHeld(new Load());
-		
-		loadUp = new JoystickButton(stick, 5);
-		loadDown = new JoystickButton(stick, 3);
 		
 		resetEncoders = new JoystickButton(stick, 7);
 		resetEncoders.whenPressed(new ResetEncoders());
+		
+		
 		
 		cameraAim = new JoystickButton(stick, 9);
 		//cameraAim.whenPressed(new AimVertically(Robot.visionClient.getYAngle()));
 		
 		//cameraAim = new JoystickButton(stick, 1);
 		cameraAim.whenPressed(new AimVertically(45));//Robot.visionClient.getYAngle()*180/3.14 + 45));
-		
-		omni = new JoystickButton(stick, 4);
-		omni.whenPressed(new OmniDrive());
-		
-		tank = new JoystickButton(stick, 6);
-		tank.whenPressed(new TankDrive());
-		
-		
-		
-		
 		
 	}
 	
@@ -118,13 +104,15 @@ public class OI {
 	 * @return twist value from joystick (-1 to 1)
 	 */
 	public double getJoyTwist() {
-		return (Math.abs(stick.getTwist()) < RobotMap.DEADZONE) ? 0 : stick.getTwist();
-	}
-	
-	public int getPOV() {
-		return stick.getPOV(0);
+		return ((Math.abs(stick.getTwist()) < RobotMap.DEADZONE) ? 0 : stick.getTwist());
 	}
 
+
+	public int getPOV() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
 	
 }
 
