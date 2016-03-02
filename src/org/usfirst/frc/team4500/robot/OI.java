@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
 	Joystick stick;
 	
-	//Buttons are instantiated like this:
+
 	Button setpointB, moveLeft, moveRight, 
 	moveUp, moveDown, spinUp, callibrate, 
 	load, resetEncoders, cameraAim, omni, tank;
