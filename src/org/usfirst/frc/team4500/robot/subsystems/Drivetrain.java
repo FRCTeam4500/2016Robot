@@ -129,7 +129,7 @@ public class Drivetrain extends Subsystem {
 	 * @return The angle given by the gyro in degrees
 	 */
 	public double getGyroAngle() {
-		return gyro.getAngle();
+		return 0;//gyro.getAngle();
 	}
 	
     /**
@@ -197,10 +197,9 @@ public class Drivetrain extends Subsystem {
      * @param joyX x-axis of joystick input
      * @param joyY y-axis of joystick input
      * @param joyTwist twist of joystick input
-     * @param gyro gyroscope reading (relative, degrees)
+     * @param gyro gyroscope reading (relative)
      */
     public void omniDrive(double joyX, double joyY, double joyTwist, double gyro) {
-    	gyro /= 360;
     	Vector linear = new Vector(joyX, joyY, 0); 					//The non rotational component of the motion
     	Vector rotation = new Vector(0, 0, joyTwist - gyro); 		//The rotational component of the motion
     	
