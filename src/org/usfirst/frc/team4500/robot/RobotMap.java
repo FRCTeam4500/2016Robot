@@ -65,12 +65,10 @@ public class RobotMap {
 								fOmniRatio = 1, 
 								bOmniRatio = 1;
 	
-	
-	//TODO Find actual value
 	/**
-	 * The height from the ground to the camera in meters - DUMMY VALUE!
+	 * The height from the ground to the camera in meters
 	 */
-	public static final double HEIGHT_TO_CAMERA = 1;
+	public static final double HEIGHT_TO_CAMERA = .75;
 	
 	/**
 	 * The maximum speed we can move the cannon while calibrating it, safely.
