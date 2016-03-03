@@ -200,16 +200,20 @@ public class Drivetrain extends Subsystem {
      * @param gyro gyroscope reading (relative, degrees)
      */
     public void omniDrive(double joyX, double joyY, double joyTwist, double gyro) {
-    	gyro /= 360;
+    	gyro /= ((360 * (Math.ceil(gyro/360))) * 2*Math.PI);	//Reduces angle to a value between -1 and 1, then converts it to radians
     	Vector linear = new Vector(joyX, joyY, 0); 					//The non rotational component of the motion
-    	Vector rotation = new Vector(0, 0, joyTwist - gyro); 		//The rotational component of the motion
-    	
+    	Vector rotation = new Vector(0, 0, joyTwist);// - gyro); XXX I think this was the problem, the gyro angle should be taken into account later
+    																//The rotational component of the motion
+
+
     	double speeds[] = new double[4]; 							//Array to store each wheel speed
     	double maxSpeed = 0.0; 										//Stores the value of the maximum speed of any of the wheels during the current iteration
     	
-    	for(int i = 0; i<omniWheels.length; i++){
-    		speeds[i] = omniWheels[i].getSpeed(linear, rotation); 	//Gets the speed of each wheel relative to the robot's current position.
+    	for(int i = 0; i<omniWheels.length; i++){    		
+    		speeds[i] = omniWheels[i].getSpeed(linear, rotation, gyro); 	//Gets the speed of each wheel relative to the robot's current position.
     																//i.e. the actual speed of the wheel 
+    		
+    		
     		if(Math.abs(speeds[i]) > maxSpeed){
     			maxSpeed = Math.abs(speeds[i]); 					//Sets the value of the max speed
     		}

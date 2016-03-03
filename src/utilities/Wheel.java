@@ -23,10 +23,13 @@ public class Wheel {
 	/**
 	 * Gets the speed of the wheel based on the linear and rotational movements
 	 */
-	public double getSpeed(Vector velocity, Vector rotation){
+	public double getSpeed(Vector velocity, Vector rotation, double theta){
 		Vector wheel_velocity = velocity.add(rotation.cross(position));
+		wheel_velocity.rotateAboutZAxis(theta);
 		return direction.dot(wheel_velocity) * speed_ratio;
-		
+		/*Vector wheelVec = new Vector(direction.getX()*magnitude, direction.getY()*magnitude, direction.getZ());
+		wheelVec.rotateAboutZAxis(theta);
+		return wheelVec.projectOnto(position);*/
 	}
 	
 	/**
@@ -34,9 +37,7 @@ public class Wheel {
 	 */
 	public void setSpeed(double speed){
 		motor_controller.set(speed);
-	}
-	
-	
+	}	
 	
 
 }
