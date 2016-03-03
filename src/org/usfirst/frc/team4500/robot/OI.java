@@ -2,6 +2,7 @@ package org.usfirst.frc.team4500.robot;
 
 import org.usfirst.frc.team4500.robot.commands.AimVertically;
 import org.usfirst.frc.team4500.robot.commands.Load;
+import org.usfirst.frc.team4500.robot.commands.MaintainAngle;
 import org.usfirst.frc.team4500.robot.commands.MoveHorizontally;
 import org.usfirst.frc.team4500.robot.commands.MoveVertically;
 import org.usfirst.frc.team4500.robot.commands.OmniDrive;
@@ -23,7 +24,7 @@ public class OI {
 
 	Button setpointB, moveLeft, moveRight, 
 	moveUp, moveDown, spinUp, callibrate, 
-	load, resetEncoders, cameraAim, omni, tank;
+	load, resetEncoders, cameraAim, omni, tank, straight;
 	
 	/**
 	 * Initializes the joystick and the coprocessor socket;
@@ -43,6 +44,9 @@ public class OI {
 		
 		omni = new JoystickButton(stick,11);
 		tank = new JoystickButton(stick,12);
+		
+		straight = new JoystickButton(stick, 10);
+		straight.whenPressed(new MaintainAngle());
 		
 		
 		//callibrate = new JoystickButton(stick, 12);

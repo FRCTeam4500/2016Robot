@@ -177,7 +177,15 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	/**
-	 * Makes the robot drive straight using PID control.
+	 * Sets the proper ANGULAR ONLY setpoint for the PID loops before calling tankDriveStraight()
+	 * @param angleToMaintain the angle to set the setpoint to
+	 */
+	public void initTankDriveStraight(double angleToMaintain) {
+		angularTankPID.setSetpoint(angleToMaintain);
+	}
+	
+	/**
+	 * Makes the robot drive straight using PID control WITH LINEAR PID.
 	 *  Call initializeTankDriveStraight() first, and then iterate this function until
 	 *  tandDriveStraightFinished() returns true
 	 */
@@ -186,7 +194,15 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	/**
-	 * Returns true when the robot has reached its destination after tank driving straight
+	 *  Makes the robot drive straight using PID control for ANGLE only, at the set speed.
+	 * @param speed speed to set the motors to between -1 and 1
+	 */
+	public void tankDriveStraight(double speed) {
+		tankDrivetrain.arcadeDrive(speed, angularTankHandler.getOutput());
+	}
+	
+	/**
+	 * Returns true when the robot has reached its destination after tank driving straight with linear PID
 	 */
 	public boolean tankDriveStraightFinished() {
 		return linearTankPID.onTarget();
@@ -230,6 +246,7 @@ public class Drivetrain extends Subsystem {
     		omniWheels[i].setSpeed(speeds[i]);
     	}
     }
+    
     
     /**
      * The types of drivetrain (OMNI and TANK)

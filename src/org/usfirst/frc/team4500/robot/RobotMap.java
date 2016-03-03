@@ -130,7 +130,7 @@ public class RobotMap {
 	/**
 	 * The P, I, and D values for controlling with the gyro on the tank drive
 	 */
-	public static final double tankGyroP = 0, tankGyroI = 0, tankGyroD = 0;
+	public static final double tankGyroP = 0.01, tankGyroI = 0, tankGyroD = 0;
 	
 	/**
 	 * The P, I and D values for controlling with the gyro on the omni drive
