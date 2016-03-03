@@ -24,7 +24,8 @@ public class OI {
 
 	Button setpointB, moveLeft, moveRight, 
 	moveUp, moveDown, spinUp, callibrate, 
-	load, resetEncoders, cameraAim, omni, tank, straight;
+	load, resetEncoders, cameraAim, omni, tank;
+	Button straight;
 	
 	/**
 	 * Initializes the joystick and the coprocessor socket;
