@@ -1,52 +1,57 @@
 package org.usfirst.frc.team4500.robot;
 
-import org.usfirst.frc.team4500.robot.commands.AimVertically;
 import org.usfirst.frc.team4500.robot.commands.Load;
+import org.usfirst.frc.team4500.robot.commands.LoadDown;
 import org.usfirst.frc.team4500.robot.commands.MaintainAngle;
 import org.usfirst.frc.team4500.robot.commands.MoveHorizontally;
 import org.usfirst.frc.team4500.robot.commands.MoveVertically;
 import org.usfirst.frc.team4500.robot.commands.OmniDrive;
 import org.usfirst.frc.team4500.robot.commands.ResetEncoders;
 import org.usfirst.frc.team4500.robot.commands.SpinUp;
+import org.usfirst.frc.team4500.robot.commands.StopLoad;
 import org.usfirst.frc.team4500.robot.commands.TankDrive;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.Trigger;
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	Joystick stick;
+	Joystick driveStick;
+	Joystick shootStick;
 	
 
 	Button setpointB, moveLeft, moveRight, 
-	moveUp, moveDown, spinUp, callibrate, 
-	load, resetEncoders, cameraAim, omni, tank;
+	moveUp, moveDown, callibrate, 
+	load, loadDown, resetEncoders, cameraAim, omni, tank;
 	Button straight;
 	
+	Button spinUp;
 	/**
 	 * Initializes the joystick and the coprocessor socket;
 	 * The coprocesser socket may be a null socket - be warned.
 	 */
 	public OI() {
-		stick = new Joystick(0); 
+		driveStick = new Joystick(0);
+		shootStick = new Joystick(1);
 		//Buttons can be made to activate commands like this:
 		
 		//setpointB = new JoystickButton(stick, 11);
 		//setpointB.whenPressed(new ManualMoveToVertSetpoint(30));
 		
-		moveLeft = new JoystickButton(stick, 3);
-		moveRight = new JoystickButton(stick, 4);
-		moveUp = new JoystickButton(stick, 5);
-		moveDown = new JoystickButton(stick, 6);
+		moveLeft = new JoystickButton(shootStick, 4);
+		moveRight = new JoystickButton(shootStick, 5);
+		moveUp = new JoystickButton(shootStick, 3);
+		moveDown = new JoystickButton(shootStick, 2);
 		
-		omni = new JoystickButton(stick,11);
-		tank = new JoystickButton(stick,12);
+		omni = new JoystickButton(driveStick,11);
+		tank = new JoystickButton(driveStick,12);
 		
-		straight = new JoystickButton(stick, 10);
+		straight = new JoystickButton(driveStick, 10);
 		straight.whenPressed(new MaintainAngle());
 		
 		
@@ -65,25 +70,30 @@ public class OI {
 		tank.whenPressed(new TankDrive());
 
 		
-		spinUp = new JoystickButton(stick, 2);
+		spinUp = new JoystickButton(shootStick, 0);
 		spinUp.whenPressed(new SpinUp(1));
 		spinUp.whenReleased(new SpinUp(0));
 		
 		//callibrate.whenPressed(new CalibrateCannon());
 		
-		load = new JoystickButton(stick, 8);
-		load.whileHeld(new Load());
+		load = new JoystickButton(shootStick, 6);
+		load.whenPressed(new Load());
+		load.whenReleased(new StopLoad());
 		
-		resetEncoders = new JoystickButton(stick, 7);
+		loadDown = new JoystickButton(shootStick, 7);
+		loadDown.whenPressed(new LoadDown());
+		loadDown.whenReleased(new StopLoad());
+		
+		resetEncoders = new JoystickButton(driveStick, 7);
 		resetEncoders.whenPressed(new ResetEncoders());
 		
 		
 		
-		cameraAim = new JoystickButton(stick, 9);
+		cameraAim = new JoystickButton(driveStick, 9);
 		//cameraAim.whenPressed(new AimVertically(Robot.visionClient.getYAngle()));
 		
 		//cameraAim = new JoystickButton(stick, 1);
-		cameraAim.whenPressed(new AimVertically(45));//Robot.visionClient.getYAngle()*180/3.14 + 45));
+		cameraAim.whenPressed(new MaintainAngle());//Robot.visionClient.getYAngle()*180/3.14 + 45));
 		
 	}
 	
@@ -93,7 +103,7 @@ public class OI {
 	 * @return x value from joystick (-1 to 1)
 	 */
 	public double getJoyX() {
-		return (Math.abs(stick.getX()) < RobotMap.DEADZONE) ? 0 : stick.getX();
+		return (Math.abs(driveStick.getX()) < RobotMap.DEADZONE) ? 0 : driveStick.getX();
 	}
 	
 	/**
@@ -101,7 +111,7 @@ public class OI {
 	 * @return y value from joystick (-1 to 1)
 	 */
 	public double getJoyY() {
-		return (Math.abs(stick.getY()) < RobotMap.DEADZONE) ? 0 : stick.getY();
+		return (Math.abs(driveStick.getY()) < RobotMap.DEADZONE) ? 0 : driveStick.getY();
 	}
 	
 	/**
@@ -109,7 +119,7 @@ public class OI {
 	 * @return twist value from joystick (-1 to 1)
 	 */
 	public double getJoyTwist() {
-		return ((Math.abs(stick.getTwist()) < RobotMap.DEADZONE) ? 0 : stick.getTwist());
+		return ((Math.abs(driveStick.getTwist()) < RobotMap.DEADZONE) ? 0 : driveStick.getTwist());
 	}
 
 

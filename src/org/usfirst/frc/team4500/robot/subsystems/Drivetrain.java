@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.RobotDrive.MotorType;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import utilities.PIDHandler;
 import utilities.Vector;
 import utilities.Wheel;
@@ -108,9 +109,12 @@ public class Drivetrain extends Subsystem {
     	wheelSwitch = new DoubleSolenoid(RobotMap.DRIVESWITCHER1, RobotMap.DRIVESWICHER2);
     	//tankDrivetrain.setInvertedMotor(MotorType.kFrontRight, true);
     	//tankDrivetrain.setInvertedMotor(MotorType.kRearRight, true);
+    	initPID();
     }
     
     private void initPID() {
+    	angularTankPID.enable();
+    	angularOmniPID.enable();
     	angularTankPID.setAbsoluteTolerance(RobotMap.ANGULAR_TOLERANCE);
     	angularOmniPID.setAbsoluteTolerance(RobotMap.ANGULAR_TOLERANCE);
     	angularOmniPID.setContinuous(false);
@@ -190,7 +194,7 @@ public class Drivetrain extends Subsystem {
 	 *  tandDriveStraightFinished() returns true
 	 */
 	public void tankDriveStraight() {
-		tankDrivetrain.arcadeDrive(linearTankHandler.getOutput(), angularTankHandler.getOutput());
+		tankDrivetrain.arcadeDrive(linearTankHandler.getOutput(), -angularTankHandler.getOutput());
 	}
 	
 	/**
@@ -198,6 +202,7 @@ public class Drivetrain extends Subsystem {
 	 * @param speed speed to set the motors to between -1 and 1
 	 */
 	public void tankDriveStraight(double speed) {
+		SmartDashboard.putNumber("Speed", speed);
 		tankDrivetrain.arcadeDrive(speed, angularTankHandler.getOutput());
 	}
 	

@@ -106,6 +106,7 @@ public class Robot extends IterativeRobot {
     	}else{
     		SmartDashboard.putString("Working", "No");
     	}
+    	SmartDashboard.putNumber("Gyro", drivetrain.getGyroAngle());
     	/*if(visionClient.socketInitialized()){
     		visionClient.getXAngle();
     		visionClient.getYAngle();
