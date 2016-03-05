@@ -186,7 +186,7 @@ public class RobotMap {
 	 */
 	//TODO: Find values for these
 	
-	public static final String COPROCESSOR_ADDRESS = "10.45.0.187";
+	public static final String COPROCESSOR_ADDRESS = "10.45.0.22";
 	public static final int COPROCESSOR_PORT = 1234;
 
 	/**

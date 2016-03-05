@@ -44,7 +44,7 @@ public class Robot extends IterativeRobot {
     	n = 0;
     	//TODO We'll comment these out and only initialize them one by one as we test the robot.
     	
-		//visionClient = new VisionClient();
+		visionClient = new VisionClient();
 		drivetrain = new Drivetrain();
 		pneumatics = new PneumaticsMain();
 		cannon = new Cannon();

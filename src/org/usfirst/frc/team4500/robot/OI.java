@@ -6,6 +6,7 @@ import org.usfirst.frc.team4500.robot.commands.MaintainAngle;
 import org.usfirst.frc.team4500.robot.commands.MoveHorizontally;
 import org.usfirst.frc.team4500.robot.commands.MoveVertically;
 import org.usfirst.frc.team4500.robot.commands.OmniDrive;
+import org.usfirst.frc.team4500.robot.commands.ReadVision;
 import org.usfirst.frc.team4500.robot.commands.ResetEncoders;
 import org.usfirst.frc.team4500.robot.commands.SpinUp;
 import org.usfirst.frc.team4500.robot.commands.StopLoad;
@@ -31,6 +32,8 @@ public class OI {
 	Button straight;
 	
 	Button spinUp;
+	
+	Button putAngle;
 	/**
 	 * Initializes the joystick and the coprocessor socket;
 	 * The coprocesser socket may be a null socket - be warned.
@@ -43,6 +46,9 @@ public class OI {
 		//setpointB = new JoystickButton(stick, 11);
 		//setpointB.whenPressed(new ManualMoveToVertSetpoint(30));
 		
+		putAngle = new JoystickButton(driveStick, 7);
+		putAngle.whenPressed(new ReadVision());
+		
 		moveLeft = new JoystickButton(shootStick, 4);
 		moveRight = new JoystickButton(shootStick, 5);
 		moveUp = new JoystickButton(shootStick, 3);
@@ -51,7 +57,7 @@ public class OI {
 		omni = new JoystickButton(driveStick,11);
 		tank = new JoystickButton(driveStick,12);
 		
-		straight = new JoystickButton(driveStick, 10);
+		straight = new JoystickButton(driveStick, 9);
 		straight.whenPressed(new MaintainAngle());
 		
 		
@@ -70,7 +76,7 @@ public class OI {
 		tank.whenPressed(new TankDrive());
 
 		
-		spinUp = new JoystickButton(shootStick, 0);
+		spinUp = new JoystickButton(shootStick, 1);
 		spinUp.whenPressed(new SpinUp(1));
 		spinUp.whenReleased(new SpinUp(0));
 		

@@ -169,6 +169,11 @@ public class Cannon extends Subsystem {
     			degrees, RobotMap.VELOCITY, RobotMap.GRAVITY, (RobotMap.HEIGHT_OF_GOAL-RobotMap.HEIGHT_TO_CAMERA), RobotMap.HEIGHT_OFFSET));
     }
     
+    public double getVerticalAngle(double degrees) {
+    	 return (RobotMap.EFFECTIVE_HORIZONTAL-calculateVerticalAngle(
+    			degrees, RobotMap.VELOCITY, RobotMap.GRAVITY, (RobotMap.HEIGHT_OF_GOAL-RobotMap.HEIGHT_TO_CAMERA), RobotMap.HEIGHT_OFFSET));
+    }
+    
     /**
      * Sets the vertical motor to the output of the PID controller.
      * Iterate this function until verticalAimFinished() returns true.
