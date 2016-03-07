@@ -2,14 +2,16 @@ package org.usfirst.frc.team4500.robot.subsystems;
 
 import org.usfirst.frc.team4500.robot.RobotMap;
 
+import utilities.PIDHandler;
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import utilities.PIDHandler;
 
 /**
  * The firing mechanism of the robot
@@ -60,6 +62,11 @@ public class Cannon extends Subsystem {
 		horizontalPID = new PIDController(RobotMap.horizCannonP, RobotMap.horizCannonI, RobotMap.horizCannonD, horizEncoder, horizHandler);
 		verticalPID = new PIDController(RobotMap.vertCannonP, RobotMap.vertCannonI, RobotMap.vertCannonD, vertEncoder, vertHandler);
 		limit = new DigitalInput(RobotMap.SWITCH);
+		
+		RobotMap.pot = new AnalogPotentiometer(0, 360, 30);
+		AnalogInput ai = new AnalogInput(1);
+		RobotMap.pot = new AnalogPotentiometer(ai, 360, 30);
+		
 		initPID();
 	}
 	

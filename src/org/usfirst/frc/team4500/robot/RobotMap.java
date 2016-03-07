@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4500.robot;
 
+import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 import utilities.Vector;
 
 /**
@@ -224,6 +225,8 @@ public class RobotMap {
 	public static int tankDrive = 0;
 
 	public static int omniDrive = 1;
+	
+	public static Potentiometer pot;
 	
 	
 	

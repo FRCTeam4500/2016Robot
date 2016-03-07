@@ -101,6 +101,7 @@ public class Robot extends IterativeRobot {
     		SmartDashboard.putNumber("HoizEncoder", Robot.cannon.horizEncoder.get());
     		SmartDashboard.putNumber("Vert Encoder", Robot.cannon.vertEncoder.getDistance());
     		SmartDashboard.putNumber("Counter", n);
+    		SmartDashboard.putNumber("Potentiometer", RobotMap.pot.get());
     		n++;
     		SmartDashboard.putString("Working", "yes");
     	}else{
