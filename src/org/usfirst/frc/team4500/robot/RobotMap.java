@@ -55,7 +55,7 @@ public class RobotMap {
 	public static final Vector  lOmniDirection = new Vector(0, 1, 0),
 								rOmniDirection = new Vector(0, 1, 0),
 								fOmniDirection = new Vector(1, 0, 0),
-								bOmniDirection = new Vector(-1, 0, 0);
+								bOmniDirection = new Vector(1, 0, 0);
 	
 	/**
 	 * These values relate how different motors need to move according to their gear ratio. Set at dummy values now
