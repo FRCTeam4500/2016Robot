@@ -1,3 +1,4 @@
+
 package org.usfirst.frc.team4500.robot;
 
 import org.usfirst.frc.team4500.robot.commands.Load;
@@ -69,7 +70,8 @@ public class OI {
 		moveDown.whileHeld(new MoveVertically(.3));
 		moveDown.whenReleased(new MoveVertically(0));
 		moveUp.whenReleased(new MoveVertically(0));
-		moveRight.whenReleased(new MoveHorizontally(0));
+		moveRight.whenReleased(new MoveHorizontally(0)
+		);
 		moveLeft.whenReleased(new MoveHorizontally(0));
 		
 		omni.whenPressed(new OmniDrive());

@@ -127,6 +127,11 @@ public class Drivetrain extends Subsystem {
     public void initDefaultCommand() {
         setDefaultCommand(new TankDrive());
     }
+    
+    public void setStraife(double speed) {
+    	bOmni.set(speed);
+    	fOmni.set(speed);
+    }
 	
 	/**
 	 * The reading of the gyro
