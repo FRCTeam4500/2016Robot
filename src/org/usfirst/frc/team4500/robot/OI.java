@@ -12,6 +12,7 @@ import org.usfirst.frc.team4500.robot.commands.ResetEncoders;
 import org.usfirst.frc.team4500.robot.commands.SpinUp;
 import org.usfirst.frc.team4500.robot.commands.StopLoad;
 import org.usfirst.frc.team4500.robot.commands.TankDrive;
+import org.usfirst.frc.team4500.robot.commands.loadEject;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -89,7 +90,7 @@ public class OI {
 		load.whenReleased(new StopLoad());
 		
 		loadDown = new JoystickButton(shootStick, 7);
-		loadDown.whenPressed(new LoadDown());
+		loadDown.whenPressed(new loadEject());
 		loadDown.whenReleased(new StopLoad());
 		
 		resetEncoders = new JoystickButton(driveStick, 7);
