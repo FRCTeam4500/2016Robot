@@ -225,6 +225,8 @@ public class RobotMap {
 
 	public static int omniDrive = 1;
 	
+	public static double dfmMotorSpeed = 0.8;
+	
 	
 	
 }
