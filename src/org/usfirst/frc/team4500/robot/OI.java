@@ -3,12 +3,14 @@ package org.usfirst.frc.team4500.robot;
 
 import org.usfirst.frc.team4500.robot.commands.Load;
 import org.usfirst.frc.team4500.robot.commands.LoadDown;
+import org.usfirst.frc.team4500.robot.commands.LoadUp;
 import org.usfirst.frc.team4500.robot.commands.MaintainAngle;
 import org.usfirst.frc.team4500.robot.commands.MoveHorizontally;
 import org.usfirst.frc.team4500.robot.commands.MoveVertically;
 import org.usfirst.frc.team4500.robot.commands.OmniDrive;
 import org.usfirst.frc.team4500.robot.commands.ReadVision;
 import org.usfirst.frc.team4500.robot.commands.ResetEncoders;
+import org.usfirst.frc.team4500.robot.commands.ReverseLoad;
 import org.usfirst.frc.team4500.robot.commands.SpinUp;
 import org.usfirst.frc.team4500.robot.commands.StopLoad;
 import org.usfirst.frc.team4500.robot.commands.TankDrive;
@@ -35,6 +37,10 @@ public class OI {
 	Button spinUp;
 	
 	Button putAngle;
+	
+	Button reverseLoad;
+	
+	Button loadUp;
 	/**
 	 * Initializes the joystick and the coprocessor socket;
 	 * The coprocesser socket may be a null socket - be warned.
@@ -88,9 +94,17 @@ public class OI {
 		load.whenPressed(new Load());
 		load.whenReleased(new StopLoad());
 		
-		loadDown = new JoystickButton(shootStick, 7);
+		reverseLoad = new JoystickButton(shootStick, 7);
+		reverseLoad.whenPressed(new ReverseLoad());
+		reverseLoad.whenReleased(new StopLoad());
+		
+		loadDown = new JoystickButton(shootStick, 11);
 		loadDown.whenPressed(new LoadDown());
 		loadDown.whenReleased(new StopLoad());
+		
+		loadUp = new JoystickButton(shootStick, 12);
+		loadUp.whenPressed(new LoadUp());
+		loadUp.whenReleased(new StopLoad());
 		
 		resetEncoders = new JoystickButton(driveStick, 7);
 		resetEncoders.whenPressed(new ResetEncoders());

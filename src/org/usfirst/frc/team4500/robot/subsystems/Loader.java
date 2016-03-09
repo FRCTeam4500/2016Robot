@@ -30,6 +30,10 @@ public class Loader extends Subsystem {
     	loader.set(RobotMap.LOAD_SPEED);
     }
     
+    public void reverse() {
+    	loader.set(-RobotMap.LOAD_SPEED);
+    }
+    
     public void stop() {
     	loader.set(0);
     }
