@@ -13,7 +13,7 @@ public class RobotMap {
     /**
      * Drive motor ports
      */
-	public static final int LMOTOR = 1, RMOTOR = 0, FMOTOR = 3, BMOTOR = 2;
+	public static final int LMOTOR = 0, RMOTOR = 1, FMOTOR = 2, BMOTOR = 3;
 	
 	/**
 	 * 	Turret motor ports
@@ -52,10 +52,10 @@ public class RobotMap {
 	/**
 	 * The direction of each wheel in relation the robot's coordinate system - may need to negativise some values
 	 */
-	public static final Vector  lOmniDirection = new Vector(0, -1, 0),
+	public static final Vector  lOmniDirection = new Vector(0, 1, 0),
 								rOmniDirection = new Vector(0, 1, 0),
 								fOmniDirection = new Vector(1, 0, 0),
-								bOmniDirection = new Vector(-1, 0, 0);
+								bOmniDirection = new Vector(1, 0, 0);
 	
 	/**
 	 * These values relate how different motors need to move according to their gear ratio. Set at dummy values now
