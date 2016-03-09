@@ -1,21 +1,19 @@
 
 package org.usfirst.frc.team4500.robot;
 
-import org.usfirst.frc.team4500.robot.commands.DoNothing;
-import org.usfirst.frc.team4500.robot.commands.DriveToDefence;
+import org.usfirst.frc.team4500.robot.commands.ConnectToCoprocessor;
 import org.usfirst.frc.team4500.robot.subsystems.Cannon;
 import org.usfirst.frc.team4500.robot.subsystems.Climber;
 import org.usfirst.frc.team4500.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team4500.robot.subsystems.Loader;
 import org.usfirst.frc.team4500.robot.subsystems.PneumaticsMain;
 
-import utilities.VisionClient;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import utilities.VisionClient;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -55,12 +53,7 @@ public class Robot extends IterativeRobot {
 		
 		oi = new OI();
 		
-		Command autonomousCommand;
-		SendableChooser autoChooser;
-		autoChooser = new SendableChooser();
-		autoChooser.addDefault("Default Program", new DoNothing());
-		autoChooser.addObject("Drive For Milliseconds", new DriveToDefence());
-		
+		boolean JackisDumb = true;
 		//visionClient = new VisionClient();
 		//(new ConnectToCoprocessor()).start(); //TODO: Make sure that this command runs in parallel
 		
@@ -68,16 +61,12 @@ public class Robot extends IterativeRobot {
         // instantiate the command used for the autonomous period
         //i.e. autonomousCommand = new ExampleCommand();
     }
-
-    
-    
-    
-    public void disabledPeriodic() {
+	
+	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 	}
 
-	
-	public void autonomousInit() {
+    public void autonomousInit() {
         // schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
     }
