@@ -53,7 +53,6 @@ public class Robot extends IterativeRobot {
 		
 		oi = new OI();
 		
-		boolean JackisDumb = true;
 		//visionClient = new VisionClient();
 		//(new ConnectToCoprocessor()).start(); //TODO: Make sure that this command runs in parallel
 		
