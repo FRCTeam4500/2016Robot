@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team4500.robot;
 
+import org.usfirst.frc.team4500.robot.commands.AimHorizontally;
 import org.usfirst.frc.team4500.robot.commands.Load;
 import org.usfirst.frc.team4500.robot.commands.LoadDown;
 import org.usfirst.frc.team4500.robot.commands.LoadUp;
@@ -111,11 +112,11 @@ public class OI {
 		
 		
 		
-		cameraAim = new JoystickButton(driveStick, 9);
+		cameraAim = new JoystickButton(shootStick, 2);
 		//cameraAim.whenPressed(new AimVertically(Robot.visionClient.getYAngle()));
 		
 		//cameraAim = new JoystickButton(stick, 1);
-		cameraAim.whenPressed(new MaintainAngle());//Robot.visionClient.getYAngle()*180/3.14 + 45));
+		cameraAim.whenPressed(new AimHorizontally());
 		
 	}
 	

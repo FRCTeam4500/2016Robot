@@ -7,22 +7,17 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-class AimHorizontally extends Command {
+public class AimHorizontally extends Command {
 
     double offset;
 	
-	/**
-	 * DO NOT USE THIS COMMAND ALONE. DOES NOT REQUIRE SUBSYSTEM. USE AIMCANNON.
-	 * Aims the horizontal component of the cannon.
-	 * @param offset
-	 */
-    public AimHorizontally(double offset) {
-        this.offset = offset;
+    public AimHorizontally() {
+    	requires(Robot.cannon);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.cannon.setHorizontalOffset(offset);
+    	Robot.cannon.setHorizontalOffset(Robot.visionClient.getXAngle());
     }
 
     // Called repeatedly when this Command is scheduled to run
