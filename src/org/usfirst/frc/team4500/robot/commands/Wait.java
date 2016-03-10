@@ -8,12 +8,12 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class Wait extends Command {
 
-    double ms;
+    double sec;
 	Timer time;
 	
-	public Wait(double ms) {
+	public Wait(double sec) {
         time = new Timer();
-        this.ms = ms;
+        this.sec = sec;
     }
 
     // Called just before this Command runs the first time
@@ -27,11 +27,12 @@ public class Wait extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return time.get() > ms;
+        return time.get() > sec;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	time.stop();
     }
 
     // Called when another command which requires one or more of the same

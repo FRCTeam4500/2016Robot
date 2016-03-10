@@ -2,6 +2,8 @@
 package org.usfirst.frc.team4500.robot;
 
 import org.usfirst.frc.team4500.robot.commands.ConnectToCoprocessor;
+import org.usfirst.frc.team4500.robot.commands.Fire;
+import org.usfirst.frc.team4500.robot.commands.MaintainAngle;
 import org.usfirst.frc.team4500.robot.subsystems.Cannon;
 import org.usfirst.frc.team4500.robot.subsystems.Climber;
 import org.usfirst.frc.team4500.robot.subsystems.Drivetrain;
@@ -12,6 +14,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import utilities.VisionClient;
 
@@ -33,6 +36,8 @@ public class Robot extends IterativeRobot {
 	public static PneumaticsMain pneumatics;
 	public static Loader loader;
 	int n;
+	
+	SendableChooser chooser;
 
     Command autonomousCommand;
 
@@ -52,6 +57,11 @@ public class Robot extends IterativeRobot {
 		//climber = new Climber();
 		
 		oi = new OI();
+		
+		chooser = new SendableChooser();
+		chooser.addDefault("Drive Forward", new MaintainAngle(.5, 5));
+		chooser.addObject("Fire", new Fire());
+		autonomousCommand = (Command) chooser.getSelected();
 		
 		//visionClient = new VisionClient();
 		//(new ConnectToCoprocessor()).start(); //TODO: Make sure that this command runs in parallel

@@ -13,11 +13,11 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Loader extends Subsystem {
     
-    private Victor loader;
+    private Talon loader;
     private DoubleSolenoid grabSol;
     
     public Loader() {
-    	loader = new Victor(RobotMap.LOADMOTOR);
+    	loader = new Talon(RobotMap.LOADMOTOR);
     	grabSol = new DoubleSolenoid(RobotMap.LOAD_SOLENOID_1, RobotMap.LOAD_SOLENOID_2);
     }
 

@@ -27,8 +27,8 @@ public class Drivetrain extends Subsystem {
 	 * Motor controllers for the left, right, front, and back omni wheels.
 	 *  Use the setter functions to set speeds in case we need multiple controllers for the same side.
 	 */
-	private Victor lOmni, rOmni;
-	private Jaguar fOmni, bOmni;
+	private Talon lOmni, rOmni;
+	private Talon fOmni, bOmni;
 	
 	/**
 	 * The robot's gyroscope
@@ -44,7 +44,7 @@ public class Drivetrain extends Subsystem {
 	/**
 	 * Motor controllers for the left and right tank treads
 	 */
-	private Victor lTank, rTank;
+	private Talon lTank, rTank;
 	
 	/**
 	 * Array containing each omni wheel
@@ -83,10 +83,10 @@ public class Drivetrain extends Subsystem {
 	private DoubleSolenoid wheelSwitch;
 
     public Drivetrain() {
-    	lOmni = new Victor(RobotMap.LMOTOR);
-    	rOmni = new Victor(RobotMap.RMOTOR);
-    	fOmni = new Jaguar(RobotMap.FMOTOR);
-    	bOmni = new Jaguar(RobotMap.BMOTOR);
+    	lOmni = new Talon(RobotMap.LMOTOR);
+    	rOmni = new Talon(RobotMap.RMOTOR);
+    	fOmni = new Talon(RobotMap.FMOTOR);
+    	bOmni = new Talon(RobotMap.BMOTOR);
     	lTank = lOmni;
     	rTank = rOmni;
     	gyro = new ADXRS450_Gyro();

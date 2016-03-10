@@ -10,7 +10,11 @@ import edu.wpi.first.wpilibj.command.Command;
 public class TankDriveStraight extends Command {
 	double setpoint;
 
-    public TankDriveStraight(double setpoint) {
+    /**
+     * @deprecated Use MaintainAngle instead
+     * @param setpoint
+     */
+	public TankDriveStraight(double setpoint) {
         requires(Robot.drivetrain);
         this.setpoint = setpoint;
     }
