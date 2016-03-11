@@ -7,6 +7,7 @@ import org.usfirst.frc.team4500.robot.commands.LoadDown;
 import org.usfirst.frc.team4500.robot.commands.LoadUp;
 import org.usfirst.frc.team4500.robot.commands.MaintainAngle;
 import org.usfirst.frc.team4500.robot.commands.MoveHorizontally;
+import org.usfirst.frc.team4500.robot.commands.MoveLoader;
 import org.usfirst.frc.team4500.robot.commands.MoveVertically;
 import org.usfirst.frc.team4500.robot.commands.OmniDrive;
 import org.usfirst.frc.team4500.robot.commands.ReadVision;
@@ -15,6 +16,7 @@ import org.usfirst.frc.team4500.robot.commands.ReverseLoad;
 import org.usfirst.frc.team4500.robot.commands.SpinUp;
 import org.usfirst.frc.team4500.robot.commands.StopLoad;
 import org.usfirst.frc.team4500.robot.commands.TankDrive;
+import org.usfirst.frc.team4500.robot.subsystems.Loader;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -42,6 +44,8 @@ public class OI {
 	Button reverseLoad;
 	
 	Button loadUp;
+	
+	Button moveLoaderUp, moveLoaderDown;
 	/**
 	 * Initializes the joystick and the coprocessor socket;
 	 * The coprocesser socket may be a null socket - be warned.
@@ -53,7 +57,11 @@ public class OI {
 		
 		//setpointB = new JoystickButton(stick, 11);
 		//setpointB.whenPressed(new ManualMoveToVertSetpoint(30));
+		moveLoaderUp = new JoystickButton(driveStick, 4);
+		moveLoaderUp.whenPressed(new LoadUp());
 		
+		moveLoaderDown = new JoystickButton(driveStick, 3);
+		moveLoaderDown.whenPressed(new LoadDown());
 		putAngle = new JoystickButton(driveStick, 7);
 		putAngle.whenPressed(new ReadVision());
 		
@@ -77,8 +85,7 @@ public class OI {
 		moveDown.whileHeld(new MoveVertically(.3));
 		moveDown.whenReleased(new MoveVertically(0));
 		moveUp.whenReleased(new MoveVertically(0));
-		moveRight.whenReleased(new MoveHorizontally(0)
-		);
+		moveRight.whenReleased(new MoveHorizontally(0));
 		moveLeft.whenReleased(new MoveHorizontally(0));
 		
 		omni.whenPressed(new OmniDrive());
@@ -91,19 +98,19 @@ public class OI {
 		
 		//callibrate.whenPressed(new CalibrateCannon());
 		
-		load = new JoystickButton(shootStick, 6);
+		load = new JoystickButton(driveStick, 5);
 		load.whenPressed(new Load());
 		load.whenReleased(new StopLoad());
 		
-		reverseLoad = new JoystickButton(shootStick, 7);
+		reverseLoad = new JoystickButton(driveStick, 3);
 		reverseLoad.whenPressed(new ReverseLoad());
 		reverseLoad.whenReleased(new StopLoad());
 		
-		loadDown = new JoystickButton(shootStick, 11);
+		loadDown = new JoystickButton(driveStick, 4);
 		loadDown.whenPressed(new LoadDown());
 		loadDown.whenReleased(new StopLoad());
 		
-		loadUp = new JoystickButton(shootStick, 12);
+		loadUp = new JoystickButton(driveStick, 6);
 		loadUp.whenPressed(new LoadUp());
 		loadUp.whenReleased(new StopLoad());
 		
@@ -112,11 +119,11 @@ public class OI {
 		
 		
 		
-		cameraAim = new JoystickButton(shootStick, 2);
+		//cameraAim = new JoystickButton(shootStick, 2);
 		//cameraAim.whenPressed(new AimVertically(Robot.visionClient.getYAngle()));
 		
 		//cameraAim = new JoystickButton(stick, 1);
-		cameraAim.whenPressed(new AimHorizontally());
+		//cameraAim.whenPressed(new AimHorizontally());
 		
 	}
 	

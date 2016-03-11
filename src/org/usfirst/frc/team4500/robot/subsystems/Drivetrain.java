@@ -128,8 +128,8 @@ public class Drivetrain extends Subsystem {
         setDefaultCommand(new TankDrive());
     }
     
-    public void setStraife(double speed) {
-    	bOmni.set(speed);
+    public void setStrafe(double speed) {
+    	bOmni.set(-speed);
     	fOmni.set(speed);
     }
 	
@@ -270,9 +270,9 @@ public class Drivetrain extends Subsystem {
      */
     public void switchDrivetrain(driveType drivetrain) {
     	if (drivetrain == driveType.OMNI) {
-    		wheelSwitch.set(Value.kForward);
-    	} else {
     		wheelSwitch.set(Value.kReverse);
+    	} else {
+    		wheelSwitch.set(Value.kForward);
     	}
     }
 

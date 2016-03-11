@@ -22,6 +22,7 @@ public class OmniDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.drivetrain.tankDrive(Robot.oi.getJoyY(), -Robot.oi.getJoyTwist());
+    	Robot.drivetrain.setStrafe(Robot.oi.getJoyX());
     	//Robot.drivetrain.setStraife(Robot.oi.getJoyX());
     	//TODO temp uses tankdrive
     	//Gives the omni drive functions the square of the joystick axes, making for smoother control.

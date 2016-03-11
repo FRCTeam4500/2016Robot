@@ -49,19 +49,22 @@ public class Robot extends IterativeRobot {
     	n = 0;
     	//TODO We'll comment these out and only initialize them one by one as we test the robot.
     	
-		visionClient = new VisionClient();
+		//visionClient = new VisionClient();
 		drivetrain = new Drivetrain();
 		pneumatics = new PneumaticsMain();
 		cannon = new Cannon();
 		loader = new Loader();
 		//climber = new Climber();
 		
-		oi = new OI();
+
 		
-		chooser = new SendableChooser();
-		chooser.addDefault("Drive Forward", new MaintainAngle(.5, 5));
-		chooser.addObject("Fire", new Fire());
-		autonomousCommand = (Command) chooser.getSelected();
+		//chooser = new SendableChooser();
+		//chooser.addDefault("Drive Forward", new MaintainAngle(.5, 5));
+		//chooser.addObject("Fire", new Fire());
+		//autonomousCommand = (Command) chooser.getSelected();
+		autonomousCommand = new Fire();
+		
+		oi = new OI();
 		
 		//visionClient = new VisionClient();
 		//(new ConnectToCoprocessor()).start(); //TODO: Make sure that this command runs in parallel
