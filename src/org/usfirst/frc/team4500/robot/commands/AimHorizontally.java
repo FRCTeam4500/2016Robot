@@ -17,7 +17,7 @@ public class AimHorizontally extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	//Robot.cannon.setHorizontalOffset(Robot.visionClient.getXAngle());
+    	Robot.cannon.setHorizontalOffset(Robot.visionClient.getXAngle());
     	//Robot.cannon.setHorizontalOffset(-40);
     }
 

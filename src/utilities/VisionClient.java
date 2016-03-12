@@ -128,6 +128,8 @@ public class VisionClient {
 														//Tell the coprocessor that we want an angle
 			double d = readDouble();
 			SmartDashboard.putNumber("xAngle", d);
+
+			//return (d == 0/0) ? 0 : d;
 			return d;
 			
 			
