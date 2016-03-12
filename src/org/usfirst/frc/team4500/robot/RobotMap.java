@@ -138,7 +138,7 @@ public class RobotMap {
 	/**
 	 * The P, I and D values for controlling the horizontal motion of the cannon
 	 */
-	public static final double horizCannonP = -0.01, horizCannonI = 0, horizCannonD = 0;
+	public static final double horizCannonP = 0.04, horizCannonI = 0, horizCannonD = 0;
 	
 	/**
 	 * The P, I and D values for controlling the vertical motion of the cannon
@@ -186,7 +186,7 @@ public class RobotMap {
 	 */
 	//TODO: Find values for these
 	
-	public static final String COPROCESSOR_ADDRESS = "10.45.0.22";
+	public static final String COPROCESSOR_ADDRESS = "10.45.0.80";
 	public static final int COPROCESSOR_PORT = 1234;
 
 	/**

@@ -45,7 +45,11 @@ public class OI {
 	
 	Button loadUp;
 	
+	Button shootForward, shootReverse, shootUp, shootDown;
+	
 	Button moveLoaderUp, moveLoaderDown;
+	
+	Button aimHoriz;
 	/**
 	 * Initializes the joystick and the coprocessor socket;
 	 * The coprocesser socket may be a null socket - be warned.
@@ -67,8 +71,11 @@ public class OI {
 		
 		moveLeft = new JoystickButton(shootStick, 4);
 		moveRight = new JoystickButton(shootStick, 5);
-		moveUp = new JoystickButton(shootStick, 3);
-		moveDown = new JoystickButton(shootStick, 2);
+		//moveUp = new JoystickButton(shootStick, 3);
+		//moveDown = new JoystickButton(shootStick, 2);
+		
+		aimHoriz = new JoystickButton(shootStick, 3);
+		//aimHoriz.whenPressed(new AimHorizontally());
 		
 		omni = new JoystickButton(driveStick,11);
 		tank = new JoystickButton(driveStick,12);
@@ -79,12 +86,12 @@ public class OI {
 		
 		//callibrate = new JoystickButton(stick, 12);
 
-		moveLeft.whileHeld(new MoveHorizontally(-.5));
-		moveRight.whileActive(new MoveHorizontally(.5));
-		moveUp.whileHeld(new MoveVertically(-.4));
-		moveDown.whileHeld(new MoveVertically(.3));
-		moveDown.whenReleased(new MoveVertically(0));
-		moveUp.whenReleased(new MoveVertically(0));
+		moveLeft.whileHeld(new MoveHorizontally(-.3));
+		moveRight.whileActive(new MoveHorizontally(.3));
+		//moveUp.whileHeld(new MoveVertically(-.4));
+		//moveDown.whileHeld(new MoveVertically(.3));
+		//moveDown.whenReleased(new MoveVertically(0));
+		//moveUp.whenReleased(new MoveVertically(0));
 		moveRight.whenReleased(new MoveHorizontally(0));
 		moveLeft.whenReleased(new MoveHorizontally(0));
 		
@@ -113,6 +120,22 @@ public class OI {
 		loadUp = new JoystickButton(driveStick, 6);
 		loadUp.whenPressed(new LoadUp());
 		loadUp.whenReleased(new StopLoad());
+		
+		shootForward = new JoystickButton(shootStick, 6);
+		shootForward.whenPressed(new Load());
+		shootForward.whenReleased(new StopLoad());
+		
+		shootReverse = new JoystickButton(shootStick, 7);
+		shootReverse.whenPressed(new ReverseLoad());
+		shootReverse.whenReleased(new StopLoad());
+		
+		shootDown = new JoystickButton(shootStick, 11);
+		shootDown.whenPressed(new LoadDown());
+		shootDown.whenReleased(new StopLoad());
+		
+		shootUp = new JoystickButton(shootStick, 10);
+		shootUp.whenPressed(new LoadUp());
+		shootUp.whenReleased(new StopLoad());
 		
 		resetEncoders = new JoystickButton(driveStick, 7);
 		resetEncoders.whenPressed(new ResetEncoders());
