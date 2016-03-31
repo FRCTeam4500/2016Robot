@@ -65,6 +65,7 @@ public class Robot extends IterativeRobot {
 		autonomousCommand = new Fire();
 		
 		oi = new OI();
+		oi.initTrigger();
 		
 		//visionClient = new VisionClient();
 		//(new ConnectToCoprocessor()).start(); //TODO: Make sure that this command runs in parallel

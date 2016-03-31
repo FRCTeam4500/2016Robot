@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.Trigger;
+import utilities.ScrollTrigger;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -30,6 +31,8 @@ import edu.wpi.first.wpilibj.buttons.Trigger;
 public class OI {
 	Joystick driveStick;
 	Joystick shootStick;
+	
+	
 	
 
 	Button setpointB, moveLeft, moveRight, 
@@ -50,6 +53,10 @@ public class OI {
 	Button moveLoaderUp, moveLoaderDown;
 	
 	Button aimHoriz;
+	
+	Trigger scrollTrigger;
+	
+	
 	/**
 	 * Initializes the joystick and the coprocessor socket;
 	 * The coprocesser socket may be a null socket - be warned.
@@ -57,6 +64,7 @@ public class OI {
 	public OI() {
 		driveStick = new Joystick(0);
 		shootStick = new Joystick(1);
+		
 		//Buttons can be made to activate commands like this:
 		
 		//setpointB = new JoystickButton(stick, 11);
@@ -99,13 +107,13 @@ public class OI {
 		tank.whenPressed(new TankDrive());
 
 		
-		spinUp = new JoystickButton(shootStick, 1);
+		/*spinUp = new JoystickButton(shootStick, 1);
 		spinUp.whenPressed(new SpinUp(1));
-		spinUp.whenReleased(new SpinUp(0));
+		spinUp.whenReleased(new SpinUp(0));*/
 		
 		//callibrate.whenPressed(new CalibrateCannon());
 		
-		load = new JoystickButton(driveStick, 5);
+		load = new JoystickButton(shootStick, 1);
 		load.whenPressed(new Load());
 		load.whenReleased(new StopLoad());
 		
@@ -150,6 +158,12 @@ public class OI {
 		
 	}
 	
+	public void initTrigger() {
+		scrollTrigger = new ScrollTrigger();
+		scrollTrigger.whenActive(new SpinUp(1.0));
+		scrollTrigger.whenInactive(new SpinUp(0));
+	}
+	
 	
 	/**
 	 * The value of the x axis of the joystick, adjusted for deadzones and any necessary scaling
@@ -179,6 +193,10 @@ public class OI {
 	public int getPOV() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	public boolean getScroller() {
+		return shootStick.getZ() < 0;
 	}
 	
 	
