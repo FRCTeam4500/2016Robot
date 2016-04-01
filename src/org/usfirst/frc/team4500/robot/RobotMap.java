@@ -218,6 +218,10 @@ public class RobotMap {
 
 	public static final int LOAD_SOLENOID_2 = 1;
 
+	public static final int VISION_PORT = 0;
+
+	public static final double VISION_SCALE_FACTOR = .8/3.6;
+
 	//Dummys
 	public static int tankDrive = 0;
 

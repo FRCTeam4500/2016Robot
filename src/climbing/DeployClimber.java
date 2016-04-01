@@ -38,7 +38,7 @@ public class DeployClimber extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return (useTime && time.get() > seconds) ? true : false;
+        return (useTime && time.get() > seconds);
     }
 
     // Called once after isFinished returns true

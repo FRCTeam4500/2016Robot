@@ -2,6 +2,7 @@ package org.usfirst.frc.team4500.robot.subsystems;
 
 import org.usfirst.frc.team4500.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
@@ -38,6 +39,8 @@ public class Cannon extends Subsystem {
 	 */
 	DigitalInput limit;
 	
+	AnalogInput visionIn;
+	
 	
 	public Cannon() {
 		horizMotor = new Talon(RobotMap.HORIZMOTOR);
@@ -61,6 +64,13 @@ public class Cannon extends Subsystem {
 		verticalPID = new PIDController(RobotMap.vertCannonP, RobotMap.vertCannonI, RobotMap.vertCannonD, vertEncoder, vertHandler);
 		limit = new DigitalInput(RobotMap.SWITCH);
 		initPID();
+		initAnalogInput();
+	}
+	
+	private void initAnalogInput() {
+		visionIn = new AnalogInput(RobotMap.VISION_PORT);
+		visionIn.setAverageBits(5);
+		visionIn.setOversampleBits(5);
 	}
 	
 	private void initPID() {
@@ -76,6 +86,14 @@ public class Cannon extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    }
+    
+    /**
+     * The angle given by the beaglebone vision processing via analog/PWM signal
+     * @return the angle in rad
+     */
+    public double getVisionAngle() {
+    	return (visionIn.getAverageVoltage() - 3.6/2) * RobotMap.VISION_SCALE_FACTOR;
     }
     
     /**
