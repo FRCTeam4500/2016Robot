@@ -1,4 +1,4 @@
-package org.usfirst.frc.team4500.robot.commands;
+package climbing;
 
 import org.usfirst.frc.team4500.robot.Robot;
 
@@ -7,10 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class LowerClaw extends Command {
+public class Lock extends Command {
 
-    public LowerClaw() {
-        // Use requires() here to declare subsystem dependencies
+    public Lock() {
         requires(Robot.climber);
     }
 
@@ -20,7 +19,7 @@ public class LowerClaw extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.climber.setBottom();
+    	Robot.climber.lock();
     }
 
     // Make this return true when this Command no longer needs to run execute()

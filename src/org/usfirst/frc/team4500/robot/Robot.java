@@ -5,11 +5,11 @@ import org.usfirst.frc.team4500.robot.commands.ConnectToCoprocessor;
 import org.usfirst.frc.team4500.robot.commands.Fire;
 import org.usfirst.frc.team4500.robot.commands.MaintainAngle;
 import org.usfirst.frc.team4500.robot.subsystems.Cannon;
-import org.usfirst.frc.team4500.robot.subsystems.Climber;
 import org.usfirst.frc.team4500.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team4500.robot.subsystems.Loader;
 import org.usfirst.frc.team4500.robot.subsystems.PneumaticsMain;
 
+import climbing.Climber;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -32,9 +32,10 @@ public class Robot extends IterativeRobot {
 	public static VisionClient visionClient;
 	public static Drivetrain drivetrain;
 	public static Cannon cannon;
-	public static Climber climber;
+	//public static Climber climber;
 	public static PneumaticsMain pneumatics;
 	public static Loader loader;
+	public static Climber climber;
 	int n;
 	
 	SendableChooser chooser;
@@ -66,8 +67,8 @@ public class Robot extends IterativeRobot {
 		
 		oi = new OI();
 		
-		//visionClient = new VisionClient();
-		//(new ConnectToCoprocessor()).start(); //TODO: Make sure that this command runs in parallel
+		visionClient = new VisionClient();
+		(new ConnectToCoprocessor()).start(); //TODO: Make sure that this command runs in parallel
 		
 		
         // instantiate the command used for the autonomous period

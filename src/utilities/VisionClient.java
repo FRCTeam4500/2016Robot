@@ -46,6 +46,7 @@ public class VisionClient {
 			coprocessorSock = null;
 			socketReader = null;
 			SmartDashboard.putString("Error", "UnknownHost");
+			return false;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
