@@ -1,6 +1,9 @@
 
 package org.usfirst.frc.team4500.robot;
 
+import java.io.IOException;
+import java.net.UnknownHostException;
+
 import org.usfirst.frc.team4500.robot.commands.ConnectToCoprocessor;
 import org.usfirst.frc.team4500.robot.subsystems.Cannon;
 import org.usfirst.frc.team4500.robot.subsystems.Climber;
@@ -14,6 +17,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import utilities.VisionClient;
+import utilities.VisionClient2;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -26,7 +30,8 @@ public class Robot extends IterativeRobot {
 
 	// Instantiate subsystems here, i.e: public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
-	public static VisionClient visionClient;
+	//public static VisionClient visionClient;
+	public static VisionClient2 visionClient;
 	public static Drivetrain drivetrain;
 	public static Cannon cannon;
 	public static Climber climber;
@@ -43,24 +48,33 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
     	n = 0;
     	//TODO We'll comment these out and only initialize them one by one as we test the robot.
-    	
+
 		//visionClient = new VisionClient();
 		drivetrain = new Drivetrain();
 		pneumatics = new PneumaticsMain();
 		cannon = new Cannon();
 		loader = new Loader();
 		//climber = new Climber();
-		
+
 		oi = new OI();
-		
+
+		visionClient = new VisionClient2();
+		try {
+			visionClient.initalizeSocket();
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		//visionClient = new VisionClient();
 		//(new ConnectToCoprocessor()).start(); //TODO: Make sure that this command runs in parallel
-		
-		
+
+
         // instantiate the command used for the autonomous period
         //i.e. autonomousCommand = new ExampleCommand();
     }
-	
+
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 	}
@@ -79,7 +93,7 @@ public class Robot extends IterativeRobot {
 
     public void teleopInit() {
 		// This makes sure that the autonomous stops running when
-        // teleop starts running. If you want the autonomous to 
+        // teleop starts running. If you want the autonomous to
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
@@ -106,6 +120,15 @@ public class Robot extends IterativeRobot {
     	}else{
     		SmartDashboard.putString("Working", "No");
     	}
+
+    	if(visionClient.socketInitalized()) {
+    		try {
+				String cords = visionClient.getData();
+				SmartDashboard.putString("Cords", cords);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+    	}
     	/*if(visionClient.socketInitialized()){
     		visionClient.getXAngle();
     		visionClient.getYAngle();
@@ -116,7 +139,7 @@ public class Robot extends IterativeRobot {
     	}*/
         Scheduler.getInstance().run();
     }
-    
+
     /**
      * This function is called periodically during test mode
      */
