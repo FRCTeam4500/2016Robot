@@ -1,6 +1,9 @@
 
 package org.usfirst.frc.team4500.robot;
 
+import java.io.IOException;
+import java.net.UnknownHostException;
+
 import org.usfirst.frc.team4500.robot.commands.ConnectToCoprocessor;
 import org.usfirst.frc.team4500.robot.commands.Fire;
 import org.usfirst.frc.team4500.robot.commands.MaintainAngle;
@@ -17,6 +20,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import utilities.VisionClient;
+import utilities.VisionClient2;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -29,7 +33,8 @@ public class Robot extends IterativeRobot {
 
 	// Instantiate subsystems here, i.e: public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
-	public static VisionClient visionClient;
+	//public static VisionClient visionClient;
+	public static VisionClient2 visionClient;
 	public static Drivetrain drivetrain;
 	public static Cannon cannon;
 	//public static Climber climber;
@@ -37,7 +42,7 @@ public class Robot extends IterativeRobot {
 	public static Loader loader;
 	public static Climber climber;
 	int n;
-	
+
 	SendableChooser chooser;
 
     Command autonomousCommand;
@@ -49,33 +54,40 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
     	n = 0;
     	//TODO We'll comment these out and only initialize them one by one as we test the robot.
-    	
+
 		//visionClient = new VisionClient();
 		drivetrain = new Drivetrain();
 		pneumatics = new PneumaticsMain();
 		cannon = new Cannon();
 		loader = new Loader();
 		//climber = new Climber();
-		
 
-		
+
+
 		//chooser = new SendableChooser();
 		//chooser.addDefault("Drive Forward", new MaintainAngle(.5, 5));
 		//chooser.addObject("Fire", new Fire());
 		//autonomousCommand = (Command) chooser.getSelected();
 		autonomousCommand = new Fire();
-		
+
 		oi = new OI();
 		oi.initTrigger();
-		
-		visionClient = new VisionClient();
-		(new ConnectToCoprocessor()).start(); //TODO: Make sure that this command runs in parallel
-		
-		
+
+		visionClient = new VisionClient2();
+		try {
+			visionClient.initalizeSocket();
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		//(new ConnectToCoprocessor()).start(); //TODO: Make sure that this command runs in parallel
+
+
         // instantiate the command used for the autonomous period
         //i.e. autonomousCommand = new ExampleCommand();
     }
-	
+
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 	}
@@ -94,7 +106,7 @@ public class Robot extends IterativeRobot {
 
     public void teleopInit() {
 		// This makes sure that the autonomous stops running when
-        // teleop starts running. If you want the autonomous to 
+        // teleop starts running. If you want the autonomous to
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
@@ -130,9 +142,15 @@ public class Robot extends IterativeRobot {
     		visionClient.initializeSocket();
     		SmartDashboard.putString("InitS", "No");
     	}*/
+
+    	if(visionClient.socketInitalized()) {
+    		SmartDashboard.putString("SocketInit", "Yes");
+    	} else {
+    		SmartDashboard.putString("SocketInit", "No");
+    	}
         Scheduler.getInstance().run();
     }
-    
+
     /**
      * This function is called periodically during test mode
      */

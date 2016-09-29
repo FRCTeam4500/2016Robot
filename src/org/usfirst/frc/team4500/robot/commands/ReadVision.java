@@ -18,16 +18,16 @@ public class ReadVision extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    } 
+    }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.visionClient.socketInitialized()){	
+    	/*if(Robot.visionClient.socketInitialized()){
     		double xAngle = Robot.visionClient.getXAngle();
     		double yAngle = Robot.visionClient.getYAngle();
-    		
+
     		double aimAngle = Robot.cannon.getVerticalAngle(yAngle*180/3.14 + 45);
-    		
+
     		SmartDashboard.putNumber("x angle", xAngle*180/3.14 + 45);
     		SmartDashboard.putNumber("y angle", yAngle*180/3.14 + 45);
     		SmartDashboard.putNumber("aim angle", aimAngle);
@@ -35,7 +35,7 @@ public class ReadVision extends Command {
     	}else{
     		Robot.visionClient.initializeSocket();
     		SmartDashboard.putString("InitS", "No");
-    	}
+    	}*/
 
 
     }
