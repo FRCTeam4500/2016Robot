@@ -153,7 +153,7 @@ public class OI {
 		//aimTarget = new JoystickButton(shootStick, 12);
 		//aimTarget.whenPressed(new AimAtTarget());
 
-		visionAim = new JoystickButton(shootStick, 12);
+		visionAim = new JoystickButton(shootStick, 8);
 		visionAim.whenPressed(new AimCannon());
 
 		//cameraAim = new JoystickButton(shootStick, 2);
