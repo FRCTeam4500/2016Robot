@@ -31,19 +31,12 @@ public class VisionClient2 {
 		System.out.println("Recived: " + str);
 
 		int colonIndex = str.indexOf(":");
-		//int stringLength = str.length();
 		String xS = "";
-		//String yS = "";
 
 		for(int xl = 0; xl < colonIndex; xl++) {
 			xS = xS + str.charAt(xl);
 		}
-		/*for(int yl = colonIndex + 1; yl < stringLength; yl++) {
-			yS = yS + str.charAt(yl);
-		}*/
-		//System.out.println(yS);
 		int x = Integer.parseInt(xS);
-		//int y = Integer.parseInt(yS);
 		System.out.println("X cord is " + x);
 		return x;
 	}
