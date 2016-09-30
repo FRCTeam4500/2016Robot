@@ -78,8 +78,10 @@ public class Robot extends IterativeRobot {
 			visionClient.initalizeSocket();
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
+			SmartDashboard.putString("Init2", e + "");
 		} catch (IOException e) {
 			e.printStackTrace();
+			SmartDashboard.putString("Init2", e + "");
 		}
 		//(new ConnectToCoprocessor()).start(); //TODO: Make sure that this command runs in parallel
 
