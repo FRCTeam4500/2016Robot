@@ -74,15 +74,8 @@ public class Robot extends IterativeRobot {
 		oi.initTrigger();
 
 		visionClient = new VisionClient2();
-		try {
-			visionClient.initalizeSocket();
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-			SmartDashboard.putString("Init2", e + "");
-		} catch (IOException e) {
-			e.printStackTrace();
-			SmartDashboard.putString("Init2", e + "");
-		}
+		visionClient.initalizeSocket();
+		
 		//(new ConnectToCoprocessor()).start(); //TODO: Make sure that this command runs in parallel
 
 
@@ -145,11 +138,11 @@ public class Robot extends IterativeRobot {
     		SmartDashboard.putString("InitS", "No");
     	}*/
 
-    	if(visionClient.socketInitalized()) {
+    	/*if(visionClient.socketInitalized()) {
     		SmartDashboard.putString("SocketInit", "Yes");
     	} else {
     		SmartDashboard.putString("SocketInit", "No");
-    	}
+    	}*/
         Scheduler.getInstance().run();
     }
 

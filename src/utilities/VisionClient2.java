@@ -15,12 +15,16 @@ public class VisionClient2 {
 	public DataInputStream dis;
 	public BufferedReader inFromClient;
 
-	public void initalizeSocket() throws UnknownHostException, IOException {
-		s = new Socket("10.45.0.80", 31415);
-		stream = new DataOutputStream(s.getOutputStream());
-
-		dis = new DataInputStream(s.getInputStream());
-		inFromClient = new BufferedReader(new InputStreamReader (s.getInputStream()));
+	public void initalizeSocket() {
+		try {
+			s = new Socket("10.45.0.25", 31415);
+			stream = new DataOutputStream(s.getOutputStream());
+			dis = new DataInputStream(s.getInputStream());
+			inFromClient = new BufferedReader(new InputStreamReader (s.getInputStream()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public int getData() throws IOException {
