@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import utilities.VisionClient;
 import utilities.VisionClient2;
+import utilities.VisionClientFinal;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -34,13 +35,15 @@ public class Robot extends IterativeRobot {
 	// Instantiate subsystems here, i.e: public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 	//public static VisionClient visionClient;
-	public static VisionClient2 visionClient;
+	//public static VisionClient2 visionClient;
 	public static Drivetrain drivetrain;
 	public static Cannon cannon;
 	//public static Climber climber;
 	public static PneumaticsMain pneumatics;
 	public static Loader loader;
 	public static Climber climber;
+
+	public static VisionClientFinal server;
 	int n;
 
 	SendableChooser chooser;
@@ -73,14 +76,22 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		oi.initTrigger();
 
-		visionClient = new VisionClient2();
-		visionClient.initalizeSocket();
+		//visionClient = new VisionClient2();
+		//visionClient.initalizeSocket();
 		
 		//(new ConnectToCoprocessor()).start(); //TODO: Make sure that this command runs in parallel
 
 
         // instantiate the command used for the autonomous period
         //i.e. autonomousCommand = new ExampleCommand();
+		
+		try {
+			server = new VisionClientFinal((short) 1234);
+			Thread t = new Thread(server);
+			t.start();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 
 	public void disabledPeriodic() {
@@ -143,6 +154,8 @@ public class Robot extends IterativeRobot {
     	} else {
     		SmartDashboard.putString("SocketInit", "No");
     	}*/
+    	double data = server.getData();
+        SmartDashboard.putNumber("Server data", data);
         Scheduler.getInstance().run();
     }
 
