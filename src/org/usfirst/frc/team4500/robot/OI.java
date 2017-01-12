@@ -9,6 +9,7 @@ import org.usfirst.frc.team4500.robot.commands.MaintainAngle;
 import org.usfirst.frc.team4500.robot.commands.MoveHorizontally;
 import org.usfirst.frc.team4500.robot.commands.MoveLoader;
 import org.usfirst.frc.team4500.robot.commands.MoveVertically;
+import org.usfirst.frc.team4500.robot.commands.NewAimAndFire;
 import org.usfirst.frc.team4500.robot.commands.OmniDrive;
 import org.usfirst.frc.team4500.robot.commands.ReadVision;
 import org.usfirst.frc.team4500.robot.commands.ResetEncoders;
@@ -54,6 +55,8 @@ public class OI {
 	Button aimTarget;
 
 	Button visionAim;
+	
+	Button moveTurret;
 
 	Trigger scrollTrigger;
 
@@ -153,6 +156,9 @@ public class OI {
 		//aimTarget.whenPressed(new AimAtTarget());
 
 		visionAim = new JoystickButton(shootStick, 8);
+		
+		moveTurret = new JoystickButton(driveStick, 8);
+		moveTurret.whileHeld(new NewAimAndFire(0.3));
 
 		//cameraAim = new JoystickButton(shootStick, 2);
 		//cameraAim.whenPressed(new AimVertically(Robot.visionClient.getYAngle()));

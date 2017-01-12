@@ -154,8 +154,8 @@ public class Robot extends IterativeRobot {
     	} else {
     		SmartDashboard.putString("SocketInit", "No");
     	}*/
-    	double data = server.getData();
-        SmartDashboard.putNumber("Server data", data);
+    	RobotMap.visionX = server.getData();
+        SmartDashboard.putNumber("Server X Position", RobotMap.visionX);
         Scheduler.getInstance().run();
     }
 

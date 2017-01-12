@@ -227,6 +227,10 @@ public class RobotMap {
 
 	public static int omniDrive = 1;
 	
+	public static double visionX = 0;
+	
+	public static int VISION_X_CENTER = 160;
+	
 	
 	
 }
