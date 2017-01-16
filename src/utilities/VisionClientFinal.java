@@ -40,6 +40,7 @@ public class VisionClientFinal implements Runnable {
 	
 	public double getData() {
 		double data = 0.0;
+		data = this.data;
 		try {
 			mutex.acquire();
 			data = this.data;

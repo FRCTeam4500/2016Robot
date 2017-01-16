@@ -17,6 +17,7 @@ import org.usfirst.frc.team4500.robot.commands.ReverseLoad;
 import org.usfirst.frc.team4500.robot.commands.SpinUp;
 import org.usfirst.frc.team4500.robot.commands.StopLoad;
 import org.usfirst.frc.team4500.robot.commands.TankDrive;
+import org.usfirst.frc.team4500.robot.commands.VisionGroup;
 import org.usfirst.frc.team4500.robot.subsystems.Loader;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -158,7 +159,7 @@ public class OI {
 		visionAim = new JoystickButton(shootStick, 8);
 		
 		moveTurret = new JoystickButton(driveStick, 8);
-		moveTurret.whileHeld(new NewAimAndFire(0.3));
+		moveTurret.whenPressed(new VisionGroup());
 
 		//cameraAim = new JoystickButton(shootStick, 2);
 		//cameraAim.whenPressed(new AimVertically(Robot.visionClient.getYAngle()));

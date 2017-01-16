@@ -156,6 +156,7 @@ public class Robot extends IterativeRobot {
     	}*/
     	RobotMap.visionX = server.getData();
         SmartDashboard.putNumber("Server X Position", RobotMap.visionX);
+        
         Scheduler.getInstance().run();
     }
 
